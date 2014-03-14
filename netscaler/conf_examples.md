@@ -8,7 +8,6 @@ You can then match on this cookie in a sessionPolicy (`REQ.HTTP.HEADER Cookie CO
 You will likely have to clear the cache on the NetScaler (`flush cache contentgroup ALL`) to see the effects of this modification.
 
 ### DOMAIN\sAMAccountName
-	
 	add rewrite action domain_extract_act insert_after "HTTP.RES.BODY(1024).REGEX_SELECT(re/function ns_check\\(\\).*return false;\\W*}/)" "\"\n\tvar domain = login.replace(/\\\\\\\\.*/, \\\"\\\");\n\tvar expiry = new Date(+new Date + 7200000); // +2 hours\n\tdocument.cookie = \\\"Domain=\\\" + escape(domain) + \\\"; path=/; expires=\\\" + expiry.toGMTString();\"" -bypassSafetyCheck YES
 	add rewrite policy domain_extract_pol "HTTP.REQ.URL.PATH.ENDSWITH(\"vpn/login.js\")" domain_extract_act
 	bind vpn vserver agee_vserver -policy domain_extract_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
@@ -18,13 +17,11 @@ The configuration above will send the login field as-is.  If you need to strip t
 	add rewrite action domain_extract_act insert_after "HTTP.RES.BODY(1024).REGEX_SELECT(re/function ns_check\\(\\).*return false;\\W*}/)" "\"\n\tvar domain = login.replace(/\\\\\\\\.*/, \\\"\\\");\n\tdocument.forms[\'vpnForm\'].login.value = login.replace(/.*\\\\\\\\/, \\\"\\\");\n\tvar expiry = new Date(+new Date + 7200000); // 2hr\n\tdocument.cookie = \\\"Domain=\\\" + escape(domain) + \\\"; path=/; expires=\\\" + expiry.toGMTString();\"" -bypassSafetyCheck YES
 
 ### userPrincipalName
-	
 	add rewrite action domain_extract_act insert_after "HTTP.RES.BODY(1024).REGEX_SELECT(re/function ns_check\\(\\).*return false;\\W*}/)" "\"\n\tvar domain = login.replace(/.*@/, \\\"\\\");\n\tvar expiry = new Date(+new Date + 7200000); // +2 hours\n\tdocument.cookie = \\\"Domain=\\\" + escape(domain) + \\\"; path=/; expires=\\\" + expiry.toGMTString();\"" -bypassSafetyCheck YES
 	add rewrite policy domain_extract_pol "HTTP.REQ.URL.PATH.ENDSWITH(\"vpn/login.js\")" domain_extract_act
 	bind vpn vserver agee_vserver -policy domain_extract_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
 
 ## Group Persistence While Honoring TCP Port
-
 This will encrypt the IP and port with AES256 and a random key and set it in a cookie.  (You can find more detail in eDocs: [Encrypting and Decrypting Text](http://www.google.com/url?q=http%3A%2F%2Fsupport.citrix.com%2Fproddocs%2Ftopic%2Fnetscaler-policy-configuration-93-map%2Fns-pi-adv-exp-eval-txt-encrypt-decrypt-txt-con.html&sa=D&sntz=1&usg=AFQjCNEJuqY-AKwJa30Blf3UAN3fzvGjWg).)
 
 	add service svc1 192.168.34.50 HTTP 5080 -CustomServerID 192.168.34.50:5080
@@ -44,11 +41,14 @@ The set cookie header will be similar to the following.
 
 Persistence will be honored based on CustomServerID.
 
-## NS Debug HTTP Header
-
+## Insert Debuging HTTP Header
 Insert an HTTP header (`NSDbg`) containing the backend server IP and TCP port number for a specific subnet
 	
 	add rewrite action nsdbg_rw_act insert_http_header NSDbg "SERVER.IP.SRC + \":\" +  SERVER.TCP.SRCPORT"
 	add rewrite policy nsdbg_rw_pol "CLIENT.IP.SRC.IN_SUBNET(10.198.4.0/24)" nsdbg_rw_act
 	bind lb vserver [lb_vserver] -policyName nsdbg_rw_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
+
+## Remove HTTP Header
+	add rewrite action rm_jsessionid_cookie_act replace "HTTP.REQ.HEADER(\"Cookie\").REGEX_SELECT(re/(\?i) JSESSIONID=\\S*;/)" "\"\""
+	add rewrite policy rm_jsessionid_cookie_pol TRUE rm_jsessionid_cookie_act
 
