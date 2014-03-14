@@ -6,6 +6,10 @@
 
 1. The client sends credentials to the vpn vserver (HTTP `POST /cgi/login`)
 
+1. If a second factor authentication (e.g., RADIUS) server respondds with a challenge (e.g., `Access-Challenge`)
+	1. The vpn vserver responds with a request for the challenge response (i.e., one-time password) (`HTTP 200`)
+	2. The client sends the challenge response to the vpn vserver (HTTP `POST /cgi/dlge`) 
+
 1. The vpn vserver sets authentication cookies and redirects to set client type based on the HTTP User-Agent header from the client (`HTTP 302`; `Location: /cgi/setclient?cvpn`)
 
 1. The client sends a request (HTTP `GET /cgi/setclient?cvpn`)
