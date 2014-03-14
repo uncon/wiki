@@ -36,8 +36,9 @@
 	- `Address` contains the STA ticket
 	- `SSLProxyHost` contains the FQDN and TCP port number of the gateway
 
-1.  Receiver is launched with the ICA file and sends a SOCKSv5 `CONNECT` or CGP request to the server.
-	- The address type of the SOCKSv5 `CONNECT` request is `DOMAINNAME` and the `DST.ADDR` bits contain the STA ticket.
+1.  Receiver is launched with the ICA file and sends a SOCKSv5 `CONNECT` to the server.
+	- `address type` (field 4) is domain name (`0x03`)
+	- `destination address` (field 5) is the STA ticket
 
 1. The vpn vserver determines the type of incoming connection to be SOCKSv5 or CGP and handles the proxy connection.
 	- The NetScaler inspects the connection data to determine the type of connection (protocol) based on a byte sequence signature.
@@ -49,4 +50,4 @@
 
 1. The STA server forwards the original data to the gateway. (notably, `<Value name="CGPAddress">` and `<Value name="ICAAddress">`)
 
-1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5 or CGP
+1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5
