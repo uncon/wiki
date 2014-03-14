@@ -40,7 +40,7 @@
 	- `address type` (field 4) is domain name (`0x03`)
 	- `destination address` (field 5) is the STA ticket
 
-1. The vpn vserver determines the type of incoming connection to be SOCKSv5 or CGP and handles the proxy connection.
+1. The vpn vserver determines the type of incoming connection to be SOCKSv5 and handles the proxy connection.
 	- The NetScaler inspects the connection data to determine the type of connection (protocol) based on a byte sequence signature.
 	- If the inspected bytes match a protocol signature, the handler registered with that signature is called.
 	- These handles consist of HTTP, SOCKSv5, and CGP.
