@@ -24,7 +24,7 @@
 
 1. The SF/WI server enumerates the user's applications and presents them to the client via via Clienteles VPN  (`HTTP 200`)
 
-1. The user launches (clicks on) an application
+1. The user launches (clicks on) an application (HTTP `GET`)
 	- Store Front: `/cvpn/https/storefront.internal.com/Citrix/StoreWeb/Resources/LaunchIca/[...]`
 	- Web Interface: `/cvpn/https/webinterface.internal.com/Citrix/XenApp/site/launcher.aspx[...]`
 
@@ -45,4 +45,4 @@
 
 1. The STA server forwards the original data to the gateway. (notably, `<Value name="CGPAddress">` and `<Value name="ICAAddress">`)
 
-1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5 or CGP.
+1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5 or CGP
