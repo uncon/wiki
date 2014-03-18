@@ -130,15 +130,29 @@
 			
 	1. Edit `/usr/local/etc/nginx/conf.d/ssl` with the SSL options.
 
-			ssl_certificate certificate.pem;
-			ssl_certificate_key key.pem;
-			ssl_dhparam dhparam4096.pem;
+			ssl_certificate /usr/local/etc/nginx/ssl/self-signed.cert;
+			ssl_certificate_key /usr/local/etc/nginx/ssl/self-signed.key;
 			ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 			ssl_ciphers "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4";
 			ssl_prefer_server_ciphers on;
 			ssl_session_cache shared:SSL:10m;
 			ssl_session_timeout 10m;
 			
+	1. Create self-signed SSL certificate.
+
+		1. Generate the private key.
+
+				mkdir /usr/local/etc/nginx/ssl
+				openssl genrsa -out /usr/local/etc/nginx/ssl/self-signed.key 2048
+				
+		1. Create the certificate signing request.
+
+				openssl req -new -key /usr/local/etc/nginx/ssl/self-signed.key -out /usr/local/etc/nginx/ssl/self-signed.req -sha256
+				
+		1. Generate the Certificate.
+
+				openssl x509 -req -days 3650 -in /usr/local/etc/nginx/ssl/self-signed.req -signkey /usr/local/etc/nginx/ssl/self-signed.key -out /usr/local/etc/nginx/ssl/self-signed.cert -sha256
+
 	1. Edit `/usr/local/etc/nginx/conf.d/php-fpm` with the PHP-FPM options.
 
 			fastcgi_pass unix:/var/run/php-fpm.sock;
