@@ -16,7 +16,7 @@
 
 		hostname=freebsd
 		sshd_enable="YES"
-		ifconfig_vtnet0="DHCP"
+		ifconfig_em0="DHCP"
 
 1. Install base package.
 
