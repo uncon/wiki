@@ -35,7 +35,11 @@
 
 2. Upload key
 
-		ssh-copy-id  -i ~/.ssh/id_rsa.pub user@host` or `cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
+		ssh-copy-id  -i ~/.ssh/id_rsa.pub user@host
+
+	or
+
+		cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 
 ## Convert all filenames to lowercase
 	for file in *; do newFile="$(expr "xxx$file" : 'xxx\(.*\)' | tr '[A-Z]' '[a-z]')"; mv "$file" "$newFile"; done
