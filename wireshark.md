@@ -3,11 +3,11 @@
 ## Latency Column
 
 1. Edit -> Preferences -> Protocols -> TCP
-	- Enable "Enable conversation timestamps"
+	- Enable "Calculate conversation timestamps"
 2. User Interface -> Columns -> Add
-	- **Field type**: Custom
-	- **Field name**: tcp.time_delta
 	- **Title**: Latency
+	- **Type**: Custom
+	- **Field name**: tcp.time_delta
 
 ## Mac OS X
 *  Fix the fonts in Wireshark's (horrible) GTK theme
