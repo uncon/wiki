@@ -3,12 +3,12 @@
 `nsg.sh`
 	
 	#!/bin/sh
-	NSG_FQDN='CHANGEME'
+	NSG_FQDN='nsg.domain.com'
 	
-	DNS_HOST="192.168.0.1"
-	DNS_USER="root"
+	DNS_HOST='192.168.1.1'
+	DNS_USER='root'
 	
-	NSG_UA='User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.73.11 (KHTML, like Gecko) Version/7.0.1 Safari/537.73.11'
+	NSG_UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.74.9 (KHTML, like Gecko) Version/7.0.2 Safari/537.74.9'
 	
 	localAuth() {
 		echo "- Local authentication"
@@ -49,7 +49,10 @@
 		
 		rm "${HOME}/.nsg_cookies" &> /dev/null
 		
-		curl -s -c "${HOME}/.nsg_cookies" "https://${NSG_FQDN}/cgi/login" -H 'Content-Type: application/x-www-form-urlencoded' -H "Referer: https://${NSG_FQDN}/vpn/index.html" -H "${NSG_UA}" --data "login=${NSG_USER}&passwd=${NSG_PASSWD}&passwd1=${NSG_PASSWD2}" > /dev/null
+		HTTP_RESP=$(curl -w "%{http_code}" -s -c "${HOME}/.nsg_cookies" "https://${NSG_FQDN}/cgi/login" -H 'Content-Type: application/x-www-form-urlencoded' -H "Referer: https://${NSG_FQDN}/vpn/index.html" -H "User-Agent: ${NSG_UA}" --data "login=${NSG_USER}&passwd=${NSG_PASSWD}&passwd1=${NSG_PASSWD2}" -o /dev/null)
+		if [ ${HTTP_RESP} -ne 302 ]; then
+			echo "Expected 302 response but got ${HTTP_RESP}.  Continuing."
+		fi
 	
 		# Check For An Error
 		NSG_ERR=$(grep 'NSC_VPNERR' "${HOME}/.nsg_cookies" | cut -f 7)
@@ -60,7 +63,10 @@
 		fi
 	
 		# Set Client
-		curl -s -b "${HOME}/.nsg_cookies" "https://${NSG_FQDN}/cgi/setclient?macc" -H "Referer: https://${NSG_FQDN}/vpn/index.html" -H "${NSG_UA}" > /dev/null
+		HTTP_RESP=$(curl -w "%{http_code}" -s -b "${HOME}/.nsg_cookies" "https://${NSG_FQDN}/cgi/setclient?macc" -H "Referer: https://${NSG_FQDN}/vpn/index.html" -H "User-Agent: ${NSG_UA}" -o /dev/null)
+		if [ ${HTTP_RESP} -ne 302 ]; then
+			echo "Expected 302 response but got ${HTTP_RESP}.  Continuing."
+		fi
 	
 		# Grab AAA Cookie
 		NSG_AAAC=$(grep "NSC_AAAC" "${HOME}/.nsg_cookies" | cut -f 7)	
@@ -75,14 +81,20 @@
 	
 	NSGLaunch() {
 		echo "- Launching client connection"
-		curl -s "http://localhost:3148/svc?NSC_AAAC=${NSG_AAAC}&nsloc=https://${NSG_FQDN}/vpns/m_services.html&nsversion=10,1,120,1316&nstrace=DEBUG&nsvip=255.255.255.255" > /dev/null
+		HTTP_RESP=$(curl -w "%{http_code}" -s "http://localhost:3148/svc?NSC_AAAC=${NSG_AAAC}&nsloc=https://${NSG_FQDN}/vpns/m_services.html&nsversion=10,1,120,1316&nstrace=DEBUG&nsvip=255.255.255.255" -o /dev/null)
+		if [ ${HTTP_RESP} -ne 200 ]; then
+			echo "Expected 200 response but got ${HTTP_RESP}.  Continuing."
+		fi
 	}
 	
 	NSGStop() {
 		echo "- Stopping Access Gateway"
-		curl -s -b "${HOME}/.nsg_cookies" "https://${NSG_FQDN}/cgi/logout" > /dev/null
+		HTTP_RESP=$(curl -w "%{http_code}" -s -b "${HOME}/.nsg_cookies" "https://${NSG_FQDN}/cgi/logout" -o /dev/null)
+		if [ ${HTTP_RESP} -ne 302 ]; then
+			echo "Expected 302 response but got ${HTTP_RESP}.  Continuing."
+		fi
 		killall "Access Gateway"
-		rm "${HOME}/.nsg_cookies"
+		rm "${HOME}/.nsg_cookies" &> /dev/null
 	}
 	
 	case "$1" in
@@ -94,12 +106,23 @@
 			NSGAuth
 			NSGLaunch
 			;;
+		restart)
+			echo "Connecting..."
+			NSGStop
+			NSGStart
+			NSGAuth
+			NSGLaunch
+			;;
 		stop)
 			echo "Disconnecting..."
 			localAuth
 			NSGStop
 			cleanHosts
 			restartDNS
+			;;
+		reconnect)
+			echo "Reconnecting..."
+			NSGLaunch
 			;;
 		refresh)
 			echo "Refreshing DNS..."
@@ -108,10 +131,8 @@
 			getHosts
 			restartDNS
 			;;
-
 		*)
-			echo "Usage: $0 [start|stop|refresh]"
+			echo "Usage: $0 [start|stop|reconnect|refresh|restart]"
 			exit 1
 			;;
 	esac
-
