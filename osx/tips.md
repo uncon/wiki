@@ -12,7 +12,7 @@ The following command creates a PM assertion to prevent idle sleep (while runnin
 
 ## Reset Backgrounds
 
-	rm "~/Library/Application Support/Dock/desktoppicture.db" && killall Dock
+	rm "${HOME}/Library/Application Support/Dock/desktoppicture.db" && killall Dock
 
 ## Search With Google
 
