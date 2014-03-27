@@ -6,7 +6,7 @@
 	find . -type f -iname "*.flac" | while read -r file; do mv "${file}" "${file%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${file}" "${file%.flac}-OLD.flac"; done
 
 ## Remove Litter from Windows and OS X
-	find "${@:-$PWD}" \(
+	find "${@:-$PWD}" \( \
 	-type f -name '._*' -o \
 	-type f -name '.DS_Store' -o \
 	-type d -name '__MACOSX' -o \
@@ -20,7 +20,7 @@
 	-type d -name '.DocumentRevisions-V100' -o \
 	-type d -name '.fseventsd' -o \
 	-type f -name 'Thumbs.db' \
-	\) -print0 | xargs -0 rm -fr`
+	\) -print0 | xargs -0 rm -fr
 
 ## Remove all events from Windows logs
 	for /f %x in ('wevtutil el') do wevtutil cl "%x"
@@ -59,8 +59,8 @@
 ## Network Debug
 	tcpdump -nnvvS host 192.168.1.22 and port 80
 
-## Copy SNES (USA) ROMs From No-Intro Set
-	ls | grep -v "\[BIOS\]\|(Beta)\|(Japan)\|(France)\|(Europe)\|(Germany)\|(Australia)\|(Spain)\|(Korea)\|(Brazil)\|(Italy)\|(Canada)\|(Netherlands)\|(Hong Kong)\|(Sweden)\|(China)" | while read FILE; do cp "${FILE}" ~/Temp/SNES/; done`
+## Copy USA ROMs From No-Intro Sets
+	mkdir ../USA; ls | grep -v "\[BIOS\]\|(Asia)\|(Beta.*)\|(Proto.*)\|(Japan)\|(Japan, Europe)\|(Japan, Korea)\|(France)\|(Europe)\|(Germany)\|(Australia)\|(Spain)\|(Korea)\|(Brazil)\|(Italy)\|(Canada)\|(Netherlands)\|(Hong Kong)\|(Sweden)\|(China)\|(Taiwan)" | while read FILE; do mv "${FILE}" ../USA; done
 
 ## Organize Files (WIP)
 	for CHAR in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z; do mkdir ${CHAR}; mv ${CHAR}* ${CHAR}/ 2> /dev/null; mv $(echo ${CHAR} | tr '[A-Z]' '[a-z]')* ${CHAR}/ 2> /dev/null; done; mkdir 0-9; mv [0-9]* 0-9/ 2> /dev/null
