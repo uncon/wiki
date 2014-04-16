@@ -35,29 +35,29 @@
 
 ## Find time of counter spikes
 
-	# nsconmsg -K newnslog -s disptime=1 -g err -g fail -d maxrate
+	# nsconmsg -K /var/nslog/newnslog -s disptime=1 -g err -g fail -d maxrate
 
 ## Find errors in newnslog
 
-	# nsconmsg -K newnslog -g err -g fail -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current
+	# nsconmsg -K /var/nslog/newnslog -g err -g fail -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current
 
 ## Find failover in newnslog
 
-	# nsconmsg -K newnslog -g ha_cur_system_state -g ha_cur_nodes_num -g ha_cur_master_state -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current
+	# nsconmsg -K /var/nslog/newnslog -g ha_cur_system_state -g ha_cur_nodes_num -g ha_cur_master_state -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current
 ## Find monitor events in newnslog
 
-	# nsconmsg -K newnslog -d event | grep "DOWN; Last response:\|UP; Last response:" | sed -e 's/^.* PPE-[0-9]*//g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
+	# nsconmsg -K /var/nslog/newnslog -d event | grep "DOWN; Last response:\|UP; Last response:" | sed -e 's/^.* PPE-[0-9]*//g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
 ## Find HA events in newnslog
 
-	# nsconmsg -K newnslog -d event | grep " node\|heartbeat\|interface" | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
+	# nsconmsg -K /var/nslog/newnslog -d event | grep " node\|heartbeat\|interface" | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
 
 ## Find CPU use > 60% in newnslog
 
-	# nsconmsg -K newnslog -s totalcount=600 -g master_cpu_use -s disptime=1 -d current | grep -v "^Displaying\|^Performance\|^reltime\|Index\|^$" | awk '{ print $8, $9, $11, $10 " - " $3 / 10 "%" }'
+	# nsconmsg -K /var/nslog/newnslog -s totalcount=600 -g master_cpu_use -s disptime=1 -d current | grep -v "^Displaying\|^Performance\|^reltime\|Index\|^$" | awk '{ print $8, $9, $11, $10 " - " $3 / 10 "%" }'
 	
 ## Format events in newnslog
 
-	# nsconmsg -K newnslog -d event | sed -e 's/^.* PPE-[0-9]*//g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
+	# nsconmsg -K /var/nslog/newnslog -d event | sed -e 's/^.* PPE-[0-9]*//g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
 
 ## Find Authentication Failure Count by Hour
 
