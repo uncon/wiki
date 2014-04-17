@@ -23,7 +23,7 @@
 	# nsprofmon -K /netscaler/nsppe/nsppe-[version]-[build] -k newproflog_cpu_[X].out -d alltexthitsym
 
 ##Find policy hits
-	# nsconmsg -d current -g pol_hits
+	# nsconmsg -g pol_hits -d current
 
 ## Find executed commands
 
@@ -81,7 +81,7 @@ or
 
 then
 
-	# VER="100"; \
+	# VER="101"; \
 	for file in $(find . -name "newnslog*" -maxdepth 1 | grep -v "\.tar$\|\.tar\.gz" | sed -e 's#^./##g'); do \
 	  nsconmsg$VER -K $file -d setime > nsconmsg-setime-$file; \
 	  nsconmsg$VER -K $file -d event > nsconmsg-event-$file; \
