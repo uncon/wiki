@@ -9,7 +9,6 @@ Use this index.php file on a [NGINX server](../nginx.md) with the following conf
 1. Edit `/usr/local/etc/nginx/sites/default.conf`.
 
 		server {
-			limit_req zone=gulag burst=200 nodelay;
 			expires max;
 
 			listen 80;
