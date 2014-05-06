@@ -26,6 +26,7 @@
 	# Time format
 	gui.time_format: UTC
 	gui.seconds_format: HOUR_MIN_SEC
+	time.display_time_type: UTC
 
 	# Name Resolution
 	nameres.transport_name: FALSE
