@@ -1,13 +1,38 @@
 # Tips for Wireshark
 
-## Latency Column
+## Preferences File
 
-1. Edit -> Preferences -> Protocols -> TCP
-	- Enable "Calculate conversation timestamps"
-2. User Interface -> Columns -> Add
-	- **Title**: Latency
-	- **Type**: Custom
-	- **Field name**: tcp.time_delta
+	# Columns
+	gui.column.format:
+		"No.", "%m",
+		"Time", "%t",
+		"Latency", "%Cus:tcp.time_delta:0:U",
+		"Source", "%s",
+		"Destination", "%d",
+		"Protocol", "%p",
+		"PcbDevNo", "%Cus:nstrace.pdevno:0:U",
+		"TCP Stream", "%Cus:tcp.stream:0:U",
+		"Length", "%L",
+		"Info", "%i"
+	
+	# Filter Bookmarks
+	gui.filter_expressions.label: Bad TCP
+	gui.filter_expressions.enabled: TRUE
+	gui.filter_expressions.expr: tcp.analysis.flags && !tcp.analysis.window_update
+	gui.filter_expressions.label: Conn Est
+	gui.filter_expressions.enabled: TRUE
+	gui.filter_expressions.expr: tcp.connection.syn
+
+	# Time format
+	gui.time_format: UTC
+	gui.seconds_format: HOUR_MIN_SEC
+
+	# Name Resolution
+	nameres.transport_name: FALSE
+
+	# TCP Options
+	tcp.relative_sequence_numbers: FALSE
+	tcp.calculate_timestamps: TRUE
 
 ## Mac OS X
 *  Fix the fonts in Wireshark's (horrible) GTK theme
