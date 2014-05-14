@@ -7,7 +7,7 @@ This was last tested with Receiver for Linux 13.0.0.256735 on 64-bit Arch (2014-
 
 1. Prerequisites
 
-		# sudo pacman -S lib32-gtk2 lib32-alsa-plugins lib32-libpulse lib32-libxml2 lib32-libpng12
+		# sudo pacman -S lib32-gtk2 lib32-alsa-plugins lib32-libpulse lib32-libxml2 lib32-libpng12 lib32-gstreamer0.10 lib32-speex
 
 1. Download [Receiver for Linux](http://receiver.citrix.com/)
 
