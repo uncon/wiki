@@ -3,10 +3,7 @@
 ##  Receiver for Linux
 This was last tested with Receiver for Linux 13.0.0.256735 on 64-bit Arch (2014-05-14).
 
-**notes**
-* Technically, Receiver for Linux is exclusively 32-bit for the time being.  You must enable the multilib repository in `/etc/pacman.conf`.
-* There are some additional dependencies for `selfservice`.
-
+**Note**: Technically, Receiver for Linux is exclusively 32-bit for the time being.  You must enable the multilib repository in `/etc/pacman.conf`.
 
 1. Prerequisites
 
