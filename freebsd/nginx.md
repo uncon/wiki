@@ -133,10 +133,10 @@
 			ssl_certificate /usr/local/etc/nginx/ssl/self-signed.cert;
 			ssl_certificate_key /usr/local/etc/nginx/ssl/self-signed.key;
 			ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-			ssl_ciphers "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4";
-			ssl_prefer_server_ciphers on;
-			ssl_session_cache shared:SSL:10m;
-			ssl_session_timeout 10m;
+			ssl_protocols               SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+			ssl_ciphers                 EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:EECDH+RC4:RSA+RC4:!MD5;
+			ssl_prefer_server_ciphers   on;
+
 			
 	1. Create self-signed SSL certificate.
 
