@@ -1,5 +1,11 @@
 # Arch Linux Tips
 
+## GNOME
+
+### Disable HiDPI
+
+	# gsettings set org.gnome.desktop.interface scaling-factor 1
+
 ## Maintenance
 
 ### Remove all packages no longer required as dependencies (orphans)
