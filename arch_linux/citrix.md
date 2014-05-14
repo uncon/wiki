@@ -3,15 +3,14 @@
 ##  Receiver for Linux
 This was last tested with Receiver for Linux 13.0.0.256735 on 64-bit Arch (2014-05-14).
 
-**Note**: Technically, Receiver for Linux is exclusively 32-bit for the time being.  You must enable the multilib repository in `/etc/pacman.conf`.
+**notes**
+* Technically, Receiver for Linux is exclusively 32-bit for the time being.  You must enable the multilib repository in `/etc/pacman.conf`.
+* There are some additional dependencies for `selfservice`.
+
 
 1. Prerequisites
 
-		# sudo pacman -S lib32-gtk2 lib32-alsa-plugins lib32-libpulse
-
-1. Optional Prerequisites
-
-		# yaourt -S lib32-openmotif lib32-libxp
+		# sudo pacman -S lib32-gtk2 lib32-alsa-plugins lib32-libpulse lib32-libxml2 lib32-libpng12
 
 1. Download [Receiver for Linux](http://receiver.citrix.com/)
 
@@ -29,4 +28,4 @@ This was last tested with Receiver for Linux 13.0.0.256735 on 64-bit Arch (2014-
 
 			# find . -type f -executable -exec ldd "{}" \; | grep " not found$" | awk '{ print $1 }' | sort -u
 			
-	1. Install them
+	1. Install them (32-bit)
