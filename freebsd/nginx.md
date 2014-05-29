@@ -9,7 +9,7 @@
 1. Configure PHP.
 
 		cp /usr/local/etc/php.ini-development /usr/local/etc/php.ini
-		sed -i.orig -e 's_^\(listen = \).*$_\1/var/run/php-fpm.sock_' /usr/local/etc/php-fpm.conf
+		sed -i.orig -E -e 's/^(listen = ).*$/\1\/var\/run\/php-fpm.sock/' -e 's/^;(listen\.(owner|group|mode) )/\1/g' /usr/local/etc/php-fpm.conf
 		sed -i.orig -e 's_^;\(date\.timezone =\)_\1 \"America/Chicago\"_' /usr/local/etc/php.ini
 		
 1. Enable PHP-FPM.
