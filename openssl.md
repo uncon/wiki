@@ -32,3 +32,9 @@
 
 ## Verify a certificate
 	openssl verify -CApath . [certificate]
+
+## View the signer of a certificate
+	openssl x509 -in cert.pem -noout -issuer -issuer_hash
+
+## View the hash value of a certificate
+	openssl x509 -noout -hash -in cert.pem
