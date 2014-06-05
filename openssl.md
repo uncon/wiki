@@ -1,8 +1,5 @@
 # OpenSSL One-Liners
 
-## Extract certificate details
-	openssl x509 -text -in cert.pem
-
 ## Remove a passphrase from a PEM private key file
 	openssl rsa -in userkey.pem -out userkey-nopass.pem
 
@@ -33,8 +30,14 @@
 ## Verify a certificate
 	openssl verify -CApath . [certificate]
 
-## View the signer of a certificate
+## View certificate details
+	openssl x509 -in cert.pem -text
+
+## View the signer and signer hash of a certificate
 	openssl x509 -in cert.pem -noout -issuer -issuer_hash
 
 ## View the hash value of a certificate
-	openssl x509 -noout -hash -in cert.pem
+	openssl x509 -in cert.pem -noout -hash
+
+## View the subject, hash, issuer, and issuer hash
+	openssl x509 -in cert.pem -noout -subject -hash -issuer -issuer_hash
