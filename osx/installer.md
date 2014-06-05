@@ -1,5 +1,13 @@
 # OS X Installer
 
+## USB
+1. Format a USB drive with a 'Mac OS Extened (Journaled)' partition using Disk Utility
+
+1. Create Installation media
+
+		sudo /Applications/Install\ OS\ X\ Mavericks.app/Contents/Resources/createinstallmedia --volume /Volumes/Untitled --applicationpath /Applications/Install\ OS\ X\ Mavericks.app --nointeraction
+
+## ISO
 The following process will build a bootable .iso file for installing OS X.  ([source](http://www.contrib.andrew.cmu.edu/~somlo/OSXKVM/MakeMavericksDVD.sh))
 
 1. Mount the installer image
