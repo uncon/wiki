@@ -12,6 +12,7 @@
 		"Protocol", "%p",
 		"PcbDevNo", "%Cus:nstrace.pdevno:0:U",
 		"TCP Stream", "%Cus:tcp.stream:0:U",
+		"ACK To", "%Cus:tcp.analysis.acks_frame:0:R",
 		"Length", "%L",
 		"Info", "%i"
 	
