@@ -1,6 +1,7 @@
 # Tips for Wireshark
 
 ## Preferences File
+`~/.wireshark/preferences`
 
 	# Columns
 	gui.column.format:
