@@ -19,7 +19,8 @@
 	-type d -name '.Spotlight-V100' -o \
 	-type d -name '.DocumentRevisions-V100' -o \
 	-type d -name '.fseventsd' -o \
-	-type f -name 'Thumbs.db' \
+	-type f -name 'Thumbs.db' -o \
+	-type f -name '*:Zone.Identifier:$DATA' \
 	\) -print0 | xargs -0 rm -fr
 
 ## Remove all events from Windows logs
