@@ -16,7 +16,7 @@
 
 	# gsettings set org.cinnamon.keybindings custom-list "['custom0']"
 	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ name 'Lock'
-	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ command "/bin/sh -c 'cinnamon-screensaver-command --lock && xset dpms force standby'"
+	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ command "/bin/sh -c 'sleep 1 && cinnamon-screensaver-command --lock && xset dpms force standby'"
 	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ binding '<Primary><Shift>PowerOff'
 
 ## Maintenance
