@@ -6,6 +6,19 @@
 
 	# gsettings set org.gnome.desktop.interface scaling-factor 1
 
+## Cinnamon
+
+### Disable HiDPI
+
+	# gsettings set org.cinnamon.desktop.interface scaling-factor 1
+
+### OS X Style Lock Keybinding
+
+	# gsettings set org.cinnamon.keybindings custom-list "['custom0']"
+	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ name 'Lock'
+	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ command "/bin/sh -c 'cinnamon-screensaver-command --lock && xset dpms force standby'"
+	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ binding '<Primary><Shift>PowerOff'
+
 ## Maintenance
 
 ### Remove all packages no longer required as dependencies (orphans)
