@@ -6,7 +6,7 @@
 	# Columns
 	gui.column.format:
 		"No.", "%m",
-		"Time", "%t",
+		"Time", "%Aut",
 		"Latency", "%Cus:tcp.time_delta:0:U",
 		"Source", "%s",
 		"Destination", "%d",
@@ -26,8 +26,6 @@
 	gui.filter_expressions.expr: tcp.connection.syn
 
 	# Time format
-	gui.time_format: UTC
-	gui.seconds_format: HOUR_MIN_SEC
 	time.display_time_type: UTC
 
 	# Name Resolution
