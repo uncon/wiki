@@ -72,6 +72,16 @@ function doSleep() {
 	if(!empty($slept)) return $slept;
 }
 
+function doPad() {
+        if(! @$pad = (int)rawurldecode($_GET['pad'])) $pad = 0;
+        if($pad > 8) {
+                $realPad = $pad - 4;
+                $padding = str_pad("<!-- ", $realPad, "#") . " -->";
+                $padded['padded'] = $pad . " bytes" . $padding;
+        }
+        if(!empty($padded)) return $padded;
+}
+
 function setHttpLocation() {
 	if(! @$locationHeader = rawurldecode($_GET['loc'])) $locationHeader = "";
 	if(! $locationHeader == "") {
@@ -204,6 +214,7 @@ function setHttpCookie() {
 }
 
 $slept = doSleep();
+$pad = doPad();
 $httpHeader = setHttpResponse();
 setHttpLocation();
 setHttpCookie();
@@ -253,6 +264,11 @@ td {
 <?php if(!empty($slept)) {
 	echo "<h2>slept</h2>\n";
 	echo buildTable($slept);
+} ?>
+
+<?php if(!empty($pad)) {
+        echo "<h2>pad</h2>\n";
+        echo buildTable($pad);
 } ?>
 
 <h2>request</h2>
@@ -353,6 +369,8 @@ td {
 		<tr>
 			<th>?sleep=X</th><td>sleep X seconds during response</td>
 		</tr><tr>
+                        <th>?pad=X</th><td>pad response with X bytes (must be &gt; 8)</td>
+                </tr><tr>
 			<th>?resp=X</th><td>set response code to X</td>
 		</tr><tr>
 			<th>?loc=X</th><td>set location header to X</td>
