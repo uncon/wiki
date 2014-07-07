@@ -24,8 +24,8 @@ The following process can be used to setup a [KVM](https///wiki.archlinux.org/in
 
 2. Enable and start services
 
-		systemctl enable rpc-statd
-		systemctl start rpc-statd
+		systemctl enable nfs-client.target
+		systemctl start nfs-client.target
 
 
 ### Bridge Network Connection
