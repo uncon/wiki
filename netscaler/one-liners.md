@@ -1,13 +1,5 @@
 # NetScaler One-Liners
 
-## Remove the passphrase from a PEM private key file
-
-	# openssl rsa -in myKey.key -out myKey-nopass.key
-
-## Dump information from a certificate
-
-	# openssl x509 -text -in myCert.pem
-
 ## Find NetScaler version and build from a vmcore file
 
 	# strings vmcore.0 | grep "NetScaler" | grep "Build"
