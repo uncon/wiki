@@ -26,15 +26,15 @@
 8. Format partitions
     - Boot
 
-			mkfs.ext4 -L "ARCH_BOOT" /dev/vda1
+			mkfs.ext4 -L "Arch Linux Boot" /dev/vda1
 
     - Root
 
-			mkfs.ext4 -L "ARCH_ROOT" /dev/vda2
+			mkfs.ext4 -L "Arch Linux Root" /dev/vda2
 
     - Swap
 
-			mkswap -L "ARCH_SWAP" /dev/vda3
+			mkswap -L "Arch Linux Swap" /dev/vda3
 
 9. Mount the partitions
     - Root
