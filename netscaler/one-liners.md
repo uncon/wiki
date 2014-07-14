@@ -19,7 +19,7 @@
 
 ## Find executed commands
 
-	# grep CMD_EXECUTED ns.log | sed -e 's/^\(.*\) <.*\( Command \)/\1 -\2/'
+	# grep CMD_EXECUTED ns.log | sed -e 's/^\(.*\) <.*\( User [^ ]* \).*-\( Command \)/\1 -\2-\3/'
 
 ## Counter timeline from newnslog
 
