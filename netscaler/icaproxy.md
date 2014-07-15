@@ -26,7 +26,7 @@
 
 1. The vpn vserver responds to SF/WI including any Smart Access information (`HTTP 200`; `<GetAccessInformationResult>`).
 
-1. The SF/WI server enumerates the user's applications and presents them to the client via via Clienteles VPN  (`HTTP 200`).
+1. The SF/WI server enumerates the user's applications and presents them to the client via Clienteles VPN  (`HTTP 200`).
 
 1. The user launches (clicks on) an application (HTTP `GET`).
 	- Store Front: `/cvpn/https/storefront.internal.com/Citrix/StoreWeb/Resources/LaunchIca/[...]`
