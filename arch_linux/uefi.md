@@ -89,6 +89,10 @@
 
 			INT=eno1; sed -e "s/^\(Description=\).*$/\1'DHCP on ${INT}'/" -e "s/^\(Interface=\).*$/\1${INT}/" /etc/netctl/examples/ethernet-dhcp > "/etc/netctl/${INT}"; netctl enable "${INT}"
 
+    - Enable timesyncd
+
+			ln -s '/usr/lib/systemd/system/systemd-timesyncd.service' '/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service'
+
     - Enable SSH
 
 			ln -s '/usr/lib/systemd/system/sshd.service' '/etc/systemd/system/multi-user.target.wants/sshd.service'
