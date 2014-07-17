@@ -1,28 +1,28 @@
 # ICA Proxy Traffic Flow
 
-1. The client sends request to FQDN of vpn vserver (HTTP `GET`).
+1. The client sends a request to the FQDN of vpn vserver (HTTP `GET`).
 
-1. The vpn vserver determines the type of the incoming connection to be unauthenticated HTTP and redirects to the authentication page (`HTTP 302`; `Location: /vpn/index.html`).
+1. The vpn vserver determines the type of the incoming connection to be unauthenticated HTTP and redirects the client to the authentication page (`HTTP 302`; `Location: /vpn/index.html`).
 
-1. The client sends credentials to the vpn vserver (HTTP `POST /cgi/login`).
+1. The client sends the entered credentials to the vpn vserver (HTTP `POST /cgi/login`).
 
-1. If a second factor authentication (e.g., RADIUS) server respondds with a challenge (e.g., `Access-Challenge`).
+1. If a second factor authentication (e.g., RADIUS) server respondds with a challenge (i.e., `Access-Challenge`).
 	1. The vpn vserver responds with a request for the challenge response (i.e., one-time password) (`HTTP 200`).
 	2. The client sends the challenge response to the vpn vserver (HTTP `POST /cgi/dlge`).
 
-1. The vpn vserver sets authentication cookies and redirects to set client type based on the HTTP User-Agent header from the client (`HTTP 302`; `Location: /cgi/setclient?cvpn`).
+1. The vpn vserver sets authentication cookies and redirects the client to a "set client" page based on the HTTP User-Agent header from the client (`HTTP 302`; `Location: /cgi/setclient?cvpn`).
 
-1. The client sends a request (HTTP `GET /cgi/setclient?cvpn`).
+1. The client sends the request including authentication cookies (HTTP `GET /cgi/setclient?cvpn`).
 
-1. The vpn vserver determines the type of incoming connection to be authenticated HTTP and redirects to `/vpns/cvpnpage.html` (`HTTP 302`).
+1. The vpn vserver determines the type of incoming connection to be authenticated HTTP and redirects the client to `/vpns/cvpnpage.html` (`HTTP 302`).
 
-1. The client sends a request (HTTP `GET /vpns/cvpnpage.html`).
+1. The client sends the request including authentication cookies (HTTP `GET /vpns/cvpnpage.html`).
 
 1. The vpn vserver redirects again to StoreFront (SF) or Web Interface (WI) page via Clienteles VPN: `/cvpn/https/storefront.internal.com/Citrix/StoreWeb` (`HTTP 302`).
  
-1. The client sends a request (HTTP `GET /cvpn/https/storefront.internal.com/Citrix/StoreWeb`).
+1. The client sends the request including authentication cookies (HTTP `GET /cvpn/https/storefront.internal.com/Citrix/StoreWeb`).
 
-1. The SF/WI server performs a SSO call-back to the vpn vserver (HTTP `POST /CitrixAuthService/AuthService.asmx`; `<GetAccessInformation [...]>`).
+1. The SF/WI server performs a single sign-on (SSO) call-back to the vpn vserver (HTTP `POST /CitrixAuthService/AuthService.asmx`; `<GetAccessInformation [...]>`).
 
 1. The vpn vserver responds to SF/WI including any Smart Access information (`HTTP 200`; `<GetAccessInformationResult>`).
 
