@@ -5,17 +5,18 @@
 
 	# Columns
 	gui.column.format:
-		"No.", "%m",
-		"Time", "%Aut",
-		"Latency", "%Cus:tcp.time_delta:0:U",
-		"Source", "%s",
-		"Destination", "%d",
-		"Protocol", "%p",
-		"PcbDevNo", "%Cus:nstrace.pdevno:0:U",
-		"TCP Stream", "%Cus:tcp.stream:0:U",
-		"ACK To", "%Cus:tcp.analysis.acks_frame:0:R",
-		"Length", "%L",
-		"Info", "%i"
+        	"No.", "%m",
+        	"Time", "%Aut",
+        	"Latency", "%Cus:tcp.time_delta:0:U",
+        	"Source", "%s",
+        	"Destination", "%d",
+        	"Protocol", "%p",
+        	"NS PcbDevNo", "%Cus:nstrace.pdevno:0:U",
+        	"NS NIC", "%Cus:nstrace.nicno:0:R",
+        	"TCP Stream", "%Cus:tcp.stream:0:U",
+        	"ACK To", "%Cus:tcp.analysis.acks_frame:0:R",
+        	"Length", "%L",
+        	"Info", "%i"
 	
 	# Filter Bookmarks
 	gui.filter_expressions.label: Bad TCP
