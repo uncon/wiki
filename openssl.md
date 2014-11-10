@@ -3,6 +3,9 @@
 ## Remove a passphrase from a PEM private key file
 	openssl rsa -in userkey.pem -out userkey-nopass.pem
 
+## Convert DER to PEM
+	openssl x509 -inform der -in certificate.cer -out certificate.pem
+
 ## Convert PKCS#12 bundle to PEM
 	openssl pkcs12 -in bundle.p12 -out userkey.pem -nodes -clcerts
 
