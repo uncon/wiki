@@ -46,4 +46,4 @@
 	openssl x509 -in cert.pem -noout -subject -hash -issuer -issuer_hash
 
 ## View the ASN.1 structures
-	openssl asn1parse -in cert.pem
+	openssl asn1parse -i -in cert.pem
