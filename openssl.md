@@ -47,3 +47,7 @@
 
 ## View the ASN.1 structures
 	openssl asn1parse -i -in cert.pem
+
+To drill down into a OCTET STRING, note the offset (first column)
+
+	openssl asn1parse -i -strparse [offset] -in cert.pem
