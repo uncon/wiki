@@ -9,7 +9,7 @@
 1. The client sends the entered credentials to the vpn vserver (HTTP `POST /cgi/login`).
 
 1. The NetScaler verfies the credentials on the backend.
-	1. If a second factor authentication (e.g., RADIUS) server respondds with a challenge (i.e., `Access-Challenge`).
+	1. If a second factor authentication (e.g., RADIUS) server responds with a challenge (i.e., `Access-Challenge`).
 		1. The vpn vserver responds with a request for the challenge response (i.e., one-time password) (`HTTP 200`).
 		1. The client sends the challenge response to the vpn vserver (HTTP `POST /cgi/dlge`).
 
