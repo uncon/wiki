@@ -65,10 +65,6 @@ or
 
 ## Dump newnslog data to log files
 
-	# gunzip newnslog.*.gz
-
-or
-
 	# for file in *.tar.gz; do tar zxvf "${file}"; done
 
 then
