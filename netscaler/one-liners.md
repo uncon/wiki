@@ -79,7 +79,6 @@ then
 	  nsconmsg$VER -K $file -d event > nsconmsg-event-$file; \
 	  nsconmsg$VER -K $file -d consmsg > nsconmsg-consmsg-$file; \
 	  nsconmsg$VER -K $file -d auditedcmd > nsconmsg-auditedcmd-$file; \
-	  nsconmsg$VER -K $file -s disptime=1 -g ssl_err -g cvm -g fips -d past > nsconmsg-ssl-$file; \
 	  nsconmsg$VER -K $file -g ha_cur_system_state -g ha_cur_nodes_num -g ha_cur_master_state -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current > nsconmsg-ha-$file; \
 	  nsconmsg$VER -K $file -s disptime=1 -g err -g fail -d maxrate > nsconmsg-err_maxrate-$file; \
 	  nsconmsg$VER -K $file -g err -g fail -d statswt0 \
