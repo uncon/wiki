@@ -1,5 +1,11 @@
 # Configuration Examples
 
+## Redirect HTTP to SSL
+This responder policy and action will redirect http traffic to an SSL vserver while maintaining the URL.
+
+	add responder action https_redir_act respondwith q{"HTTP/1.1 301 Moved Permanently\r\n" + "Location: https://" + HTTP.REQ.HOSTNAME + HTTP.REQ.URL.PATH_AND_QUERY.HTTP_URL_SAFE + "\r\n\r\n"}
+	add responder policy https_redir_pol CLIENT.SSL.IS_SSL.NOT https_redir_act
+
 ## AGEE: Rewrite To Insert Domain Cookie
 This config will modify the login.js file on the fly. The rewrite will extract the domain (all text prior to a \ or all text after a @ in the user name field) and place it in a cookie named 'Domain' with a 2 hour expiration.
 
