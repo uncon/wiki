@@ -3,7 +3,7 @@
 ## Redirect HTTP to SSL
 This responder policy and action will redirect http traffic to an SSL vserver while maintaining the URL.
 
-	add responder action https_redir_act respondwith q{"HTTP/1.1 301 Moved Permanently\r\n" + "Location: https://" + HTTP.REQ.HOSTNAME + HTTP.REQ.URL.PATH_AND_QUERY.HTTP_URL_SAFE + "\r\n\r\n"}
+	add responder action https_redir_act respondwith q{"HTTP/1.1 301 Moved Permanently\r\n" + "Location: https://" + HTTP.REQ.HOSTNAME + HTTP.REQ.URL.PATH_AND_QUERY.HTTP_URL_SAFE + "\r\nConnection: close\r\n\r\n"}
 	add responder policy https_redir_pol CLIENT.SSL.IS_SSL.NOT https_redir_act
 
 ## AGEE: Rewrite To Insert Domain Cookie
