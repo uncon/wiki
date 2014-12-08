@@ -1,4 +1,4 @@
-# Arch Linux Installation on MacBookPro10,1 Systems
+# Arch Linux Installation on a MacBookPro10,1
 
 ## Arch Installation
 
