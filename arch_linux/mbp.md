@@ -166,3 +166,35 @@
 	This is necesary for consistency untill there is more wide-spread support for HiDPI
 		
 		gsettings set org.gnome.desktop.interface scaling-factor 1
+
+## KVM and libvirt
+
+1. Install packages
+
+		sudo pacman -S libvirt urlgrabber qemu libvirt virtviewer virt-manager xorg-xauth
+
+	Optionally...
+
+		sudo pacman -S dnsmasq ebtables bridge-utils
+
+1. Enable and start services
+
+		systemctl enable libvirt-guests
+		systemctl start libvirt-guests
+		systemctl enable libvirtd
+		systemctl start libvirtd
+
+### Enable User Access
+
+1. Add group
+
+		groupadd libvirt
+
+1. Add user to group
+
+		gpasswd -a uncon libvirt
+		gpasswd -a uncon kvm
+
+1. Setup PolicyKit
+
+		printf 'polkit.addRule(function(action, subject) {\n\tif (action.id == "org.libvirt.unix.manage" &&\n\t\tsubject.isInGroup("libvirt")) {\n\t\t\treturn polkit.Result.YES;\n\t\t}\n});\n' > /etc/polkit-1/rules.d/50-org.libvirt.unix.manage.rules
