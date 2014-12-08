@@ -171,11 +171,7 @@
 
 1. Install packages
 
-		sudo pacman -S libvirt urlgrabber qemu libvirt virtviewer virt-manager xorg-xauth
-
-	Optionally...
-
-		sudo pacman -S dnsmasq ebtables bridge-utils
+		sudo pacman -S libvirt urlgrabber qemu libvirt virtviewer virt-manager xorg-xauth dnsmasq ebtables bridge-utils
 
 1. Enable and start services
 
