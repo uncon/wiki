@@ -179,22 +179,24 @@
 
 1. Enable and start services
 
-		systemctl enable libvirt-guests
-		systemctl start libvirt-guests
-		systemctl enable libvirtd
-		systemctl start libvirtd
+		sudo systemctl enable libvirt-guests
+		sudo systemctl start libvirt-guests
+		sudo systemctl enable libvirtd
+		sudo systemctl start libvirtd
 
 ### Enable User Access
 
 1. Add group
 
-		groupadd libvirt
+		sudo groupadd libvirt
 
 1. Add user to group
 
-		gpasswd -a uncon libvirt
-		gpasswd -a uncon kvm
+		sudo gpasswd -a uncon libvirt
+		sudo gpasswd -a uncon kvm
 
 1. Setup PolicyKit
 
+		sudo -i 
 		printf 'polkit.addRule(function(action, subject) {\n\tif (action.id == "org.libvirt.unix.manage" &&\n\t\tsubject.isInGroup("libvirt")) {\n\t\t\treturn polkit.Result.YES;\n\t\t}\n});\n' > /etc/polkit-1/rules.d/50-org.libvirt.unix.manage.rules
+		exit
