@@ -118,6 +118,15 @@
 			chfn uncon
 			passwd uncon
 
+    - Configure sudo
+
+			visudo
+
+		Uncomment the following line.
+
+			## Uncomment to allow members of group wheel to execute any command
+			%wheel ALL=(ALL) ALL
+
     - Exit
 
 			exit
