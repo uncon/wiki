@@ -127,3 +127,27 @@
 		umount /mnt/{boot,}
 		systemctl reboot
 
+## Post-Installation
+
+1. Install [Aura](https://github.com/aurapm/aura)
+
+		wget "https://aur.archlinux.org/packages/au/aura-bin/aura-bin.tar.gz"
+		tar xf aura-bin.tar.gz
+		cd aura-bin
+		makepkg -s
+		sudo pacman -U aura-bin-*.pkg.tar.xz
+
+1. Isntall Wireless Drivers
+
+		sudo aura -A broadcom-wl 
+
+1. Install Google Chrome
+
+		sudo aura -A google-chrome
+
+1. Install powertop
+
+		sudo aura -A powertop-autotune-systemd
+		sudo powertop --calibrate
+		sudo systemctl enable powertop-autotune
+		sudo systemctl start powertop-autotune
