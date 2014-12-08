@@ -151,3 +151,9 @@
 		sudo powertop --calibrate
 		sudo systemctl enable powertop-autotune
 		sudo systemctl start powertop-autotune
+
+1. Disable HiDPI
+
+	This is necesary for consistency untill there is more wide-spread support for HiDPI
+		
+		gsettings set org.gnome.desktop.interface scaling-factor 1
