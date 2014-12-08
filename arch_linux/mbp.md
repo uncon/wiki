@@ -52,10 +52,9 @@
 
 			genfstab -U /mnt >> /mnt/etc/fstab
 
-    - Update /mnt/etc/fstab
+    - Update fstab
 
-TODO: automate this...
-Add 'discard' to all vfat and ext4 fstab entries
+		(TODO: automate this!) Add 'discard' to all vfat and ext4 fstab entries (/mnt/etc/fstab)
 
     - Change root
 
