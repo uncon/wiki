@@ -29,14 +29,23 @@
 
 			mkfs.ext4 -L "Arch Linux Root" /dev/sda2
 
+    - Home
+
+			mkfs.ext4 -L "Arch Linux Home" /dev/sda3
+
     - Swap
 
-			mkswap -L "Arch Linux Swap" /dev/sda3
+			mkswap -L "Arch Linux Swap" /dev/sda4
 
 2. Mount the partitions
     - Root
 
 			mount /dev/sda2 /mnt
+
+    - Home
+
+			mkdir -p /mnt/home
+			mount /dev/sda3 /mnt/home
 
     - EFI
 
@@ -133,7 +142,7 @@
 
 1. Unmount and Reboot
 
-		umount /mnt/{boot,}
+		umount /mnt/{boot,home,}
 		systemctl reboot
 
 ## Post-Installation
