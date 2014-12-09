@@ -54,7 +54,7 @@
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh dnsutils sudo wget zsh nvidia xorg-server xorg-server-utils xf86-input-synaptics gnome gnome-extra gvfs-smb gdm gvim cups gutenprint
+		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh dnsutils sudo wget git htop tmux zsh nvidia xorg-server xorg-server-utils xf86-input-synaptics gnome gnome-extra gvfs-smb gdm gvim cups gutenprint
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
     - Generate fstab
