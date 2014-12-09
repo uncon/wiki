@@ -7,7 +7,7 @@
 
 		passwd
 
-3. Setup SSH1
+3. Setup SSH1i
 		systemctl start sshd
 
 1. Find IP
@@ -155,7 +155,7 @@
 		makepkg -s
 		sudo pacman -U aura-bin-*.pkg.tar.xz
 
-1. Isntall Wireless Drivers
+1. Install Wireless Drivers
 
 		sudo aura -A broadcom-wl 
 
