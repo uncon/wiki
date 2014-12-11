@@ -7,7 +7,7 @@ This was last tested with Receiver for Linux 13.1.0.285639 on 64-bit Arch (2014-
 
 1. Prerequisites
 
-		# sudo pacman -S lib32-gtk2 lib32-alsa-plugins
+		# sudo pacman -S lib32-gtk2 lib32-alsa-plugins lib32-libpulse
 
 1. Optional Dependencies
 
