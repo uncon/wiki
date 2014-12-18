@@ -19,6 +19,12 @@
 	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ command "/bin/sh -c 'cinnamon-screensaver-command --lock && sleep 3 && xset dpms force standby'"
 	# gsettings set org.cinnamon.keybindings.custom-keybinding:/org/cinnamon/keybindings/custom-keybindings/custom0/ binding '<Primary><Alt>l'
 
+## Google Chrome
+
+### Enable WebGL for blacklisted GPU's
+
+	sudo sed -i.orig -e 's#^Exec=/usr/bin/google-chrome-stable#Exec=/usr/bin/google-chrome-stable --ignore-gpu-blacklist#g' /usr/share/applications/google-chrome.desktop
+
 ## Maintenance
 
 ### Remove all packages no longer required as dependencies (orphans)
