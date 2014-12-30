@@ -23,6 +23,12 @@
 	-type f -name '*:Zone.Identifier:$DATA' \
 	\) -print0 | xargs -0 rm -fr
 
+## Remove Litter from Citrix Receiver for Linux
+	find "${@:-$PWD}" \( \
+	-type f -name '.access^' -o \
+	-type f -name '.attribute^' \
+	\) -print0 | xargs -0 rm -fr
+
 ## Remove all events from Windows logs
 	for /f %x in ('wevtutil el') do wevtutil cl "%x"
 
