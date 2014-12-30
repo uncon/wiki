@@ -7,7 +7,6 @@
 
 ## Remove Litter from Windows and OS X
 	find "${@:-$PWD}" \( \
-	-type f -name '._*' -o \
 	-type f -name '.DS_Store' -o \
 	-type d -name '__MACOSX' -o \
 	-type f -name '.apdisk' -o \
