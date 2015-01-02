@@ -1,4 +1,6 @@
-# Arch Linux Installation on a MacBookPro10,1
+# Arch Linux Installation on a MacBook Pro
+
+These steps are specify for my MacBookPro10,1 but are likely useful for others as well.
 
 ## Arch Installation
 
