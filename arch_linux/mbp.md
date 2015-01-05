@@ -163,7 +163,10 @@ These steps are specify for my MacBookPro10,1 but are likely useful for others a
 
 1. Install Google Chrome
 
+	Also, force Chrome to ignore the GPU blacklist to enable WebGL.
+
 		sudo aura -A google-chrome
+		sudo sed -i.orig -e 's#^Exec=/usr/bin/google-chrome-stable#Exec=/usr/bin/google-chrome-stable --ignore-gpu-blacklist#g' /usr/share/applications/google-chrome.desktop
 
 1. Install powertop
 
