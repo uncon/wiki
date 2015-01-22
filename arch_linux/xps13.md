@@ -175,6 +175,13 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 		sudo systemctl enable powertop-autotune
 		sudo systemctl start powertop-autotune
 
+1. Install [Insync](https://www.insynchq.com/)
+
+		sudo pacman -Sy gsettings-desktop-schemas
+		sudo aura -A insync
+		sudo systemctl enable insync@uncon
+		sudo systemctl start insync@uncon
+
 1. Disable HiDPI
 
 	This is necesary for consistency untill there is more wide-spread support for HiDPI
