@@ -4,12 +4,11 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 ## Arch Installation
 
-1. Log in as root
 1. Set root password
 
 		passwd
 
-3. Setup SSH1i
+3. Setup SSH
 		systemctl start sshd
 
 1. Find IP
