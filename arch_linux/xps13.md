@@ -178,6 +178,11 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 		sudo systemctl enable insync@uncon
 		sudo systemctl start insync@uncon
 
+1. Fix touchpad
+This became necessary after updating to linux-3.18.4-1.
+
+		sudo su -c 'printf "# Blacklist i2c_hid to fix tackpad issues since kernel upgrade (3.18.2-2 -> 3.18.4-1)\nblacklist i2c_hid\n" > /etc/modprobe.d/trackpad-fix.conf' 
+
 1. Disable HiDPI
 
 	This is necesary for consistency untill there is more wide-spread support for HiDPI
