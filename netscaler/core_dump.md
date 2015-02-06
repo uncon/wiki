@@ -26,35 +26,19 @@
 
 ## NSPPE Core Dump
 
-**Note**: It may not be necessary to change the PitBoss policy settings in these commands since we disable PitBoss.
-
-1. Find NSPPE PID's.
-
-		# nsp query
-
-2. Set PitBoss policy to defaults.
+1. Set PitBoss policy to defaults.
 
 		# pb_policy -d
 
-3. Set PitBoss policy to abort other processes when something cannot be restarted.
+1. Set PitBoss policy to abort other processes when something cannot be restarted.
 
 		# pb_policy -o abort
 
-4. Disable PitBoss.
+1. Kill the NSPPE process.
 
-		# sysctl netscaler_pitbosspolicy=0
+		# killall -m -SIGABRT 'NSPPE-[0-9]*'
 
-5. Kill the NSPPE process.
-
-		# kill SIGSTOP <NSPPE_PID>
-
-6. After all the cores have been dumped, reboot the system.
-
-		# reboot
-
-7. Set PitBoss policy to defaults.
-
-		# pb_policy -d
+1. After all the cores have been dumped, the system should reboot.
 
 ## Reboot
 
@@ -64,30 +48,14 @@ In order to stop the NetScaler when it panics execute the following commands fro
 
 		sysctl debug.debugger_on_panic=1
 
-2. Wait for the crash
+1. Wait for the crash
 
-3. Print backtrace (at the 'db>' prompt)
+1. Print backtrace (at the 'db>' prompt)
 
 		t
 
-4. Continue dump (at the 'db>' prompt)
+1. Continue dump (at the 'db>' prompt)
 
 		call nspanic
 
-5. Press a key to reboot the system
-
-## Live System
-
-In order to force a core dump on a running system, execute the following commands from the NetScaler shell. 
-
-1. Synchronize the filesystems
-
-		sync
-
-2. Configure the system to dump a core instead of drop to the debugger
-
-		nsapimgr -B "w debugger_on_panic 0"
-
-3. Force panic
-
-		nsapimgr -B "call nspanic"
+1. Press a key to reboot the system
