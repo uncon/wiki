@@ -6,7 +6,7 @@
 
 2. Patch XML file
 
-		sed -e "s#eth0#virbr1#g" -e "s#`<source file='\(NSVPX-KVM.*\)'/>`#`<source file='${PWD}/\1'/>`#" NSVPX-KVM.xml > NSVPX-KVM-patched.xml
+		ssed -e "s#eth0#virbr1#g" -e "s#^\(\s*\)<source file='\(NSVPX-KVM.*\)'/>\$#\1<source file='${PWD}/\2'/>#" NSVPX-KVM.xml > NSVPX-KVM-patched.xml
 
 3. Import VM
 
