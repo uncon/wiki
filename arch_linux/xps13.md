@@ -149,6 +149,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 ## Post-Installation
 
 1. Install [Infinality](http://bohoomil.com)
+
 		printf '\n# Infinality Bundle & Fonts\n[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch\n\n[infinality-bundle-multilib]\nServer = http://bohoomil.com/repo/multilib/$arch\n\n[infinality-bundle-fonts]\nServer = http://bohoomil.com/repo/fonts\n\n' >> /etc/pacman.conf
 		pacman-key -r 962DDE58
 		pacman-key -f 962DDE58
