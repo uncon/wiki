@@ -190,7 +190,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 	The following puts the touchpad in PS2 (not I2C) mode and soundcard in HDA (not I2S) mode as well as impliments a workaround to disable resetting the touchpad driver on recieving invalid packets.
 
-		sudo sed -i.orig -e 's/^\(options\W.*\) rw$/\1 acpi_osi="!Windows 2013" resetafter=0 rw/g' /boot/loader/entries/arch.conf
+		sudo sed -i.orig -e 's/^\(options\W.*\) rw$/\1 acpi_osi="!Windows 2013" psmouse.resetafter=0 rw/g' /boot/loader/entries/arch.conf
 
 1. Disable HiDPI
 
