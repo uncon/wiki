@@ -22,113 +22,113 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 		cgdisk /dev/sda
 
 1. Format partitions
-    - EFI
+	- EFI
 
 			mkfs.vfat -F32 -n "EFI System Partition" /dev/sda1
 
-    - Root
+	- Root
 
 			mkfs.ext4 -L "Arch Linux Root" /dev/sda2
 
-    - Home
+	- Home
 
 			mkfs.ext4 -L "Arch Linux Home" /dev/sda3
 
-    - Swap
+	- Swap
 
 			mkswap -L "Arch Linux Swap" /dev/sda4
 
 2. Mount the partitions
-    - Root
+	- Root
 
 			mount /dev/sda2 /mnt
 
-    - Home
+	- Home
 
 			mkdir -p /mnt/home
 			mount /dev/sda3 /mnt/home
 
-    - EFI
+	- EFI
 
 			mkdir -p /mnt/boot
 			mount /dev/sda1 /mnt/boot
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh dnsutils sudo wget git htop tmux zsh xf86-video-intel mesa-libgl libva-intel-driver libva xorg-server xorg-server-utils xorg-utils xf86-input-synaptics gnome gnome-extra gvfs-smb gdm gvim cups gutenprint
+		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh dnsutils sudo wget git htop tmux zsh xf86-video-intel mesa-libgl libva-intel-driver libva xorg-server xorg-server-utils xorg-server-xwayland xorg-utils xf86-input-synaptics gnome gnome-extra gvfs-smb gdm gvim cups gutenprint
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
-    - Generate fstab
+	- Generate fstab
 
 			genfstab -U /mnt >> /mnt/etc/fstab
 
-    - Update fstab
+	- Update fstab
 
 		(TODO: automate this!) Add 'discard' to all vfat and ext4 fstab entries (/mnt/etc/fstab)
 
-    - Change root
+	- Change root
 
 			arch-chroot /mnt
 
-    - Set hostname
+	- Set hostname
 
 			echo "arch" > /etc/hostname
 
-    - Set time zone
+	- Set time zone
 
 			ln -s /usr/share/zoneinfo/US/Central /etc/localtime
 
-    - Set locale
+	- Set locale
 
 			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
 			locale-gen
 			echo -e "LANG=en_US.UTF-8\nLC_COLLATE=C" > /etc/locale.conf
 
-    - Create init RAM disk
+	- Create init RAM disk
 
 			mkinitcpio -p linux
 
-    - Set root password
+	- Set root password
 
 			passwd
 
-    - Install [Gummiboot](https///wiki.archlinux.org/index.php/Gummiboot)
+	- Install [Gummiboot](https///wiki.archlinux.org/index.php/Gummiboot)
 
 			pacman -S gummiboot
 			gummiboot install
 			UUID=$(dumpe2fs -h $(grep " / " /etc/mtab | grep -v "rootfs\|arch_root-image" | awk '{ print $1 }') | grep "Filesystem UUID" | awk '{ print $3 }'); printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\troot=UUID=${UUID} rw\n" > /boot/loader/entries/arch.conf
 
-    - Enable Network Manager
+	- Enable Network Manager
 
 			systemctl enable NetworkManager
 
-    - Enable SSH
+	- Enable SSH
 
 			systemctl enable sshd
 
-    - Enable timesyncd
+	- Enable timesyncd
 
 			systemctl enable systemd-timesyncd
 
-    - Enable CUPS
+	- Enable CUPS
 
 			systemctl enable org.cups.cupsd
 
-    - Enable Bluetooth
+	- Enable Bluetooth
 
 			systemctl enable bluetooth
 
-    - Enable GDM
+	- Enable GDM
 
 			systemctl enable gdm
 
-    - Add user
+	- Add user
 
 			useradd -m -g users -G wheel -s /bin/zsh uncon
 			chfn uncon
 			passwd uncon
 
-    - Configure sudo
+	- Configure sudo
 
 			visudo
 
@@ -137,7 +137,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 			## Uncomment to allow members of group wheel to execute any command
 			%wheel ALL=(ALL) ALL
 
-    - Exit
+	- Exit
 
 			exit
 
