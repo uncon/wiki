@@ -166,18 +166,20 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 1. Install Wireless Drivers
 
+	This is only required if using the DW 1560 (Broadcom) wifi card.
+
 		sudo aura -A broadcom-wl 
 
 1. Install Google Chrome
 
 		sudo aura -A google-chrome
 
-1. Install powertop
+1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
-		sudo aura -A powertop-autotune-systemd
-		sudo powertop --calibrate
-		sudo systemctl enable powertop-autotune
-		sudo systemctl start powertop-autotune
+		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
+		sudo systemctl mask systemd-rfkill
+		sudo systemctl enable tlp.service
+		sudo systemctl enable tlp-sleep.service
 
 1. Install [Insync](https://www.insynchq.com/)
 
@@ -194,7 +196,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 1. Disable HiDPI
 
-	This is necesary for consistency untill there is more wide-spread support for HiDPI
+	This is optional and provides better consistency untill there is more wide-spread support for HiDPI.
 		
 		gsettings set org.gnome.desktop.interface scaling-factor 1
 
