@@ -25,6 +25,9 @@
 	gui.filter_expressions.label: Conn Est
 	gui.filter_expressions.enabled: TRUE
 	gui.filter_expressions.expr: tcp.connection.syn
+	gui.filter_expressions.label: NS Mon
+	gui.filter_expressions.enabled: TRUE
+	gui.filter_expressions.expr: tcp.flags.syn == 1 && tcp.window_size == 8188
 
 	# Time format
 	time.display_time_type: UTC
