@@ -24,6 +24,8 @@ The following process can be used to setup a [KVM](https///wiki.archlinux.org/in
 
 2. Enable and start services
 
+		systemctl enable rpcbind
+		systemctl start rpcbind
 		systemctl enable nfs-client.target
 		systemctl start nfs-client.target
 
