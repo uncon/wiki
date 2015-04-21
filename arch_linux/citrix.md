@@ -1,17 +1,17 @@
 # Arch Linux Citrix Software
 
 ##  Receiver for Linux
-This was last tested with Receiver for Linux 13.1.0.285639 on 64-bit Arch (2014-12-08).
+This was last tested with Receiver for Linux 13.1.0.285639 on 64-bit Arch (2015-04-21).
 
-**Note**: Technically, Receiver for Linux is 32-bit for the time being.  You must enable the multilib repository in `/etc/pacman.conf`.
+**Note**: Technically, Receiver for Linux is currently 32-bit.  Thusly, you must enable the multilib repository in `/etc/pacman.conf`.
 
 1. Prerequisites
 
-		# sudo pacman -S lib32-gtk2 lib32-alsa-plugins lib32-libpulse webkitgtk2
+		# sudo pacman -Sy lib32-gtk2 lib32-alsa-plugins lib32-libpulse lib32-speex lib32-libvorbis webkitgtk2
 
 1. Optional Dependencies
 
-	These are required for Receiver (selfservice), but the main client binary (wfica) will work without them.  Unfortunately, as libxerces-c is missing, the selfservice binary will not actually work.
+	The main client binary (wfica) will work without these (using the Receiver for Web).  These dependencies would be required for the Receiver UI (selfservice).  However, as libxerces-c is missing, the Receiver UI will not actually work anyway.
 
 		# sudo aura -A libpng12 
 
