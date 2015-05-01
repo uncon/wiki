@@ -54,6 +54,9 @@
 ## Find Authentication Failure Count by Hour
 
 	# cat ns.log.* ns.log | grep "LOGIN_FAILED" | awk -F: '{ print "#" $1 ":00," }' | uniq -c | awk -F# '{ print $2 $1 }' | sort -M
+
+## View monitor probe SYN's
+	# nstcpdump.sh -nnvvS tcp[14:2] = 8188
 	
 ## View raw HTTP(S) data
 
