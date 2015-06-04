@@ -174,6 +174,12 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 		sudo aura -A google-chrome
 
+1. Fix Google Chrome's Touchscreen Support
+
+	Add the following line to ~/.profile
+
+		export CHROMIUM_USER_FLAGS="--touch-devices=$(xinput list | grep 'Virtual core pointer' | sed -e 's/^.*\w*id=\([0-9]*\)\w*.*$/\1/')"
+
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
 		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
@@ -194,11 +200,11 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 		sudo sed -i.orig -e 's/^\(options\W.*\) rw$/\1 i915.lvds_downclock=1 i915.enable_psr=1 intremap=no_x2apic_optout rw/g' /boot/loader/entries/arch.conf
 
-1. Disable HiDPI
+1. Disable GNOME's On-Screen Keyboard
 
-	This is optional and provides better consistency untill there is more wide-spread support for HiDPI.
+	Since we will always have a keyboard, there is no need for Caribou to pop up every time we touch a text box.  (This is pretty dirty, but I can't find an alternative option.)
 		
-		gsettings set org.gnome.desktop.interface scaling-factor 1
+		sudo sed -i.orig -e 's/^\(Exec=\)/#\1/g' /usr/share/dbus-1/services/org.gnome.Caribou.Antler.service /usr/share/dbus-1/services/org.gnome.Caribou.Daemon.service
 
 ## KVM and libvirt
 
