@@ -194,11 +194,12 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 		sudo systemctl enable insync@uncon
 		sudo systemctl start insync@uncon
 
-1. Kernel tweaks
+1. Kernel and module tweaks
 
 	The following is optional.
 
-		sudo sed -i.orig -e 's/^\(options\W.*\) rw$/\1 i915.lvds_downclock=1 i915.enable_psr=1 intremap=no_x2apic_optout rw/g' /boot/loader/entries/arch.conf
+		sudo sed -i.orig -e 's/^\(options\W.*\) rw$/\1 pcie_aspm=force intremap=no_x2apic_optout rw/g' /boot/loader/entries/arch.conf
+		sudo sh -c 'echo -e "options i915 lvds_downclock=1 enable_rc6=1 enable_fbc=1 enable_ips=0 enable_psr=1\noptions iwlwifi 11n_disable=8" > /etc/modprobe.d/dell-xps13.conf'
 
 1. Disable GNOME's On-Screen Keyboard
 
