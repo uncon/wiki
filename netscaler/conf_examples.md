@@ -16,7 +16,7 @@ You will likely have to clear the cache on the NetScaler (`flush cache contentgr
 ### DOMAIN\sAMAccountName
 	add rewrite action domain_extract_act insert_after "HTTP.RES.BODY(1024).REGEX_SELECT(re/function ns_check\\(\\).*return false;\\W*}/)" "\"\n\tvar domain = login.replace(/\\\\\\\\.*/, \\\"\\\");\n\tvar expiry = new Date(+new Date + 7200000); // +2 hours\n\tdocument.cookie = \\\"Domain=\\\" + escape(domain) + \\\"; path=/; expires=\\\" + expiry.toGMTString();\"" -bypassSafetyCheck YES
 	add rewrite policy domain_extract_pol "HTTP.REQ.URL.PATH.ENDSWITH(\"vpn/login.js\")" domain_extract_act
-	bind vpn vserver agee_vserver -policy domain_extract_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
+	bind vpn vserver nsg_vserver -policy domain_extract_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
 
 The configuration above will send the login field as-is.  If you need to strip the domain from the field prior to authentication, you will need to make the following change.
 	
@@ -25,7 +25,17 @@ The configuration above will send the login field as-is.  If you need to strip t
 ### userPrincipalName
 	add rewrite action domain_extract_act insert_after "HTTP.RES.BODY(1024).REGEX_SELECT(re/function ns_check\\(\\).*return false;\\W*}/)" "\"\n\tvar domain = login.replace(/.*@/, \\\"\\\");\n\tvar expiry = new Date(+new Date + 7200000); // +2 hours\n\tdocument.cookie = \\\"Domain=\\\" + escape(domain) + \\\"; path=/; expires=\\\" + expiry.toGMTString();\"" -bypassSafetyCheck YES
 	add rewrite policy domain_extract_pol "HTTP.REQ.URL.PATH.ENDSWITH(\"vpn/login.js\")" domain_extract_act
-	bind vpn vserver agee_vserver -policy domain_extract_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
+	bind vpn vserver nsg_vserver -policy domain_extract_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
+
+## Obfuscate Authentication Failures
+This rewrite policy and action will obfuscate Enhanced Authentication Feedback (`set aaa param -enableEnhancedAuthFeedback`) so that only certain failure messages are reported to the client.  (You can find the definitions of the error codes in `/resources/en.xml` (e.g., `<String id="errorMessageLabel4001">Incorrect credentials. Try again.</String>`).
+
+The example below will only allow error codes 4008, 4014, and 4016 to be reported to the client.  All other errors will be reported as 4001 ("Incorrect credentials. Try again.").
+
+	add rewrite action dropCookie_rwact replace "HTTP.RES.SET_COOKIE.COOKIE(\"NSC_VPNERR\")" "\"NSC_VPNERR=4001;Path=/;Secure\""
+	add rewrite policy dropCookie_rwpol "HTTP.RES.SET_COOKIE.COOKIE(\"NSC_VPNERR\").VALUE(\"NSC_VPNERR\").TYPECAST_NUM_AT.NE(4008) && HTTP.RES.SET_COOKIE.COOKIE(\"NSC_VPNERR\").VALUE(\"NSC_VPNERR\").TYPECAST_NUM_AT.NE(4014) && HTTP.RES.SET_COOKIE.COOKIE(\"NSC_VPNERR\").VALUE(\"NSC_VPNERR\").TYPECAST_NUM_AT.NE(4016)" dropCookie_rwact
+	bind vpn vserver nsg_vserver -policy dropCookie_rwpol -priority 100 -gotoPriorityExpression NEXT -type RESPONSE
+
 
 ## Group Persistence While Honoring TCP Port
 This will encrypt the IP and port with AES256 and a random key and set it in a cookie.  (You can find more detail in eDocs: [Encrypting and Decrypting Text](http://www.google.com/url?q=http%3A%2F%2Fsupport.citrix.com%2Fproddocs%2Ftopic%2Fnetscaler-policy-configuration-93-map%2Fns-pi-adv-exp-eval-txt-encrypt-decrypt-txt-con.html&sa=D&sntz=1&usg=AFQjCNEJuqY-AKwJa30Blf3UAN3fzvGjWg).)
@@ -57,4 +67,3 @@ Insert an HTTP header (`NSDbg`) containing the backend server IP and TCP port nu
 ## Remove HTTP Header
 	add rewrite action rm_jsessionid_cookie_act replace "HTTP.REQ.HEADER(\"Cookie\").REGEX_SELECT(re/(\?i) JSESSIONID=\\S*;/)" "\"\""
 	add rewrite policy rm_jsessionid_cookie_pol TRUE rm_jsessionid_cookie_act
-
