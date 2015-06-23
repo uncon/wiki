@@ -154,7 +154,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 		pacman-key -r 962DDE58
 		pacman-key -f 962DDE58
 		pacman-key --lsign-key 962DDE58
-		pacman -Sy infinality-bundle
+		pacman -Sy infinality-bundle ibfonts-meta-extended
 
 1. Install [Aura](https://github.com/aurapm/aura)
 
