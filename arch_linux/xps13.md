@@ -92,10 +92,9 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 			passwd
 
-	- Install [Gummiboot](https///wiki.archlinux.org/index.php/Gummiboot)
+	- Install systemd-boot to the ESP and EFI variables
 
-			pacman -S gummiboot
-			gummiboot install
+			bootctl install
 			UUID=$(dumpe2fs -h $(grep " / " /etc/mtab | grep -v "rootfs\|arch_root-image" | awk '{ print $1 }') | grep "Filesystem UUID" | awk '{ print $3 }'); printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\troot=UUID=${UUID} rw\n" > /boot/loader/entries/arch.conf
 
 	- Enable Network Manager
