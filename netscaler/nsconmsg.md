@@ -116,6 +116,9 @@ time zone is the same as the system running nsconmsg
 	tcp_tot_txMbits
 	tcp_err_ip_portalloc
 	tcp_err
+	nic_err_rl_pkt_drops
+	nic_err_rl_rate_pkt_drops
+	nic_err_rl_pps_pkt_drops
 
 ### Web
 
