@@ -5,10 +5,10 @@ This was last tested with Receiver for Linux 13.2.0.322243 on 64-bit Arch (2015-
 
 1. Optional Dependencies
 
-	The main client binary (wfica) will work without these (using the Receiver for Web).  These dependencies are required for the Receiver UI (selfservice).
+	The main client binary (wfica) will work without these (using the Receiver for Web).  These (legacy) dependencies are required for the Receiver UI (selfservice).
 
 		# sudo pacman -Sy webkitgtk2
-		# sudo aura -A libpng12 
+		# sudo aura -A libpng12 libjpeg6
 
 1. Download [Receiver for Linux](https://www.citrix.com/downloads/citrix-receiver/linux.html)
 
