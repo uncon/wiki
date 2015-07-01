@@ -15,7 +15,7 @@ This was last tested with Receiver for Linux 13.1.0.285639 on 64-bit Arch (2015-
 
 		# sudo aura -A libpng12 
 
-1. Download [Receiver for Linux](http://receiver.citrix.com/)
+1. Download [Receiver for Linux](https://www.citrix.com/downloads/citrix-receiver/linux.html)
 
 1. Extract Receiver for Linux archive
 
