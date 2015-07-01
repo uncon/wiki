@@ -1,7 +1,7 @@
 # Arch Linux Citrix Software
 
 ##  Receiver for Linux
-This was last tested with Receiver for Linux 13.1.0.285639 on 64-bit Arch (2015-04-21).
+This was last tested with Receiver for Linux 13.2.0.322243 on 64-bit Arch (2015-07-01).
 
 **Note**: Technically, Receiver for Linux is currently 32-bit.  Thusly, you must enable the multilib repository in `/etc/pacman.conf`.
 
