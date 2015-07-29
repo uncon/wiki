@@ -8,7 +8,8 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 		passwd
 
-3. Setup SSH
+1. Setup SSH
+
 		systemctl start sshd
 
 1. Find IP
