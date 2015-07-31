@@ -33,7 +33,7 @@
 
 ### Update mirror list
 
-	# sudo su -c "curl 'https://www.archlinux.org/mirrorlist/?country=US&protocol=http&ip_version=4&use_mirror_status=on' | sed -e 's/^#Server = /Server = /g' > /etc/pacman.d/mirrorlist"
+	# sudo su -c "curl 'https://www.archlinux.org/mirrorlist/?country=US&protocol=http&ip_version=4&ip_version=6&use_mirror_status=on' | sed -e 's/^#Server = /Server = /g' | grep -v '^#' | head -n 6 > ~/mirrorlist.tmp && rankmirrors -n 6 ~/mirrorlist.tmp > /etc/pacman.d/mirrorlist && rm ~/mirrorlist.tmp"
 
 ### Remove package cache
 
