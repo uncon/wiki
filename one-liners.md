@@ -5,6 +5,12 @@
 ## Re-encode flac
 	find . -type f -iname "*.flac" | while read -r file; do mv "${file}" "${file%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${file}" "${file%.flac}-OLD.flac"; done
 
+## Create Archive
+	tar -c -v -f archive.tar --mode='a+rw' --owner=0 --group=0 . &> archive.log
+
+## Install Certificate
+	certutil -d sql:${HOME}/.pki/nssdb -A -t "C,," -n "unconnet CA" -i pfSense-CA.crt
+
 ## Remove Litter from Windows and OS X
 	find "${@:-$PWD}" \( \
 	-type f -name '.DS_Store' -o \
