@@ -1,5 +1,9 @@
 # NetScaler One-Liners
 
+## SNMP walk
+
+	# snmpwalk -v2c -cpublic -m ./NS-MIB-smiv2.mib <NSIP> vsvrName
+
 ## Find NetScaler version and build from a vmcore file
 
 	# strings vmcore.0 | grep "NetScaler" | grep "Build"
