@@ -39,6 +39,15 @@
 	tcp.relative_sequence_numbers: FALSE
 	tcp.calculate_timestamps: TRUE
 
+## TShark
+*  Filter a trace into a new file
+
+		tshark -r input.pcapng -n -2 -R "ip.addr == 192.168.0.1" -w output.pcapng
+
+*  Filter a NetScaler trace into a new file
+
+		tshark -r nstrace1.cap -n -2 -R "ip.addr == 192.168.0.1" -F nstrace30 -w nstrace1-filtered.cap
+
 ## Mac OS X
 *  Fix the fonts in Wireshark's (horrible) GTK theme.
 
