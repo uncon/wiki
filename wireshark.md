@@ -21,13 +21,22 @@
 	# Filter Bookmarks
 	gui.filter_expressions.label: Bad TCP
 	gui.filter_expressions.enabled: TRUE
-	gui.filter_expressions.expr: tcp.analysis.flags && !tcp.analysis.window_update
+	gui.filter_expressions.expr: (tcp.analysis.flags && !tcp.analysis.window_update) || tcp.flags.reset eq 1
 	gui.filter_expressions.label: Conn Est
 	gui.filter_expressions.enabled: TRUE
 	gui.filter_expressions.expr: tcp.connection.syn
 	gui.filter_expressions.label: NS Mon
 	gui.filter_expressions.enabled: TRUE
-	gui.filter_expressions.expr: tcp.flags.syn == 1 && tcp.window_size == 8188
+	gui.filter_expressions.expr: tcp.connection.syn && tcp.window_size == 8188
+	gui.filter_expressions.label: Slow
+	gui.filter_expressions.enabled: TRUE
+	gui.filter_expressions.expr: tcp.time_delta > .3 && (tcp.flags.fin == 0 && tcp.flags.reset == 0)
+	gui.filter_expressions.label: Zero/Full
+	gui.filter_expressions.enabled: TRUE
+	gui.filter_expressions.expr: tcp.analysis.zero_window or tcp.analysis.window_full
+	gui.filter_expressions.label: Jumbo
+	gui.filter_expressions.enabled: TRUE
+	gui.filter_expressions.expr: tcp.options.mss_val > 1500
 
 	# Time format
 	time.display_time_type: UTC
