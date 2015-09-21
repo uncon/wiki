@@ -83,7 +83,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
 			locale-gen
-			echo -e "LANG=en_US.UTF-8\nLC_COLLATE=C" > /etc/locale.conf
+			localectl set-locale LANG=en_US.UTF-8
 
 	- Create init RAM disk
 
