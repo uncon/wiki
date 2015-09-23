@@ -4,7 +4,7 @@
 
 1. Install PHP and extensions.
 
-		pkg install php55 php55-extensions
+		pkg install php56 php56-extensions
 
 1. Configure PHP.
 
