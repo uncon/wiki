@@ -68,6 +68,8 @@
 - `STA_VERSION` - a numeric field identifying the version of the STA.
   - `10` - STA versions 1.0 and 1.1
   - `20` - STA version 2.0
+  - `22` - STA version 2.2
+  - `40` - STA version 4.0 (Required for Session Reliability)
 - `STA_SERVER_ID` - a sequence of 0 - 16 characters representing a hash of the server name.
   - When multiple STAs are shared by a single gateway server, each STA ID must be unique. This allows the gateway to locate the STA that created the ticket and return to that STA for ticket validation. (A ticket created on STA01 will not exist on STA02.)
 - `TICKET` - a randomly generated sequence of 32 (uppercase) alphanumeric characters.
