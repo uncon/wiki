@@ -156,6 +156,10 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 		pacman-key --lsign-key 962DDE58
 		pacman -Sy infinality-bundle ibfonts-meta-extended
 
+	Optionally, install 32-bit support.
+	
+		pacman -Sy lib32-freetype2-infinality-ultimate lib32-fontconfig-infinality-ultimate lib32-cairo-infinality-ultimate
+
 1. Install [Aura](https://github.com/aurapm/aura)
 
 		wget "https://aur.archlinux.org/packages/au/aura-bin/aura-bin.tar.gz"
