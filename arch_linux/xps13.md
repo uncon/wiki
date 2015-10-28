@@ -224,7 +224,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 1. Install packages
 
-		sudo pacman -S libvirt urlgrabber qemu libvirt virtviewer virt-manager xorg-xauth dnsmasq ebtables bridge-utils
+		sudo pacman -S libvirt urlgrabber qemu virtviewer virt-manager xorg-xauth dnsmasq ebtables bridge-utils
 
 1. Enable and start services
 
