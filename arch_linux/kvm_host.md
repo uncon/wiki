@@ -6,7 +6,7 @@ The following process can be used to setup a [KVM](https///wiki.archlinux.org/in
 
 1. Install KVM
 
-		pacman -S libvirt urlgrabber qemu dnsmasq ebtables bridge-utils
+		pacman -S libvirt urlgrabber qemu dnsmasq ebtables bridge-utils openbsd-netcat
 
 2. Enable and start services
 
