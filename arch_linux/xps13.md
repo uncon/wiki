@@ -79,11 +79,10 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 			ln -s /usr/share/zoneinfo/US/Central /etc/localtime
 
-	- Set locale
+	- Configure locale
 
 			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
 			locale-gen
-			localectl set-locale LANG=en_US.UTF-8
 
 	- Create init RAM disk
 
@@ -159,6 +158,10 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 	Optionally, install 32-bit support.
 	
 		pacman -Sy lib32-freetype2-infinality-ultimate lib32-fontconfig-infinality-ultimate lib32-cairo-infinality-ultimate
+
+1. Set locale
+
+		localectl set-locale LANG=en_US.UTF-8
 
 1. Install [Aura](https://github.com/aurapm/aura)
 
