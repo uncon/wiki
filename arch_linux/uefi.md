@@ -2,107 +2,140 @@
 
 ## Arch Installation
 
-1. Log in as root
-2. Set root password
+1. Set root password
 
 		passwd
 
-3. Setup SSH
+1. Setup SSH
 
 		systemctl start sshd
 
-4. Find IP
+1. Find IP
 
 		ip addr
 
-5. Log in via SSH from a remote workstation
-6. Clean and partition the disk
+1. Log in via SSH from a remote workstation
+1. Clean and partition the disk
 
 		sgdisk --zap-all /dev/sda
 		cgdisk /dev/sda
 
 1. Format partitions
-    - EFI
+	- EFI
 
 			mkfs.vfat -F32 -n "EFI System Partition" /dev/sda1
 
-    - Root
+	- Root
 
 			mkfs.ext4 -L "Arch Linux Root" /dev/sda2
 
-    - Swap
+	- Home
 
-			mkswap -L "Arch Linux Swap" /dev/sda3
+			mkfs.ext4 -L "Arch Linux Home" /dev/sda3
+
+	- Swap
+
+			mkswap -L "Arch Linux Swap" /dev/sda4
 
 2. Mount the partitions
-    - Root
+	- Root
 
 			mount /dev/sda2 /mnt
 
-    - EFI
+	- Home
+
+			mkdir -p /mnt/home
+			mount /dev/sda3 /mnt/home
+
+	- EFI
 
 			mkdir -p /mnt/boot
 			mount /dev/sda1 /mnt/boot
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel efibootmgr dosfstools netctl openssh
+		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh net-tools bind-tools sudo wget git htop tmux zsh vim
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
-    - Generate fstab
+	- Generate fstab
 
 			genfstab -U /mnt >> /mnt/etc/fstab
 
-    - Change root
+	- Update fstab
+
+		(TODO: automate this!) Add 'discard' to all vfat and ext4 fstab entries (/mnt/etc/fstab)
+
+	- Change root
 
 			arch-chroot /mnt
 
-    - Set hostname
+	- Set hostname
 
 			echo "arch" > /etc/hostname
 
-    - Set time zone
+	- Set time zone
 
 			ln -s /usr/share/zoneinfo/US/Central /etc/localtime
 
-    - Set locale
+	- Set locale
 
 			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
 			locale-gen
-			echo -e "LANG=en_US.UTF-8\nLC_COLLATE=C" > /etc/locale.conf
+			localectl set-locale LANG=en_US.UTF-8
 
-    - Create init RAM disk
+	- Create init RAM disk
 
 			mkinitcpio -p linux
 
-    - Set root password
+	- Set root password
 
 			passwd
 
-    - Install [Gummiboot](https///wiki.archlinux.org/index.php/Gummiboot)
+	- Install systemd-boot to the ESP and EFI variables
 
-			pacman -S gummiboot
-			gummiboot install
-			UUID=$(dumpe2fs -h $(grep " / " /etc/mtab | grep -v "rootfs\|arch_root-image" | awk '{ print $1 }') | grep "Filesystem UUID" | awk '{ print $3 }'); printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/initramfs-linux.img\noptions\troot=UUID=${UUID} console=tty0 console=ttyS0,115200n8 rw\n" > /boot/loader/entries/arch.conf
+			bootctl install
+			UUID=$(dumpe2fs -h $(grep " / " /etc/mtab | grep -v "rootfs\|arch_root-image" | awk '{ print $1 }') | grep "Filesystem UUID" | awk '{ print $3 }'); printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\troot=UUID=${UUID} rw\n" > /boot/loader/entries/arch.conf
 
-    - Enable DHCP
+	- Enable Network Manager
 
-			INT=eno1; sed -e "s/^\(Description=\).*$/\1'DHCP on ${INT}'/" -e "s/^\(Interface=\).*$/\1${INT}/" /etc/netctl/examples/ethernet-dhcp > "/etc/netctl/${INT}"; netctl enable "${INT}"
+			systemctl enable NetworkManager
 
-    - Enable timesyncd
+	- Enable SSH
 
-			ln -s '/usr/lib/systemd/system/systemd-timesyncd.service' '/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service'
+			systemctl enable sshd
 
-    - Enable SSH
+	- Enable timesyncd
 
-			ln -s '/usr/lib/systemd/system/sshd.service' '/etc/systemd/system/multi-user.target.wants/sshd.service'
+			systemctl enable systemd-timesyncd
 
-    - Exit
+	- Add user
+
+			useradd -m -g users -G wheel -s /bin/zsh uncon
+			chfn uncon
+			passwd uncon
+
+	- Configure sudo
+
+			visudo
+
+		Uncomment the following line.
+
+			## Uncomment to allow members of group wheel to execute any command
+			%wheel ALL=(ALL) ALL
+
+	- Exit
 
 			exit
 
 1. Unmount and Reboot
 
-		umount /mnt/{boot,}
+		umount /mnt/{boot,home,}
 		systemctl reboot
 
+## Post-Installation
+
+1. Install [Aura](https://github.com/aurapm/aura)
+
+		git clone "https://aur.archlinux.org/aura-bin.git/"
+		cd "aura-bin"
+		makepkg -i -s -r
