@@ -54,7 +54,7 @@
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh net-tools bind-tools sudo wget git htop tmux zsh vim
+		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh net-tools bind-tools sudo wget git htop tmux zsh vim networkmanager
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
 	- Generate fstab
@@ -77,7 +77,7 @@
 
 			ln -s /usr/share/zoneinfo/US/Central /etc/localtime
 
-	- Set locale
+	- Configure locale
 
 			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
 			locale-gen
@@ -133,6 +133,10 @@
 		systemctl reboot
 
 ## Post-Installation
+
+1. Set locale
+
+		localectl set-locale LANG=en_US.UTF-8
 
 1. Install [Aura](https://github.com/aurapm/aura)
 
