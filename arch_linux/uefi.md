@@ -81,7 +81,6 @@
 
 			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
 			locale-gen
-			localectl set-locale LANG=en_US.UTF-8
 
 	- Create init RAM disk
 
