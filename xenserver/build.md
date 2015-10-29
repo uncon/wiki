@@ -31,7 +31,7 @@ These steps are specify for my lab XenServer.
 1. Setup local ISO repository.
 
 		mkdir /var/run/sr-mount/<SR-UUID>/ISO_Storage
-		xe sr-create name-label=ISO type=iso device-config:location=/var/run/sr-mount/<SR-UUID>/ISO_Storage device-config:legacy_mode=true content-type=iso
+		xe sr-create name-label="Local ISO storage" type=iso device-config:location=/var/run/sr-mount/<SR-UUID>/ISO_Storage device-config:legacy_mode=true content-type=iso
 
 1. Upload ISO's.
 
