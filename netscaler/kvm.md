@@ -14,7 +14,7 @@
 
 ## First Boot
 
-Due to some bug (maybe?), the initial configuration wizard is not invoked on first boot for KVM instances.
+The initial configuration wizard may not be automatically invoked on the first boot for KVM instances.
 
 1. Invoke network wizard
 
