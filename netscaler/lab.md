@@ -26,7 +26,16 @@
 	bind service svc-http-red -monitorName http
 	bind service svc-http-green -monitorName http
 	bind service svc-http-maroon -monitorName http
-	
+
+	add service svc-ssl-blue 192.168.34.81 SSL 80
+	add service svc-ssl-red 192.168.34.82 SSL 80
+	add service svc-ssl-green 192.168.34.83 SSL 80
+	add service svc-ssl-maroon 192.168.34.84 SSL 80
+	bind service svc-ssl-blue -monitorName https
+	bind service svc-ssl-red -monitorName https
+	bind service svc-ssl-green -monitorName https
+	bind service svc-ssl-maroon -monitorName https
+
 	add lb vserver lbvs-http-1 HTTP 192.168.34.70 80
 	bind lb vserver lbvs-http-1 svc-http-blue
 	bind lb vserver lbvs-http-1 svc-http-red
