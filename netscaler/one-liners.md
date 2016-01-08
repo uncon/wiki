@@ -76,7 +76,7 @@ or
 
 then
 
-	# VER="101"; \
+	# VER="$(grep "^netscaler.version" ../../shell/sysctl-a.out | sed -e 's/^.* NS\([0-9]*\)\.\([0-9]*\): .*$/\1\2/')"; \
 	for file in $(find . -name "newnslog*" -maxdepth 1 | grep -v "\.tar$\|\.tar\.gz" | sed -e 's#^./##g'); do \
 	  nsconmsg$VER -K $file -d setime > nsconmsg-setime-$file; \
 	  nsconmsg$VER -K $file -d event > nsconmsg-event-$file; \
