@@ -1,11 +1,11 @@
 # Arch Linux Citrix Software
 
 ##  Receiver for Linux
-This was last tested with Receiver for Linux 13.2.0.322243 on 64-bit Arch (2015-07-01).
+This was last tested with Receiver for Linux 13.3.0.344519 on 64-bit Arch (2016-02-01).
 
 1. Optional Dependencies
 
-	The main client binary (wfica) will work without these (using the Receiver for Web).  These (legacy) dependencies are required for the Receiver UI (selfservice).
+	The main client binary (wfica) will work without these (using Receiver for Web).  These (legacy) dependencies are required for the Receiver UI (selfservice).
 
 		# sudo pacman -Sy webkitgtk2
 
