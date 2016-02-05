@@ -14,10 +14,15 @@
 	
 	enable ns feature LB SSL
 	
-	create ssl rsakey self-signed.key 1024 -exponent F4 -keyform PEM
-	create ssl certreq self-signed.req -keyfile self-signed.key -keyform PEM -countryName US -stateName Florida -localityName "Fort Lauderdale" -organizationName "Citrix Systems Inc." -organizationUnitName Support
-	create ssl cert self-signed.cert self-signed.req ROOT_CERT -keyFile self-signed.key -keyForm PEM -days 3650
-	add ssl certKey self-signed -cert self-signed.cert -key self-signed.key
+	create ssl rsakey testCert-root.key 1024 -exponent F4 -keyform PEM
+	create ssl certReq testCert-root.req -keyFile testCert-root.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com -emailAddress support@netscaler.com -companyName www.ns.com
+	create ssl cert testCert-root.cert testCert-root.req ROOT_CERT -keyFile testCert-root.key -keyform PEM -days 365 -certForm PEM -CAcertForm PEM -CAkeyForm PEM
+
+	create ssl rsakey testCert.key 1024 -exponent F4 -keyform PEM
+	create ssl certReq testCert.req -keyFile testCert.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com
+	create ssl cert testCert.cert testCert.req SRVR_CERT -keyform PEM -days 365 -certForm PEM -CAcert testCert-root.cert -CAcertForm PEM -CAkey testCert-root.key -CAkeyForm PEM -CAserial CASerial
+
+	add ssl certKey testCert -cert testCert.cert -key testCert.key -inform PEM
 	
 	add service svc-http-blue 192.168.34.81 HTTP 80
 	add service svc-http-red 192.168.34.82 HTTP 80
