@@ -14,15 +14,15 @@
 	
 	enable ns feature LB SSL
 	
-	create ssl rsakey testCert-root.key 1024 -exponent F4 -keyform PEM
-	create ssl certReq testCert-root.req -keyFile testCert-root.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com -emailAddress support@netscaler.com -companyName www.ns.com
-	create ssl cert testCert-root.cert testCert-root.req ROOT_CERT -keyFile testCert-root.key -keyform PEM -days 365 -certForm PEM -CAcertForm PEM -CAkeyForm PEM
+	create ssl rsakey test-cert-root.key 1024 -exponent F4 -keyform PEM
+	create ssl certReq test-cert-root.req -keyFile test-cert-root.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com -emailAddress support@netscaler.com -companyName www.ns.com
+	create ssl cert test-cert-root.cert test-cert-root.req ROOT_CERT -keyFile test-cert-root.key -keyform PEM -days 365 -certForm PEM -CAcertForm PEM -CAkeyForm PEM
 
-	create ssl rsakey testCert.key 1024 -exponent F4 -keyform PEM
-	create ssl certReq testCert.req -keyFile testCert.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com
-	create ssl cert testCert.cert testCert.req SRVR_CERT -keyform PEM -days 365 -certForm PEM -CAcert testCert-root.cert -CAcertForm PEM -CAkey testCert-root.key -CAkeyForm PEM -CAserial CASerial
+	create ssl rsakey test-cert.key 1024 -exponent F4 -keyform PEM
+	create ssl certReq test-cert.req -keyFile test-cert.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com
+	create ssl cert test-cert.cert test-cert.req SRVR_CERT -keyform PEM -days 365 -certForm PEM -CAcert test-cert-root.cert -CAcertForm PEM -CAkey test-cert-root.key -CAkeyForm PEM -CAserial CASerial
 
-	add ssl certKey testCert -cert testCert.cert -key testCert.key -inform PEM
+	add ssl certKey test-cert -cert test-cert.cert -key test-cert.key -inform PEM
 	
 	add service svc-http-blue 192.168.34.81 HTTP 80
 	add service svc-http-red 192.168.34.82 HTTP 80
@@ -49,7 +49,7 @@
 	bind lb vserver lbvs-http-1 svc-http-maroon
 	
 	add lb vserver lbvs-ssl-1 SSL 192.168.34.70 443
-	bind ssl vserver lbvs-ssl-1 -certkeyName self-signed
+	bind ssl vserver lbvs-ssl-1 -certkeyName test-cert
 	bind lb vserver lbvs-ssl-1 svc-http-blue
 	bind lb vserver lbvs-ssl-1 svc-http-red
 	bind lb vserver lbvs-ssl-1 svc-http-green
