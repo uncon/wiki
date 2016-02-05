@@ -14,11 +14,11 @@
 	
 	enable ns feature LB SSL
 	
-	create ssl rsakey test-cert-root.key 1024 -exponent F4 -keyform PEM
+	create ssl rsakey test-cert-root.key 512 -exponent F4 -keyform PEM
 	create ssl certReq test-cert-root.req -keyFile test-cert-root.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com -emailAddress support@netscaler.com -companyName www.ns.com
 	create ssl cert test-cert-root.cert test-cert-root.req ROOT_CERT -keyFile test-cert-root.key -keyform PEM -days 365 -certForm PEM -CAcertForm PEM -CAkeyForm PEM
 
-	create ssl rsakey test-cert.key 1024 -exponent F4 -keyform PEM
+	create ssl rsakey test-cert.key 512 -exponent F4 -keyform PEM
 	create ssl certReq test-cert.req -keyFile test-cert.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com
 	create ssl cert test-cert.cert test-cert.req SRVR_CERT -keyform PEM -days 365 -certForm PEM -CAcert test-cert-root.cert -CAcertForm PEM -CAkey test-cert-root.key -CAkeyForm PEM -CAserial CASerial
 
