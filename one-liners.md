@@ -32,13 +32,10 @@
 	find "${@:-$PWD}" \( \
 	-type f -name '.access^' -o \
 	-type f -name '.attribute^' \
-	\) -print0 | xargs -0 rm -fr
+	\) -print0 | xargs -0 rm
 
 ## Remove all events from Windows logs
 	for /f %x in ('wevtutil el') do wevtutil cl "%x"
-
-## Remove old kernels in Ubuntu/Debian
-	dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge
 
 ## Install identity.pub to a remote machine
 1. Generate key
@@ -47,7 +44,7 @@
 
 2. Upload key
 
-		ssh-copy-id  -i ~/.ssh/id_rsa.pub user@host
+		ssh-copy-id -i ~/.ssh/id_rsa.pub user@host
 
 	or
 
