@@ -32,7 +32,7 @@ time zone is the same as the system running nsconmsg
 	# nsconmsg -K newnslog -d oldconmsg
 
 ### Display memory details
-	# nsconmsg -K newnslog -s ConMEM=1 -d oldconmsg
+	# nsconmsg -K newnslog -s ConMEM=2 -d oldconmsg
 
 ### Display performance information where NIC bandwidth exceeds 100 Mb/s
 	# nsconmsg -K newnslog -s ratecount=100 -g mbits -d past
