@@ -164,13 +164,12 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 		localectl set-locale LANG=en_US.UTF-8
 
-1. Install [Aura](https://github.com/aurapm/aura)
+1. Install [pacaur](https://github.com/rmarquis/pacaur)
 
-		wget "https://aur.archlinux.org/packages/au/aura-bin/aura-bin.tar.gz"
-		tar xf aura-bin.tar.gz
-		cd aura-bin
-		makepkg -s
-		sudo pacman -U aura-bin-*.pkg.tar.xz
+		mkdir ~/aur
+		cd ~/aur
+		PKG="cower" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r
+		PKG="pacaur" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r
 
 1. Install Wireless Drivers
 
