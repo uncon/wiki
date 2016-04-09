@@ -181,12 +181,6 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 		sudo aura -A google-chrome
 
-1. Fix Google Chrome's Touchscreen Support
-
-	Add the following line to ~/.profile
-
-		export CHROMIUM_USER_FLAGS="--touch-devices=$(xinput list | grep 'Virtual core pointer' | sed -e 's/^.*\w*id=\([0-9]*\)\w*.*$/\1/')"
-
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
 		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
