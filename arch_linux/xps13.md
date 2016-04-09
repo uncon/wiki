@@ -175,11 +175,11 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 	This is only required if using the DW 1560 (Broadcom) wifi card.
 
-		sudo aura -A broadcom-wl 
+		pacaur -Sy broadcom-wl 
 
 1. Install Google Chrome
 
-		sudo aura -A google-chrome
+		pacaur -Sy google-chrome
 
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
@@ -191,7 +191,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 1. Install [Insync](https://www.insynchq.com/)
 
 		sudo pacman -Sy gsettings-desktop-schemas
-		sudo aura -A insync
+		pacaur -Sy insync
 		sudo systemctl enable insync@uncon
 		sudo systemctl start insync@uncon
 
