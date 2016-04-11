@@ -201,12 +201,6 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 		sudo sed -i.orig -e 's/^\(options\W.*\) rw$/\1 pcie_aspm=force intremap=no_x2apic_optout rw/g' /boot/loader/entries/arch.conf
 		sudo sh -c 'echo "options iwlwifi 11n_disable=8" > /etc/modprobe.d/dell-xps13.conf'
 
-1. Touchpad tweaks
-
-		sudo -i
-		printf 'Section "InputClass"\n\tIdentifier "touchpad"\n\tDriver "synaptics"\n\tMatchIsTouchpad "on"\n\tOption "SoftButtonAreas"  "0 0 0 0 0 0 0 0"\nEndSection' > /etc/X11/xorg.conf.d/50-synaptics.conf
-		exit
-
 1. Disable GNOME's On-Screen Keyboard
 
 	Since we will always have a keyboard, there is no need for Caribou to pop up every time we touch a text box.  (This is pretty dirty, but I can't find an alternative option.)
