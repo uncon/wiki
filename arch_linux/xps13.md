@@ -150,11 +150,13 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 1. Install [Infinality](http://bohoomil.com)
 
+		sudo -i
 		printf '\n# Infinality Bundle & Fonts\n[infinality-bundle]\nServer = http://bohoomil.com/repo/$arch\n\n[infinality-bundle-multilib]\nServer = http://bohoomil.com/repo/multilib/$arch\n\n[infinality-bundle-fonts]\nServer = http://bohoomil.com/repo/fonts\n\n' >> /etc/pacman.conf
 		pacman-key -r 962DDE58
 		pacman-key -f 962DDE58
 		pacman-key --lsign-key 962DDE58
 		pacman -Sy infinality-bundle ibfonts-meta-extended
+		exit
 
 	Optionally, install 32-bit support.
 	
@@ -184,7 +186,6 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
 		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
-		sudo systemctl mask systemd-rfkill
 		sudo systemctl enable tlp.service
 		sudo systemctl enable tlp-sleep.service
 
@@ -192,8 +193,6 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 		sudo pacman -Sy gsettings-desktop-schemas
 		pacaur -Sy insync
-		sudo systemctl enable insync@uncon
-		sudo systemctl start insync@uncon
 
 1. Kernel and module tweaks
 
