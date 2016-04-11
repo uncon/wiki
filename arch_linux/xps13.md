@@ -160,7 +160,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 	Optionally, install 32-bit support.
 	
-		pacman -Sy lib32-freetype2-infinality-ultimate lib32-fontconfig-infinality-ultimate lib32-cairo-infinality-ultimate
+		sudo pacman -Sy lib32-freetype2-infinality-ultimate lib32-fontconfig-infinality-ultimate lib32-cairo-infinality-ultimate
 
 1. Set locale
 
