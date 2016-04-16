@@ -5,6 +5,9 @@
 ## Re-encode flac
 	find . -type f -iname "*.flac" | while read -r file; do mv "${file}" "${file%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${file}" "${file%.flac}-OLD.flac"; done
 
+## Bulk extract .zip files into directories
+	find . -type f -iname "*.zip" | while read -r FILE; do mkdir "${FILE%.zip}"; 7z x "${FILE}" -o"${FILE%.zip}" && rm "${FILE}"; done
+
 ## Create Archive
 	tar -c -v -f archive.tar --mode='a+rw' --owner=0 --group=0 . &> archive.log
 
