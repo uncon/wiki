@@ -57,6 +57,29 @@
 
 		tshark -r nstrace1.cap -n -2 -R "ip.addr == 192.168.0.1" -F nstrace30 -w nstrace1-filtered.cap
 
+* Display latency statistics from a specific IP
+
+		tshark -r nstrace1.cap -o tcp.calculate_timestamps:true -T fields -e tcp.time_delta -Y "ip.src == 192.168.0.1" | sort -n | awk '
+		  BEGIN {
+		    c = 0;
+		    sum = 0;
+		  }
+		  $1 ~ /^[0-9]*(\.[0-9]*)?$/ {
+		    a[c++] = $1;
+		    sum += $1;
+		  }
+		  END {
+		    ave = sum / c;
+		    if( (c % 2) == 1 ) {
+		      median = a[ int(c/2) ];
+		    } else {
+		      median = ( a[c/2] + a[c/2-1] ) / 2;
+		    }
+		    OFS="\n";
+		    print "Sum: " sum, "Count: " c, "Average: " ave, "Median: " median, "Min: " a[0], "Max: " a[c-1];
+		  }
+		'
+
 ## Mac OS X
 *  Fix the fonts in Wireshark's (horrible) GTK theme.
 
