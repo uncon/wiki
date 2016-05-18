@@ -45,7 +45,7 @@
 	# nsconmsg -K /var/nslog/newnslog -d event | grep "DOWN; Last response:\|UP; Last response:" | sed -e 's/^.* PPE-[0-9]*//g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
 ## Find HA events in newnslog
 
-	# nsconmsg -K /var/nslog/newnslog -d event | grep " node\|heartbeat\|interface" | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
+	# nsconmsg -K /var/nslog/newnslog -d event | grep " node\|heartbeat\|interface" | sed -E -e ':a' -e 'N' -e '$!ba' -e 's/\n;/;/g' -e 's/: (Sun|Mon|Tue|Wed|Thu|Fri|Sat)/:/g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
 
 ## Find CPU use > 60% in newnslog
 
