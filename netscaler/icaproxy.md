@@ -61,7 +61,7 @@
 
 1. The STA server forwards the original data to the gateway. (notably, `<Value name="CGPAddress">` and `<Value name="ICAAddress">`).
 
-1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5.
+1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5 or CGP.
 
 ## STA Ticket Encoding Format
 `;STA_VERSION;STA_ID;TICKET`
