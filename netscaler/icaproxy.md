@@ -42,8 +42,13 @@
 	- Web Interface: `/cvpn/https/webinterface.internal.com/Citrix/XenApp/site/launcher.aspx[...]`
 
 1. The SF/WI server constructs and sends an ICA file (`HTTP 200`).
-	- `Address` contains the STA information (`;STA_VERSION;STA_SERVER_ID;STA_TICKET`, see below)
-	- `SSLProxyHost` contains the FQDN and TCP port number of the gateway
+	1. The SF/WI server contacts the XML broker to determine the address of the target server.
+	1. The XML broker locates the least-busy server for the chosen application and requests a "Logon Ticket" for that server.
+	1. The address of the target server and a corresponding "Logon Ticket" are returned to the SF/WI server.
+	1. The SF/WI server sends the target server address, user name, domain name and published application name to the STA server and receives a "Gateway Traversal Ticket" in return.
+	1. The SF/WI server renders an ICA file for the user containing the "Gateway Traversal Ticket".
+		- `Address` contains the STA information (`;STA_VERSION;STA_SERVER_ID;STA_TICKET`, see below)
+		- `SSLProxyHost` contains the FQDN and TCP port number of the gateway
 
 	![NetScaler ICA Proxy Traffic Flow Diagram - Connection Setup](images/icaproxy_5-proxy.png)
 
@@ -61,6 +66,8 @@
 
 1. The STA server forwards the original data to the gateway. (notably, `<Value name="CGPAddress">` and `<Value name="ICAAddress">`).
 
+1. In the case of Session Reliability (SR), the NetScaler requests a "Refreshable Reconnect Ticket" from the STA server to be used in case the SSL connection is severed. (This reconnect ticket is periodically refreshed while the user’s session is active.)
+
 1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5 or CGP.
 
 ## STA Ticket Encoding Format
@@ -73,3 +80,10 @@
 - `STA_SERVER_ID` - a sequence of 0 - 16 characters representing a hash of the server name.
   - When multiple STAs are shared by a single gateway server, each STA ID must be unique. This allows the gateway to locate the STA that created the ticket and return to that STA for ticket validation. (A ticket created on STA01 will not exist on STA02.)
 - `TICKET` - a randomly generated sequence of 32 (uppercase) alphanumeric characters.
+
+# ICA Proxy Reconnection Traffic Flow
+
+- In addition to the "Gateway Traversal Ticket" that is used to make the initial connection, when using Session Reliability (SR) or Auto Client Reconnect (ACR), there is an addition ticket that is stored on the endpoint in memory that is used to reconnect to the NetScaler without prompting the user for credentials.
+	- If both session reliability and auto client reconnect are enabled, the features work in sequence: ACR will engage after the SR timer has expired.
+- For ACR, the "ACR Ticket" is issued to Receiver via XenApp / XenDesktop.  For SR, the "Common Gateway Protocol Token" is issued to Receiver via the Citrix XTE Service / ICA-CGP Listener.
+- After a network interruption, the client initiates a new SSL connection to the NetScaler and presents the STA reconnect ticket.
