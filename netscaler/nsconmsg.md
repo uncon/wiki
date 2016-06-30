@@ -19,8 +19,11 @@ time zone is the same as the system running nsconmsg
 ### Display load balancing performance information for a specific vserver
 	# nsconmsg -K newnslog -s ConLb=3 -i vserver -d oldconmsg
 
-### Display current counter value information
+### Display past counter value information
 	# nsconmsg -K newnslog -d past
+
+### Display current counter value information
+	# nsconmsg -K newnslog -d current
 
 ### Display current counter value information excluding counters with 0 value
 	# nsconmsg -K newnslog -d statswt0
@@ -44,7 +47,7 @@ time zone is the same as the system running nsconmsg
 	# nsconmsg -K newnslog -d auditedcmd
 
 ### Display current counter values
-	# nsconmsg -K newnslog -g [counter-name] -d past
+	# nsconmsg -K newnslog -g [counter-name] -d current
 
 ### Dump counter values in CSV format
 	# nsconmsg -K newnslog -s csv=1 -g  [counter-name] -d current
