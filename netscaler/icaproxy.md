@@ -83,7 +83,8 @@
 
 # ICA Proxy Reconnection
 
-- In addition to the "Gateway Traversal Ticket" that is used to make the initial connection, when using Session Reliability (SR) or Auto Client Reconnect (ACR), there is an addition ticket that is stored on the endpoint in memory that is used to reconnect to the NetScaler without prompting the user for credentials.
-- For ACR, the "ACR Ticket" is issued to Receiver via XenApp / XenDesktop.  For SR, the "Common Gateway Protocol Token" is issued to Receiver via the Citrix XTE Service / ICA-CGP Listener.
+- In addition to the "Gateway Traversal Ticket" that is used to make the initial connection, when using Session Reliability (SR) or Auto Client Reconnect (ACR), there is an additional ticket that is stored on the endpoint (in memory) that is used to reconnect to the NetScaler without prompting the user for credentials.
+  - For ACR, the "ACR Ticket" is issued to Receiver via XenApp / XenDesktop.
+  - For SR, the "Common Gateway Protocol Token" is issued to Receiver via the Citrix XTE Service / ICA-CGP Listener.
 - After a network interruption, the client initiates a new SSL connection to the NetScaler and presents the STA reconnect ticket.
 - If both session reliability and auto client reconnect are enabled, the features work in sequence: ACR will engage after the SR timer has expired.
