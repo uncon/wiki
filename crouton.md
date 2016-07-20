@@ -1,4 +1,4 @@
-# Crouton Installation
+# Crouton Quick Reference
 
 These steps are specificly for my own quick reference, but they may also be useful for others as well.
 
