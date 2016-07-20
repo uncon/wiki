@@ -1,6 +1,6 @@
 # Crouton Installation
 
-These steps are specify for my my HP Chromebook 13 but may be useful for others as well.
+These steps are specificly for my own quick reference, but they may also be useful for others as well.
 
 ## Developer Mode
 
