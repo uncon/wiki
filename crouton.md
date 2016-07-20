@@ -58,9 +58,11 @@ After enabling developer mode, it is pretty important to enable some additional 
 
 ## Additional Software
 
-These steps should be done inside the chroot: sudo enter-chroot.  
+These steps should be done inside the chroot: `sudo enter-chroot`.
 
-1. sudo apt-get install software-properties-common python-software-properties
+1. Install prerequisites
+
+		sudo apt-get install software-properties-common python-software-properties
 
 ### Fix-Ups
 
