@@ -53,8 +53,8 @@ After enabling developer mode, it is pretty important to enable some additional 
 
 		sudo sh ~/Downloads/crouton -u -n crouton -t xiwi,extension
 
-	* xiwi - X.org X11 backend running **unaccelerated** in a Chromium OS window. (not required)
-	* extension - Clipboard synchronization and URL handling with Chromium OS. (recommended)
+	* `xiwi` - X.org X11 backend running **unaccelerated** in a Chromium OS window. (not required)
+	* `extension` - Clipboard synchronization and URL handling with Chromium OS. (recommended)
 
 ## Additional Software
 
