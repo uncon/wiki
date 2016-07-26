@@ -28,7 +28,7 @@ The configuration above will send the login field as-is.  If you need to strip t
 	bind vpn vserver nsg_vserver -policy domain_extract_pol -priority 100 -gotoPriorityExpression END -type RESPONSE
 
 ## Obfuscate Authentication Failures
-This rewrite policy and action will obfuscate Enhanced Authentication Feedback (`set aaa param -enableEnhancedAuthFeedback`) so that only certain failure messages are reported to the client.  You can find the definitions of the error codes in `/resources/en.xml` (e.g., `<String id="errorMessageLabel4001">Incorrect credentials. Try again.</String>`).
+This rewrite policy and action will obfuscate Enhanced Authentication Feedback (`set aaa parameter -enableEnhancedAuthFeedback YES`) so that only certain failure messages are reported to the client.  You can find the definitions of the error codes in `/resources/en.xml` (e.g., `<String id="errorMessageLabel4001">Incorrect credentials. Try again.</String>`).
 
 The example below will only allow error codes 4008, 4014, and 4016 to be reported to the client.  All other errors will be reported as 4001 ("Incorrect credentials. Try again.").
 
