@@ -56,6 +56,18 @@ After enabling developer mode, it is pretty important to enable some additional 
 	* `xiwi` - X.org X11 backend running **unaccelerated** in a Chromium OS window. (not required)
 	* `extension` - Clipboard synchronization and URL handling with Chromium OS. (recommended)
 
+## Fix-Ups
+
+### Modify SSH Client Config
+
+Disable `HashKnownHosts` so that ssh does not hash host names and addresses when they are added to `~/.ssh/known_hosts`.
+
+	sudo sed -i.orig -e 's/\(\s*HashKnownHosts\s*\).*$/\1no/' /etc/ssh/ssh_config
+
+### Remove Useless Packages
+
+	sudo apt-get purge xscreensaver netsurf-{common,gtk}
+
 ## Additional Software
 
 These steps should be done inside the chroot: `sudo enter-chroot`.
@@ -63,22 +75,6 @@ These steps should be done inside the chroot: `sudo enter-chroot`.
 1. Install prerequisites
 
 		sudo apt-get install software-properties-common python-software-properties
-
-### Fix-Ups
-
-#### Intel Graphics Drivers
-
-This is specifically for trusty.
-
-	sudo add-apt-repository https://download.01.org/gfx/ubuntu/14.04/main
-	wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg -O - | sudo apt-key add -
-	wget --no-check-certificate https://download.01.org/gfx/RPM-GPG-KEY-ilg-2 -O - | sudo apt-key add -
-	sudo apt-get update
-	sudo apt-get upgrade
-
-#### Remove Useless Packages
-
-	sudo apt-get purge xscreensaver netsurf-{common,gtk}
 
 ### Wireshark
 
@@ -122,10 +118,10 @@ This is specifically for trusty.
 
 	sudo edit-chroot -b crouton
 
-## Delete
+### Delete
 
 	sudo edit-chroot -d crouton
 
-## Restore
+### Restore
 
 	sudo edit-chroot -r crouton
