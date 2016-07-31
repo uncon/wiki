@@ -58,19 +58,27 @@ After enabling developer mode, it is pretty important to enable some additional 
 
 ## Fix-Ups
 
+### Fix touchpad in Xorg
+
+This command should be run outside the chroot.
+
+	sudo sed -i.orig -e 's/butterfly\*|falco\*/butterfly\*|falco\*|chell\*/' /mnt/stateful_partition/crouton/chroots/crouton/usr/local/bin/croutonxinitrc-wrapper
+
 ### Modify SSH Client Config
 
-Disable `HashKnownHosts` so that ssh does not hash host names and addresses when they are added to `~/.ssh/known_hosts`.
+Disable `HashKnownHosts` so that ssh does not hash host names and addresses when they are added to `~/.ssh/known_hosts`.  This command should be run inside the chroot (`sudo enter-chroot`).
 
 	sudo sed -i.orig -e 's/\(\s*HashKnownHosts\s*\).*$/\1no/' /etc/ssh/ssh_config
 
 ### Remove Useless Packages
 
+This command should be run inside the chroot (`sudo enter-chroot`).
+
 	sudo apt-get purge xscreensaver netsurf-{common,gtk}
 
 ## Additional Software
 
-These steps should be done inside the chroot: `sudo enter-chroot`.
+These commands should be run inside the chroot (`sudo enter-chroot`).
 
 1. Install prerequisites
 
