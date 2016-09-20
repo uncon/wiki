@@ -30,6 +30,7 @@
 1. The client sends the request including authentication cookies (HTTP `GET /cvpn/https/storefront.internal.com/Citrix/StoreWeb`).
 
 1. The SF/WI server performs a single sign-on (SSO) call-back to the vpn vserver (HTTP `POST /CitrixAuthService/AuthService.asmx`; `<GetAccessInformation [...]>`).
+	- In StoreFront 2.6 and newer, this callback is optional but required for SmartAccess.
 
 1. The vpn vserver responds to SF/WI including any Smart Access information (`HTTP 200`; `<GetAccessInformationResult>`).
 
