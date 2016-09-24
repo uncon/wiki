@@ -114,13 +114,7 @@ These commands should be run inside the chroot (`sudo enter-chroot`).
 
 ### Update
 
-1. Update crouton script (This may be unneccicary)
-
-		wget 'https://goo.gl/fd3zc' -O ~/Downloads/crouton
-
-1. Update the chroot
-
-		sudo sh ~/Downloads/crouton -u -n crouton
+	sudo sh ~/Downloads/crouton -u -n crouton
 
 ### Backup
 
