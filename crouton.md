@@ -60,9 +60,9 @@ After enabling developer mode, it is pretty important to enable some additional 
 
 ### Fix touchpad in Xorg
 
-This command should be run outside the chroot.
+This command will fix touchpad support in Xorg for the HP Chromebook 13 and should be run outside the chroot.
 
-	sudo sed -i.orig -e 's/butterfly\*|falco\*/butterfly\*|falco\*|chell\*/' /mnt/stateful_partition/crouton/chroots/crouton/usr/local/bin/croutonxinitrc-wrapper
+	sudo sed -i.orig -e 's/butterfly\*|falco\*|sentry\*/butterfly\*|falco\*|sentry\*|chell\*/' /mnt/stateful_partition/crouton/chroots/crouton/usr/local/bin/croutonxinitrc-wrapper
 
 ### Modify SSH Client Config
 
