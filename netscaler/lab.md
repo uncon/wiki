@@ -10,19 +10,23 @@
 	add dns nameServer 192.168.34.1
 	add route 0.0.0.0 0.0.0.0 192.168.34.1
 
-## Load Balancing
-	
-	enable ns feature LB SSL
+## SSL
+
+	enable ns feature SSL
 	
 	create ssl rsakey test-cert-root.key 512 -exponent F4 -keyform PEM
-	create ssl certReq test-cert-root.req -keyFile test-cert-root.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com -emailAddress support@netscaler.com -companyName www.ns.com
+	create ssl certReq test-cert-root.req -keyFile test-cert-root.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." 
 	create ssl cert test-cert-root.cert test-cert-root.req ROOT_CERT -keyFile test-cert-root.key -keyform PEM -days 365 -certForm PEM -CAcertForm PEM -CAkeyForm PEM
 
 	create ssl rsakey test-cert.key 512 -exponent F4 -keyform PEM
-	create ssl certReq test-cert.req -keyFile test-cert.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName www.ns.com
+	create ssl certReq test-cert.req -keyFile test-cert.key -keyform PEM -countryName US -stateName California -organizationName "NetScaler Inc." -organizationUnitName "SSL Acceleration" -localityName "Santa Clara" -commonName test-cert
 	create ssl cert test-cert.cert test-cert.req SRVR_CERT -keyform PEM -days 365 -certForm PEM -CAcert test-cert-root.cert -CAcertForm PEM -CAkey test-cert-root.key -CAkeyForm PEM -CAserial CASerial
 
-	add ssl certKey test-cert -cert test-cert.cert -key test-cert.key -inform PEM
+	add ssl certKey test-cert -cert test-cert.cert -key test-cert.key -inform PEM -expiryMonitor ENABLED -notificationPeriod 30 -bundle NO
+
+## Load Balancing
+	
+	enable ns feature LB SSL
 	
 	add service svc-http-blue 192.168.34.81 HTTP 80
 	add service svc-http-red 192.168.34.82 HTTP 80
