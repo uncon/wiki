@@ -1,7 +1,7 @@
 # Tips for Wireshark
 
 ## Preferences File
-`~/.config/wireshark/preferences`
+`~/.config/wireshark/preferences` or `%APPDATA%\Wireshark\preferences`
 
 	# Columns
 	gui.column.format:
