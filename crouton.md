@@ -98,7 +98,7 @@ These commands should be run inside the chroot (`sudo enter-chroot`).
 
 ### Other Useful Stuff
 
-	sudo apt-get install curl dnsutils
+	sudo apt-get install curl dnsutils tmux vim zsh git
 
 ## Startup
 
