@@ -57,7 +57,7 @@ These steps are specify for my my Dell XPS 13 (9343) but may be useful for other
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh net-tools bind-tools sudo wget git htop tmux zsh xf86-video-intel mesa-libgl libvdpau-va-gl libva-intel-driver xorg-server xorg-server-utils xorg-utils xf86-input-libinput gnome pulseaudio-bluetooth bluez-firmware gstreamer-vaapi gst-libav gvfs-smb gdm gvim cups gutenprint
+		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh net-tools bind-tools sudo wget git htop tmux zsh mesa-libgl libvdpau-va-gl libva-intel-driver xorg-server xorg-server-utils xorg-utils xf86-input-libinput gnome pulseaudio-bluetooth bluez-firmware gstreamer-vaapi gst-libav gvfs-smb gdm gvim cups gutenprint
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
 	- Generate fstab
