@@ -126,4 +126,4 @@ These commands should be run inside the chroot (`sudo enter-chroot`).
 
 ### Restore
 
-	sudo sh -e ~/Downloads/crouton -r crouton -t xfce -f ~/Downloads/crouton-*.tar.gz
+	sudo sh -e ~/Downloads/crouton -r xenial -f ~/Downloads/crouton.tar.gz
