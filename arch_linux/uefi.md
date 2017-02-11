@@ -2,6 +2,7 @@
 
 ## Arch Installation
 
+1. Boot (UEFI) from the installation media
 1. Set root password
 
 		passwd
@@ -54,7 +55,7 @@
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh net-tools bind-tools sudo wget git htop tmux zsh vim networkmanager
+		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools openssh net-tools bind-tools sudo wget git htop tmux zsh mesa-libgl libvdpau-va-gl libva-intel-driver xorg-server xorg-server-utils xorg-utils xf86-input-libinput gnome pulseaudio-bluetooth bluez-firmware gstreamer-vaapi gst-libav gvfs-smb gdm gvim cups gutenprint
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
 	- Generate fstab
@@ -107,6 +108,18 @@
 
 			systemctl enable systemd-timesyncd
 
+	- Enable CUPS
+
+			systemctl enable org.cups.cupsd
+
+	- Enable Bluetooth
+
+			systemctl enable bluetooth
+
+	- Enable GDM
+
+			systemctl enable gdm
+
 	- Add user
 
 			useradd -m -g users -G wheel -s /bin/zsh uncon
@@ -137,8 +150,54 @@
 
 		localectl set-locale LANG=en_US.UTF-8
 
-1. Install [Aura](https://github.com/aurapm/aura)
+1. Install [pacaur](https://github.com/rmarquis/pacaur)
 
-		git clone "https://aur.archlinux.org/aura-bin.git/"
-		cd "aura-bin"
-		makepkg -i -s -r
+		mkdir ~/aur
+		cd ~/aur
+		PKG="cower" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r
+		PKG="pacaur" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r
+
+1. Install Google Chrome
+
+		pacaur -Sy google-chrome
+
+1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
+
+		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
+		sudo systemctl enable tlp.service
+		sudo systemctl enable tlp-sleep.service
+
+1. Install [Insync](https://www.insynchq.com/)
+
+		sudo pacman -Sy gsettings-desktop-schemas
+		pacaur -Sy insync
+
+## KVM and libvirt
+
+1. Install packages
+
+		sudo pacman -S libvirt urlgrabber qemu virtviewer virt-manager xorg-xauth dnsmasq ebtables bridge-utils
+
+1. Enable and start services
+
+		sudo systemctl enable libvirt-guests
+		sudo systemctl start libvirt-guests
+		sudo systemctl enable libvirtd
+		sudo systemctl start libvirtd
+
+### Enable User Access
+
+1. Add group
+
+		sudo groupadd libvirt
+
+1. Add user to group
+
+		sudo gpasswd -a uncon libvirt
+		sudo gpasswd -a uncon kvm
+
+1. Setup PolicyKit
+
+		sudo -i 
+		printf 'polkit.addRule(function(action, subject) {\n\tif (action.id == "org.libvirt.unix.manage" &&\n\t\tsubject.isInGroup("libvirt")) {\n\t\t\treturn polkit.Result.YES;\n\t\t}\n});\n' > /etc/polkit-1/rules.d/50-org.libvirt.unix.manage.rules
+		exit
