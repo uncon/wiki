@@ -154,7 +154,8 @@
 
 		mkdir ~/aur
 		cd ~/aur
-		PKG="cower" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r
+		PKG="cower" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck
+		cd..
 		PKG="pacaur" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r
 
 1. Install Google Chrome
