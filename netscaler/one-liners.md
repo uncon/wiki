@@ -18,7 +18,7 @@
 
 	# nsprofmon -K /netscaler/nsppe/nsppe-[version]-[build] -k newproflog_cpu_[X].out -d alltexthitsym
 
-##Find policy hits
+## Find policy hits
 	# nsconmsg -g pol_hits -d current
 
 ## Find executed commands
