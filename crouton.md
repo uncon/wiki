@@ -70,6 +70,12 @@ Disable `HashKnownHosts` so that ssh does not hash host names and addresses when
 
 	sudo sed -i.orig -e 's/\(\s*HashKnownHosts\s*\).*$/\1no/' /etc/ssh/ssh_config
 
+### Fix Audio / MIDI Permissions
+
+This command should be run inside the chroot (`sudo enter-chroot`).
+
+	sudo usermod -a -G hwaudio uncon
+
 ### Remove Useless Packages
 
 This command should be run inside the chroot (`sudo enter-chroot`).
