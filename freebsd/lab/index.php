@@ -90,7 +90,7 @@ function setHttpLocation() {
 }
 
 function getHttpParams() { 
-	$param = '';
+	$param = array();
 	foreach ($_SERVER as $name => $value) {
 		if (substr($name, 0, 5) == 'HTTP_') { 
 			$param[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
@@ -100,7 +100,7 @@ function getHttpParams() {
 }
 
 function getRequestParams() { 
-	$param = '';
+	$param = array();
 	foreach ($_SERVER as $name => $value) {
 		if (substr($name, 0, 8) == 'REQUEST_') { 
 			$param[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 8)))))] = $value;
@@ -110,7 +110,7 @@ function getRequestParams() {
 }
 
 function getDocumentParams() { 
-	$param = '';
+	$param = array();
 	foreach ($_SERVER as $name => $value) {
 		if (substr($name, 0, 9) == 'DOCUMENT_') { 
 			$param[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 9)))))] = $value;
@@ -120,7 +120,7 @@ function getDocumentParams() {
 }
 
 function getServerParams() { 
-	$param = '';
+	$param = array();
 	foreach ($_SERVER as $name => $value) {
 		if (substr($name, 0, 7) == 'SERVER_') { 
 			$param[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 7)))))] = $value;
@@ -130,7 +130,7 @@ function getServerParams() {
 }
 
 function getRemoteParams() { 
-	$param = '';
+	$param = array();
 	foreach ($_SERVER as $name => $value) {
 		if (substr($name, 0, 7) == 'REMOTE_') { 
 			$param[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 7)))))] = $value;
@@ -382,4 +382,3 @@ td {
 </html>
 
 <!-- <?php echo $pageTitle; ?> -->
-
