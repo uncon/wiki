@@ -2,13 +2,13 @@
 
 ## Network
 	
-	set ns config -IPAddress 192.168.34.40 -netmask 255.255.255.0
+	set ns config -IPAddress 10.25.180.10 -netmask 255.255.255.192
 	enable ns feature LB CS SSL GSLB SSLVPN REWRITE RESPONDER
 	enable ns mode USNIP
 	set ns hostName ns1
-	add ns ip 192.168.34.41 255.255.255.0 -vServer DISABLED
-	add dns nameServer 192.168.34.1
-	add route 0.0.0.0 0.0.0.0 192.168.34.1
+	add ns ip 10.25.180.11 255.255.255.192 -vServer DISABLED
+	add dns nameServer 10.25.180.1
+	add route 0.0.0.0 0.0.0.0 10.25.180.1
 
 ## SSL
 
