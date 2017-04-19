@@ -25,36 +25,36 @@
 	add ssl certKey test-cert -cert test-cert.cert -key test-cert.key -inform PEM -expiryMonitor ENABLED -notificationPeriod 30 -bundle NO
 
 ## Load Balancing
-	
+
 	enable ns feature LB SSL
-	
-	add service svc-http-blue 192.168.34.81 HTTP 80
-	add service svc-http-red 192.168.34.82 HTTP 80
-	add service svc-http-green 192.168.34.83 HTTP 80
-	add service svc-http-maroon 192.168.34.84 HTTP 80
+
+	add service svc-http-black 10.25.180.20 HTTP 80
+	add service svc-http-blue 10.25.180.21 HTTP 80
+	add service svc-http-red 10.25.180.22 HTTP 80
+	add service svc-http-green 10.25.180.23 HTTP 80
+	bind service svc-http-black -monitorName http
 	bind service svc-http-blue -monitorName http
 	bind service svc-http-red -monitorName http
 	bind service svc-http-green -monitorName http
-	bind service svc-http-maroon -monitorName http
 
-	add service svc-ssl-blue 192.168.34.81 SSL 80
-	add service svc-ssl-red 192.168.34.82 SSL 80
-	add service svc-ssl-green 192.168.34.83 SSL 80
-	add service svc-ssl-maroon 192.168.34.84 SSL 80
+	add service svc-ssl-black 10.25.180.20 SSL 443
+	add service svc-ssl-blue 10.25.180.21 SSL 443
+	add service svc-ssl-red 10.25.180.22 SSL 443
+	add service svc-ssl-green 10.25.180.23 SSL 443
+	bind service svc-ssl-black -monitorName https
 	bind service svc-ssl-blue -monitorName https
 	bind service svc-ssl-red -monitorName https
 	bind service svc-ssl-green -monitorName https
-	bind service svc-ssl-maroon -monitorName https
 
-	add lb vserver lbvs-http-1 HTTP 192.168.34.70 80
+	add lb vserver lbvs-http-1 HTTP 10.25.180.30 80
+	bind lb vserver lbvs-http-1 svc-http-black
 	bind lb vserver lbvs-http-1 svc-http-blue
 	bind lb vserver lbvs-http-1 svc-http-red
 	bind lb vserver lbvs-http-1 svc-http-green
-	bind lb vserver lbvs-http-1 svc-http-maroon
-	
-	add lb vserver lbvs-ssl-1 SSL 192.168.34.70 443
+
+	add lb vserver lbvs-ssl-1 SSL 10.25.180.30 443
 	bind ssl vserver lbvs-ssl-1 -certkeyName test-cert
+	bind lb vserver lbvs-ssl-1 svc-http-black
 	bind lb vserver lbvs-ssl-1 svc-http-blue
 	bind lb vserver lbvs-ssl-1 svc-http-red
 	bind lb vserver lbvs-ssl-1 svc-http-green
-	bind lb vserver lbvs-ssl-1 svc-http-maroon
