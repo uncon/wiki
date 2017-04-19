@@ -4,12 +4,12 @@
 
 1. Install PHP and extensions.
 
-		pkg install php56 php56-extensions
+		pkg install php71 php71-extensions
 
 1. Configure PHP.
 
 		cp /usr/local/etc/php.ini-development /usr/local/etc/php.ini
-		sed -i.orig -E -e 's/^(listen = ).*$/\1\/var\/run\/php-fpm.sock/' -e 's/^;(listen\.(owner|group|mode) )/\1/g' /usr/local/etc/php-fpm.conf
+		sed -i.orig -E -e 's/^(listen = ).*$/\1\/var\/run\/php-fpm.sock/' -e 's/^;(listen\.(owner|group|mode) )/\1/g' /usr/local/etc/php-fpm.d/www.conf
 		sed -i.orig -e 's_^;\(date\.timezone =\)_\1 \"America/Chicago\"_' /usr/local/etc/php.ini
 		
 1. Enable PHP-FPM.
@@ -61,7 +61,7 @@
 
 	1. Create paths.
 
-			mkdir /usr/local/etc/nginx/conf.d /usr/local/etc/nginx/sites /var/log/nginx/
+			mkdir /usr/local/etc/nginx/conf.d /usr/local/etc/nginx/sites
 			
 	1. Edit `/usr/local/etc/nginx/conf.d/options` with global options.
 
