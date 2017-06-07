@@ -9,6 +9,9 @@
 ## Convert PKCS#12 bundle to PEM
 	openssl pkcs12 -in bundle.p12 -out userkey.pem -nodes -clcerts
 
+## Check Server-Provided Certificates
+	openssl s_client -showcerts -connect example.com:443 < /dev/null | grep " s:\| i:"
+
 ## Generate hash-based symlinks
 `certlink.sh`
 
