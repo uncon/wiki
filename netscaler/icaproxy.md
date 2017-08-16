@@ -63,11 +63,11 @@
 	- These handles consist of HTTP, SOCKSv5, and CGP.
 	- The current implementation assumes that SOCKSv5 and CGP connections are coming from an ICA client.
 
-1. The NetScaler performs a data request by sending the STA ticket back to the STA server and requesting its corresponding data. (`<RequestData>`).
+1. The NetScaler performs a data request by sending the STA ticket back to the STA server and requesting its corresponding data (`<RequestData>`).
 
 1. The STA server forwards the original data to the gateway. (notably, `<Value name="CGPAddress">` and `<Value name="ICAAddress">`).
 
-1. In the case of Session Reliability (SR), the NetScaler requests a "Refreshable Reconnect Ticket" from the STA server to be used in case the SSL connection is severed. (This reconnect ticket is periodically refreshed while the user’s session is active.)
+1. In the case of Session Reliability (SR), the NetScaler requests a "Refreshable Reconnect Ticket" from the STA server to be used in case the SSL connection is severed  (`<RequestTicketRefresh>`). (This reconnect ticket is periodically refreshed while the user's session is active.)
 
 1. This data is used to complete the subsequent proxy requests from Receiver via SOCKSv5 or CGP.
 
