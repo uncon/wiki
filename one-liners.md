@@ -1,9 +1,9 @@
 # One-Liners
 ## Convert flac to mp3
-	find . -type f -iname "*.flac" | while read -r file; do flac -cd "${file}" | lame -V 0 - "${file%.flac}.mp3"; done
+	find . -type f -iname "*.flac" | while read -r FILE; do flac -cd "${FILE}" | lame -V 0 - "${FILE%.flac}.mp3"; done
 
 ## Re-encode flac
-	find . -type f -iname "*.flac" | while read -r file; do mv "${file}" "${file%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${file}" "${file%.flac}-OLD.flac"; done
+	find . -type f -iname "*.flac" | while read -r FILE; do mv "${FILE}" "${FILE%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${FILE}" "${FILE%.flac}-OLD.flac"; done
 
 ## Bulk extract .zip files into directories
 	find . -type f -iname "*.zip" | while read -r FILE; do mkdir "${FILE%.zip}"; 7z x "${FILE}" -o"${FILE%.zip}" && rm "${FILE}"; done
@@ -73,9 +73,6 @@
 
 ## Copy USA ROMs From No-Intro Sets
 	mkdir ../USA; ls | grep -v "\[BIOS\]\|(Asia)\|(Beta.*)\|(Proto.*)\|(Japan)\|(Japan, Europe)\|(Japan, Korea)\|(France)\|(Europe)\|(Germany)\|(Australia)\|(Spain)\|(Korea)\|(Brazil)\|(Italy)\|(Canada)\|(Netherlands)\|(Hong Kong)\|(Sweden)\|(China)\|(Taiwan)" | while read FILE; do mv "${FILE}" ../USA; done
-
-## Organize Files (WIP)
-	for CHAR in A B C D E F G H I J K L M N O P Q R S T U V W X Y Z; do mkdir ${CHAR}; mv ${CHAR}* ${CHAR}/ 2> /dev/null; mv $(echo ${CHAR} | tr '[A-Z]' '[a-z]')* ${CHAR}/ 2> /dev/null; done; mkdir 0-9; mv [0-9]* 0-9/ 2> /dev/null
 
 ## Stupid Web Server
 	while [ true ]; do nc -e 'cat << EOF
