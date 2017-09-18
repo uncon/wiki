@@ -50,16 +50,10 @@ time zone is the same as the system running nsconmsg
 	# nsconmsg -K newnslog -g [counter-name] -d current
 
 ### Dump counter values in CSV format
-	# nsconmsg -K newnslog -s csv=1 -g  [counter-name] -d current
+	# nsconmsg -K newnslog -s csv=1 -g [counter-name] -d current
 
-### Display a current counter value excluding counters with 0 value
-	# nsconmsgsg -K newnslog -s csv=1 -g  [counter-name] -d current
-
-### Display a current counter value excluding counters with 0 value
-	# nsconmsg -K newnslog -g [counter-name] -d statswt0
-
-### Run nsconmsg on an archived newnslog file
-	# zcat newnslog.0.gz | nsconmsg -K pipe [...]
+### Display shared memory errors
+	# nsconmsg -K newnslog -f shmem0_err_allocfailed -f shmem_err_allocfailed -f shhmem0_cur_allocsize -f shmem_cur_allocsize -s disptime=1 -d current
 
 ## Useful Counters
 
