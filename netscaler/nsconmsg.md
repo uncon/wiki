@@ -57,9 +57,52 @@ time zone is the same as the system running nsconmsg
 
 ## Useful Counters
 
-### System
+### CPU
+	mgmt_cpu_use
 	cpu_use
-	mem_tot_freesize
+
+### Memory
+	mem_tot_allocsize tot=0
+	mem_tot_freesize tot=0
+
+### Network
+	ip_tot_rxbytes
+	ip_tot_txbytes
+	tcp_tot_rxMbits
+	tcp_tot_txMbits
+	ip_tot_rxpkts
+	ip_tot_txpkts
+	tcp_err_ip_portalloc
+	nic_err_rl_pkt_drops
+	nic_err_rl_rate_pkt_drops
+	nic_err_rl_pps_pkt_drops
+
+### SSL
+	ssl_tot_sslInfo_TotalSessionCount
+	ssl_tot_dec_bytes
+	ssl_tot_dec_bytes_BE
+	ssl_tot_dec_bytes_FE
+	ssl_tot_enc_bytes
+	ssl_tot_enc_bytes_BE
+	ssl_tot_enc_bytes_FE
+
+### HTTP
+	http_tot_Requests_Rate
+	http_tot_Responses_Rate
+	http_tot_Requests
+	http_tot_Responses
+
+### Servers
+	http_err_server_busy
+	si_tot_svr_busy_err
+	dht_err_update_didnt_find_entry
+
+### ICA Proxy / AAA
+	aaa_cur_icaonly_conn
+	aaa_cur_sessions
+	aaa_tot_maxconn_hit
+
+### System
 	cur_syshealth_disk0_avail
 	cur_syshealth_disk0_used
 	cur_syshealth_disk1_avail
@@ -71,9 +114,12 @@ time zone is the same as the system running nsconmsg
 	cur_syshealth_tcpu0
 	cur_syshealth_tcpu1
 	cur_syshealth_tint
-	
-### High Availability
 
+### GSLB
+	gslb_tot_gslb_msgs_rcvd
+	gslb_tot_gslb_msg_sent  
+
+### High Availability
 	ha_err
 	ha_cur_system_state
 	ha_cur_master_state
@@ -82,7 +128,6 @@ time zone is the same as the system running nsconmsg
 	ha_tot_pkt_rx
 	
 #### ha_cur_system_state
-
 * 0 - UNKNOWN
 * 1 - INIT
 * 2 - DOWN
@@ -95,41 +140,8 @@ time zone is the same as the system running nsconmsg
 * 9 - ROUTEMONITOR_FAIL
 
 #### ha_cur_master_state
-
 * 0 - INACTIVE
 * 1 - CLAIMING
 * 2 - ACTIVE
 * 3 - ALWAYS_SECONDARY
 * 4 - FORCE_CHANGE
-
-### GSLB
-
-	gslb_tot_gslb_msgs_rcvd
-	gslb_tot_gslb_msg_sent  
-
-### Network
-
-	tcp_tot_rxMbits
-	tcp_tot_txMbits
-	tcp_err_ip_portalloc
-	tcp_err
-	nic_err_rl_pkt_drops
-	nic_err_rl_rate_pkt_drops
-	nic_err_rl_pps_pkt_drops
-
-### Web
-
-	http_tot_Requests
-	http_tot_Responses
-	ssl_tot_session_inuse
-	ssl_tot_sslInfo_SPCBInUseCount
-
-### Servers
-
-	http_err_server_busy
-	si_tot_svr_busy_err
-	dht_err_update_didnt_find_entry
-
-### AAA
-
-	aaa_tot_maxconn_hit
