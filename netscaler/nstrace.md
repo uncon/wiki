@@ -5,7 +5,7 @@ To capture a network trace, issue the following command to the NetScaler CLI.
 
 You can also filter the captured traffic.  Below are some examples.
 
-    start nstrace -size 0 -filter "CONNECTION.LB_VSERVER.NAME.EQ(\"<VirtualServerName>\")" -link ENABLED
+    start nstrace -size 0 -filter "CONNECTION.LB_VSERVER.NAME.EQ(\"<VirtualServerName>\") || CONNECTION.SVCNAME.EQ(\"<ServiceName>\")" -link ENABLED
     start nstrace -size 0 -filter "CONNECTION.IP.EQ(192.168.0.1) && CONNECTION.IP.EQ(192.168.0.2) && CONNECTION.PORT.EQ(443)" -link ENABLED
 
 The NetScaler will start capturing a network trace in a date and time stamped directory in `/var/nstrace`. To stop the trace, issue the following command.
