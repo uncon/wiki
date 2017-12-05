@@ -22,7 +22,12 @@ You may need to disable SSL session reuse: `set ssl vserver <VirtualServerName> 
 Use `-mode TXB,NEW_RX,SSLPLAIN` to have the NetScaler include decrypted traffic in the trace.
 
 ### NetScaler Firmware < 11.0
-Ensure that ECC, Session Reuse and DH Param are disabled / removed from the virtual server before the trace is captured.
+In order to be able to decrypt a trace from NetScaler firmware versions prior to 11.0, ensure that the following features are disabled on or removed from the virtual server before the trace is captured.
+
+1. Elliptic Curve Cryptography (ECC) Cipher Suites
+1. SSL/TLS Session Reuse
+1. Diffie-Hellman (DH) Key Exchange
+
 ([CTX135889](https://support.citrix.com/article/CTX135889))
 
 ## Rolling Trace
