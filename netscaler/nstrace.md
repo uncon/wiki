@@ -26,18 +26,18 @@ In order to be able to decrypt a trace from NetScaler firmware versions prior to
 
 1. Elliptic Curve Cryptography (ECC) Cipher Suites
 
-        set ssl vserver myVirtualServer -sessReuse DISABLED
-
-1. SSL/TLS Session Reuse
-
-        set ssl vserver myVirtualServer -dh DISABLED
-
-1. Diffie-Hellman (DH) Key Exchange
-
         unbind ssl vserver myVirtualServer -eccCurveName P_256
         unbind ssl vserver myVirtualServer -eccCurveName P_384
         unbind ssl vserver myVirtualServer -eccCurveName P_224
         unbind ssl vserver myVirtualServer -eccCurveName P_521
+
+1. SSL/TLS Session Reuse
+
+        set ssl vserver myVirtualServer -sessReuse DISABLED
+
+1. Diffie-Hellman (DH) Key Exchange
+
+        set ssl vserver myVirtualServer -dh DISABLED
 
 ([CTX135889](https://support.citrix.com/article/CTX135889))
 
