@@ -65,7 +65,7 @@
 
 1. The NetScaler performs a data request by sending the STA ticket back to the STA server and requesting its corresponding data (`<RequestData>`).
 
-1. The STA server forwards the original data to the gateway. (notably, `<Value name="CGPAddress">` and `<Value name="ICAAddress">`).
+1. The STA server forwards the original data to the gateway. (notably, `<Value name="CGPAddress">`, `<Value name="ICAAddress">`, and `<Value name="SSLRelayAddress">` for SSL backend).
 
 1. In the case of Session Reliability (SR), the NetScaler requests a "Refreshable Reconnect Ticket" from the STA server to be used in case the SSL connection is severed  (`<RequestTicketRefresh>`). (This reconnect ticket is periodically refreshed while the user's session is active.)
 
@@ -89,3 +89,23 @@
   - For SR, the "Common Gateway Protocol Token" is issued to Receiver via the Citrix XTE Service / ICA-CGP Listener.
 - After a network interruption, the client initiates a new SSL connection to the NetScaler and presents the STA reconnect ticket.
 - If both session reliability and auto client reconnect are enabled, the features work in sequence: ACR will engage after the SR timer has expired.
+
+# Wireshark Filters
+
+## Authentication Login
+	http.request.method == "POST" && http.request.uri == "/cgi/login"
+
+## Authentication Challenge Response
+	http.request.method == "POST" && http.request.uri == "/cgi/dlge"
+
+## StoreFront Single Sign-On (SSO) Call-Back
+	http.request.method == "POST" && http.request.uri == "/CitrixAuthService/AuthService.asmx"
+
+## STA Data Request
+	http.request.method == "POST" && http.request.uri == "/scripts/ctxsta.dll" && xml.tag == "<RequestData>"
+
+## STA Data Response
+	http.response.code == 200 && xml.tag == "<ResponseData>"
+
+## STA Refreshable Ticket Request
+	http.request.method == "POST" && http.request.uri == "/scripts/ctxsta.dll" && xml.tag == "<RequestTicket>" && xml.tag == "<Refreshable>"
