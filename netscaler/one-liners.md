@@ -1,5 +1,9 @@
 # NetScaler One-Liners
 
+## Flush Cache (without IC enabled / licensed)
+
+	# shell nsapimgr_wr.sh -ys call=ns_ic_flush
+
 ## SNMP walk
 
 	# snmpwalk -v2c -cpublic -m ./NS-MIB-smiv2.mib <NSIP> vsvrName
