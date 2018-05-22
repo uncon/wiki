@@ -38,7 +38,7 @@ Remove empty directories
     find . -type d -empty -delete
 
 ## Unmount SD
-Unmount, verify, and sort SD card
+Unmount, sort, and verify SD card
 
     sudo umount /mnt
-    sudo fsck.msdos -f -v /dev/sdb1 && sudo fatsort -n -c /dev/sdb1 -X EDFC -X TBED
+    sudo fatsort -n -c /dev/sdb1 -X EDFC -X TBED && sudo fsck.msdos -f -v /dev/sdb1
