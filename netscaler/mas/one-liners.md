@@ -13,6 +13,6 @@ To connected to the MAS database, run the following command from shell.
     /mps/db_pgsql/bin/psql -U mpsroot -p 5454 mpsdb
 
 ### Determine Database Size
-To find the disk space used by the MAS database, run the following command from postgres.
+To find the disk space used (in bytes) by the MAS database, run the following command from postgres.
 
     select pg_database_size('mpsdb');
