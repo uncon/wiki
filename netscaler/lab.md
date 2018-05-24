@@ -58,3 +58,14 @@
 	bind lb vserver lbvs-ssl-1 svc-http-blue
 	bind lb vserver lbvs-ssl-1 svc-http-red
 	bind lb vserver lbvs-ssl-1 svc-http-green
+
+## GSLB
+
+	enable ns feature GSLB
+	
+	add service svc-adns-1 10.25.180.12 ADNS 53
+	add gslb vserver gslbvs-1 HTTP
+	add gslb site gslbsite-1 10.25.180.11
+	add gslb service gslbsvc-1 10.25.180.30 HTTP 80 -siteName gslbsite-1
+	bind gslb vserver gslbvs-1 -serviceName gslbsvc-1
+	bind gslb vserver gslbvs-1 -domainName gslb.domain.com
