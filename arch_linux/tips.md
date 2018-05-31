@@ -12,4 +12,4 @@
 
 ### Remove package cache
 
-	# pacman -Sc
+	pacman -Sc
