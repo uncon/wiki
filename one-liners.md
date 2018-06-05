@@ -74,9 +74,6 @@
 ## Network Debug
 	tcpdump -nnvvS host 192.168.1.22 and port 80
 
-## Copy USA ROMs From No-Intro Sets
-	mkdir ../USA; ls | grep -v "\[BIOS\]\|(Asia)\|(Beta.*)\|(Proto.*)\|(Japan)\|(Japan, Europe)\|(Japan, Korea)\|(France)\|(Europe)\|(Germany)\|(Australia)\|(Spain)\|(Korea)\|(Brazil)\|(Italy)\|(Canada)\|(Netherlands)\|(Hong Kong)\|(Sweden)\|(China)\|(Taiwan)" | while read FILE; do mv "${FILE}" ../USA; done
-
 ## Stupid Web Server
 	while [ true ]; do nc -e 'cat << EOF
 	HTTP/1.1 200 OK
