@@ -148,7 +148,7 @@
 
 1. Install Google Chrome
 
-		pacaur -Sy google-chrome
+		yay -Sy google-chrome
 
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
@@ -158,4 +158,4 @@
 
 1. Install [Insync](https://www.insynchq.com/)
 
-		pacaur -Sy insync
+		yay -Sy insync
