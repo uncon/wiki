@@ -146,6 +146,11 @@
 		cd ~/aur
 		PKG="yay" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck
 
+1. Install VMware Tools
+
+		sudo pacman -Sy open-vm-tools
+		sudo systemctl enable vmtoolsd.service
+
 1. Install Google Chrome
 
 		yay -Sy google-chrome
