@@ -140,13 +140,11 @@
 
 		localectl set-locale LANG=en_US.UTF-8
 
-1. Install [pacaur](https://github.com/rmarquis/pacaur)
+1. Install [yay](https://github.com/Jguer/yay)
 
 		mkdir ~/aur
 		cd ~/aur
-		PKG="cower" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck
-		cd..
-		PKG="pacaur" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r
+		PKG="yay" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck
 
 1. Install Google Chrome
 
