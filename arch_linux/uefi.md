@@ -55,7 +55,7 @@
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools networkmanager openssh net-tools bind-tools sudo wget git htop tmux zsh mesa-libgl libvdpau-va-gl libva-intel-driver xorg-server xf86-input-libinput gnome pulseaudio-bluetooth bluez-firmware gstreamer-vaapi gst-libav gvfs-smb gdm gvim cups gutenprint
+		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools networkmanager openssh net-tools bind-tools sudo wget git vim tmux zsh
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
 	- Generate fstab
@@ -108,18 +108,6 @@
 
 			systemctl enable systemd-timesyncd
 
-	- Enable CUPS
-
-			systemctl enable org.cups.cupsd
-
-	- Enable Bluetooth
-
-			systemctl enable bluetooth
-
-	- Enable GDM
-
-			systemctl enable gdm
-
 	- Add user
 
 			useradd -m -g users -G wheel -s /bin/zsh uncon
@@ -170,35 +158,4 @@
 
 1. Install [Insync](https://www.insynchq.com/)
 
-		sudo pacman -Sy gsettings-desktop-schemas
 		pacaur -Sy insync
-
-## KVM and libvirt
-
-1. Install packages
-
-		sudo pacman -S libvirt urlgrabber qemu virtviewer virt-manager xorg-xauth dnsmasq ebtables bridge-utils
-
-1. Enable and start services
-
-		sudo systemctl enable libvirt-guests
-		sudo systemctl start libvirt-guests
-		sudo systemctl enable libvirtd
-		sudo systemctl start libvirtd
-
-### Enable User Access
-
-1. Add group
-
-		sudo groupadd libvirt
-
-1. Add user to group
-
-		sudo gpasswd -a uncon libvirt
-		sudo gpasswd -a uncon kvm
-
-1. Setup PolicyKit
-
-		sudo -i 
-		printf 'polkit.addRule(function(action, subject) {\n\tif (action.id == "org.libvirt.unix.manage" &&\n\t\tsubject.isInGroup("libvirt")) {\n\t\t\treturn polkit.Result.YES;\n\t\t}\n});\n' > /etc/polkit-1/rules.d/50-org.libvirt.unix.manage.rules
-		exit
