@@ -76,12 +76,14 @@
 
 	- Set time zone
 
-			ln -s /usr/share/zoneinfo/US/Central /etc/localtime
+			ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
+			hwclock --systohc
 
 	- Configure locale
 
 			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
 			locale-gen
+			echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 	- Create init RAM disk
 
