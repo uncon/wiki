@@ -177,7 +177,7 @@ The following guide can be used to create a chroot environment for debugging Net
 	>&-176  belong          x               average number of files in dir %d,
 	>&-272  bequad          x               pending blocks to free %lld,
 	>&-264  belong          x               pending inodes to free %ld,
-	>&-664  bequad          x               system-wide uuid %0llx,
+	>&-664  bequad          x               system-wide uuid %llx,
 	>&-1316 belong          x               minimum percentage of free blocks %d,
 	>&-1248 belong          0               TIME optimization
 	>&-1248 belong          1               SPACE optimization
@@ -198,7 +198,7 @@ The following guide can be used to create a chroot environment for debugging Net
 	>&-176  belong          x               average number of files in dir %d,
 	>&-272  bequad          x               pending blocks to free %lld,
 	>&-264  belong          x               pending inodes to free %ld,
-	>&-664  bequad          x               system-wide uuid %0llx,
+	>&-664  bequad          x               system-wide uuid %llx,
 	>&-1316 belong          x               minimum percentage of free blocks %d,
 	>&-1248 belong          0               TIME optimization
 	>&-1248 belong          1               SPACE optimization
