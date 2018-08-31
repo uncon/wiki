@@ -8,7 +8,7 @@ Format SD card as FAT32
 ## Mount SD
 Mount SD card
 
-    sudo mount /dev/sdb1 /mnt
+    sudo mount -o uid=$(id -u),gid=$(id -g) /dev/sdb1 /mnt
 
 ## Nintendo DS
 Remove numbering
