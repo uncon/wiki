@@ -1,4 +1,4 @@
-# Quick NetScaler Lab Configuration
+# Quick Citrix Networking Lab Configuration
 
 ## Network
 	
@@ -26,7 +26,7 @@
 
 ## Load Balancing
 
-	enable ns feature LB SSL
+	enable ns feature LB CS SSL
 
 	add service svc-http-black 10.25.180.20 HTTP 80
 	add service svc-http-blue 10.25.180.21 HTTP 80
@@ -58,6 +58,20 @@
 	bind lb vserver lbvs-ssl-1 svc-http-blue
 	bind lb vserver lbvs-ssl-1 svc-http-red
 	bind lb vserver lbvs-ssl-1 svc-http-green
+	
+	add cs vserver csvs-http-1 HTTP 10.25.180.31 80
+	bind cs vserver csvs-http-1 -lbvserver lbvs-http-1
+
+	add cs vserver csvs-ssl-1 SSL 10.25.180.31 443
+	bind ssl vserver csvs-ssl-1 -certkeyName test-cert
+	bind cs vserver csvs-ssl-1 -lbvserver lbvs-http-1
+
+## Gateway
+
+	enable ns feature SSLVPN
+
+	add vpn vserver vpnvs-1 SSL 10.25.180.32 443
+	bind ssl vserver vpnvs-1 -certkeyName test-cert
 
 ## GSLB
 
