@@ -54,10 +54,10 @@
 		cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 
 ## Convert all filenames to uppercase
-	find . -mindepth 1 | while read -r FILE; do mv -i "${FILE}" $(echo "${FILE}" | tr 'a-z' 'A-Z'); done
+	find . -type f -mindepth 1 | while read -r FILE; do mv -f "${FILE}" $(echo "${FILE}" | tr 'a-z' 'A-Z'); done
 
 ## Convert all filenames to lowercase
-	find . -mindepth 1 | while read -r FILE; do mv -i "${FILE}" $(echo "${FILE}" | tr 'A-Z' 'a-z'); done
+	find . -type f -mindepth 1 | while read -r FILE; do mv -f "${FILE}" $(echo "${FILE}" | tr 'A-Z' 'a-z'); done
 
 ## Rename files based on EXIF date
 	jhead -autorot -nf../Pictures/%Y/%Y-%m/%Y-%m-%d_%H-%M-%S *.[j\|J][p\|P][g\|G]
