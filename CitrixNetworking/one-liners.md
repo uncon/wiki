@@ -44,12 +44,18 @@
 ## Find failover in newnslog
 
 	# nsconmsg -K /var/nslog/newnslog -g ha_cur_system_state -g ha_cur_nodes_num -g ha_cur_master_state -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current
+
 ## Find monitor events in newnslog
 
 	# nsconmsg -K /var/nslog/newnslog -d event | grep "DOWN; Last response:\|UP; Last response:" | sed -e 's/^.* PPE-[0-9]*//g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
+
 ## Find HA events in newnslog
 
 	# nsconmsg -K /var/nslog/newnslog -d event | grep " node\|heartbeat\|interface" | sed -E -e ':a' -e 'N' -e '$!ba' -e 's/\n;/;/g' -e 's/: (Sun|Mon|Tue|Wed|Thu|Fri|Sat)/:/g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'| sed -e 's/ *[0-9]* *[0-9]* PPE-[0-9]* //g' | sort -M | uniq
+
+Or, for multiple newnslog files:
+
+	# find . -maxdepth 1 -type d -name "newnslog*" | while read -r FILE; do nsconmsg -K "${FILE}" -d event | grep "node\|heartbeat\|interface" | sed -E -e ':a' -e 'N' -e '$!ba' -e 's/\n;/;/g' -e 's/: (Sun|Mon|Tue|Wed|Thu|Fri|Sat)/:/g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'| sed -e 's/ *[0-9]* *[0-9]* PPE-[0-9]* //g'; done | sort -M | uniq
 
 ## Find CPU use > 60% in newnslog
 
