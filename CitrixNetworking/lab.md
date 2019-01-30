@@ -78,6 +78,7 @@
 	enable ns feature GSLB
 	
 	add service svc-adns-1 10.25.180.12 ADNS 53
+	add service svc-adns-2 10.25.180.12 ADNS_TCP 53
 	add gslb vserver gslbvs-1 HTTP
 	add gslb site gslbsite-1 10.25.180.11
 	add gslb service gslbsvc-1 10.25.180.30 HTTP 80 -siteName gslbsite-1
