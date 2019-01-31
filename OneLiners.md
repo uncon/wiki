@@ -5,6 +5,9 @@
 ## Re-encode flac
 	find . -type f -iname "*.flac" | while read -r FILE; do mv "${FILE}" "${FILE%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${FILE}" "${FILE%.flac}-OLD.flac"; done
 
+## Copy a DVD
+	for FILE in /mnt/VIDEO_TS/*.VOB; do ffmpeg -fflags +genpts -i "${FILE}" -c:v copy -c:a copy "${HOME}/tmp/$(basename ${FILE%.VOB}.mkv)"; done
+
 ## Bulk extract .zip files into directories
 	find . -type f -iname "*.zip" | while read -r FILE; do mkdir "${FILE%.zip}"; 7z x "${FILE}" -o"${FILE%.zip}" && rm "${FILE}"; done
 
