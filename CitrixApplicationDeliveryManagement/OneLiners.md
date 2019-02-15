@@ -1,9 +1,9 @@
 # Citrix ADM One-Liners
 
 ## Support Bundle
-If there is an issue with ADM that is causing authentication to fail, you can collect a support bundle using the following command after logging in via SSH using the "nsrecover" user.
+If there is an issue with ADM that is causing authentication to fail, you can collect a support bundle using the following command after logging in via SSH using the "nsrecover" user with the nsroot password. The script will create a support bundle in `/var/mps/tech_support/`.
 
-    perl /mps/scripts/techsupport.pl
+    /mps/scripts/techsupport.pl
 
 ## Device Inventory
 To dump a device inventory in CSV format, run the following command from the shell.
