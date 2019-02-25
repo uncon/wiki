@@ -3,7 +3,7 @@ Use this index.php file on a [NGINX server](../nginx.md) with the following conf
 
 1. Download PHP file.
 
-		curl 'https://raw.githubusercontent.com/uncon/wiki/master/freebsd/lab/index.php' > /usr/local/www/nginx/index.php
+		curl 'https://raw.githubusercontent.com/uncon/wiki/master/FreeBSD/lab/index.php' > /usr/local/www/nginx/index.php
 
 
 1. Edit `/usr/local/etc/nginx/sites/default.conf`.
