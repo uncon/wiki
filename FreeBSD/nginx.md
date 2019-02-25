@@ -4,7 +4,7 @@
 
 1. Install PHP and extensions.
 
-		pkg install php72 php72-extensions
+		pkg install php73 php73-extensions
 
 1. Configure PHP.
 
