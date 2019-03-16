@@ -66,7 +66,7 @@
 	
 			gdm gnome gnome-power-manager gnome-tweaks aspell-en
 
-2. Configure the system (see [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
+2. Configure the system (see [ArchWiki](https://wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
 	- Generate fstab
 
 			genfstab -U /mnt >> /mnt/etc/fstab
