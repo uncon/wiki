@@ -79,10 +79,6 @@
 
 			arch-chroot /mnt
 
-	- Set hostname
-
-			echo "arch" > /etc/hostname
-
 	- Set time zone
 
 			ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
@@ -90,9 +86,13 @@
 
 	- Configure locale
 
-			sed -i.orig -e 's/^#\(en_US.*$\)/\1/g' /etc/locale.gen
+			sed -i.orig -e 's/^#\(en_US\.UTF-8 .*$\)/\1/g' /etc/locale.gen
 			locale-gen
 			echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+	- Set hostname
+
+			HOSTNAME=arch; printf "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\t${HOSTNAME}.localdomain ${HOSTNAME}\n" >> /etc/hosts; echo "${HOSTNAME}" > /etc/hostname
 
 	- Create init RAM disk
 
@@ -144,7 +144,7 @@
 
 1. Unmount and Reboot
 
-		umount /mnt/{boot,home,}
+		umount -R /mnt
 		systemctl reboot
 
 ## Post-Installation
