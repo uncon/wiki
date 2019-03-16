@@ -92,7 +92,7 @@
 
 	- Set hostname
 
-			HOSTNAME=arch; printf "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\t${HOSTNAME}.localdomain ${HOSTNAME}\n" >> /etc/hosts; echo "${HOSTNAME}" > /etc/hostname
+			MyHostName=arch; printf "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\t${MyHostName}.localdomain ${MyHostName}\n" >> /etc/hosts; echo "${MyHostName}" > /etc/hostname
 
 	- Create init RAM disk
 
