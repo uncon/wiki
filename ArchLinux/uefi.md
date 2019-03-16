@@ -3,19 +3,23 @@
 ## Arch Installation
 
 1. Boot (UEFI) from the installation media
-1. Set root password
+	
+1. Optionally, for an easier (because copy and paste) remote installation...
 
-		passwd
+	1. Set root password
 
-1. Setup SSH
+			passwd
 
-		systemctl start sshd
+	1. Setup SSH
 
-1. Find IP
+			systemctl start sshd.service
 
-		ip addr
+	1. Find IP
 
-1. Log in via SSH from a remote workstation
+			ip addr
+
+	1. Log in via SSH from a remote workstation to continue
+
 1. Clean and partition the disk
 
 		sgdisk --zap-all /dev/sda
