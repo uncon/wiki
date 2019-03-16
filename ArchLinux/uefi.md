@@ -22,15 +22,15 @@
 		cgdisk /dev/sda
 
 1. Format partitions
-	- EFI
+	- EFI (550 MiB)
 
 			mkfs.vfat -F32 -n "EFI System Partition" /dev/sda1
 
-	- Root
+	- Root (23 - 32 GiB)
 
 			mkfs.ext4 -L "Arch Linux Root" /dev/sda2
 
-	- Home
+	- Home (Optional)
 
 			mkfs.ext4 -L "Arch Linux Home" /dev/sda3
 
@@ -56,6 +56,11 @@
 1. Install the base system
 
 		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools networkmanager openssh net-tools bind-tools sudo wget git vim tmux zsh
+		
+	Optionally, append the following packages. 
+	- GNOME
+	
+			gdm gnome gnome-power-manager gnome-tweaks aspell-en
 
 2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
 	- Generate fstab
@@ -125,6 +130,10 @@
 			## Uncomment to allow members of group wheel to execute any command
 			%wheel ALL=(ALL) ALL
 
+	- Enable GDM (Optional)
+
+			sudo systemctl enable gdm.service
+
 	- Exit
 
 			exit
@@ -140,6 +149,11 @@
 
 		localectl set-locale LANG=en_US.UTF-8
 
+1. Install CUPS
+
+		sudo pacman -Sy cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
+		sudo systemctl enable --now org.cups.cupsd.service
+
 1. Install [yay](https://github.com/Jguer/yay)
 
 		mkdir ~/aur
@@ -149,7 +163,7 @@
 1. Install VMware Tools
 
 		sudo pacman -Sy open-vm-tools
-		sudo systemctl enable vmtoolsd.service
+		sudo systemctl enable --now vmtoolsd.service
 
 1. Install Google Chrome
 
@@ -158,9 +172,13 @@
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
 		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
-		sudo systemctl enable tlp.service
-		sudo systemctl enable tlp-sleep.service
+		sudo systemctl enable --now tlp.service
+		sudo systemctl enable --now tlp-sleep.service
 
 1. Install [Insync](https://www.insynchq.com/)
 
-		yay -Sy insync
+		yay -Sy insync insync-nautilus
+
+1. Install [u2f-hidraw-policy](https://github.com/amluto/u2f-hidraw-policy)
+
+		yay -Sy u2f-hidraw-policy
