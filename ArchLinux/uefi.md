@@ -62,7 +62,7 @@
 	
 			gdm gnome gnome-power-manager gnome-tweaks aspell-en
 
-2. Configure the system [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system)
+2. Configure the system (see [ArchWiki](https///wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
 	- Generate fstab
 
 			genfstab -U /mnt >> /mnt/etc/fstab
@@ -105,15 +105,15 @@
 
 	- Enable Network Manager
 
-			systemctl enable NetworkManager
+			systemctl enable NetworkManager.service
 
 	- Enable SSH
 
-			systemctl enable sshd
+			systemctl enable sshd.service
 
 	- Enable timesyncd
 
-			systemctl enable systemd-timesyncd
+			systemctl enable systemd-timesyncd.service
 
 	- Add user
 
