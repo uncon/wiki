@@ -30,7 +30,7 @@
 
 1. Setup encryption and LUKS
 
-		cryptsetup -v luksFormat /dev/sda2
+		cryptsetup luksFormat --type luks2 /dev/sda2
 		cryptsetup luksOpen /dev/sda2 luks
 		pvcreate /dev/mapper/luks
 		vgcreate vg0 /dev/mapper/luks
