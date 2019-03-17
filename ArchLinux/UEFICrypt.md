@@ -98,6 +98,10 @@
 
 			MyHostName=arch; printf "127.0.0.1\tlocalhost\n::1\t\tlocalhost\n127.0.1.1\t${MyHostName}.localdomain ${MyHostName}\n" >> /etc/hosts; echo "${MyHostName}" > /etc/hostname
 
+	- Add encryption support to mkinitcpio
+	
+			sed -i.orig -e 's/^\(HOOKS=.* block \)\(.*\)$/\1encrypt lvm2 \2/g' /etc/mkinitcpio.conf
+
 	- Create init RAM disk
 
 			mkinitcpio -p linux
