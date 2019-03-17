@@ -1,4 +1,4 @@
-# Arch Linux Installation on UEFI Systems
+# Arch Linux Installation on UEFI Systems with Disk Encryption
 
 ## Arch Installation
 
@@ -96,6 +96,7 @@
 			sed -i.orig -e 's/^#\(en_US\.UTF-8 .*$\)/\1/g' /etc/locale.gen
 			locale-gen
 			echo "LANG=en_US.UTF-8" > /etc/locale.conf
+			localectl set-locale LANG=en_US.UTF-8
 
 	- Set hostname
 
@@ -111,8 +112,8 @@
 
 	- Install systemd-boot to the ESP and EFI variables
 
-			bootctl install
-			UUID=$(dumpe2fs -h $(grep " / " /etc/mtab | grep -v "rootfs\|arch_root-image" | awk '{ print $1 }') | grep "Filesystem UUID" | awk '{ print $3 }'); printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\troot=UUID=${UUID} rw\n" > /boot/loader/entries/arch.conf
+			bootctl --path=/boot install
+			UUID=$(dumpe2fs -h $(grep " / " /etc/mtab | grep -v "rootfs\|arch_root-image" | awk '{ print $1 }') | grep "Filesystem UUID" | awk '{ print $3 }'); printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\tcryptdevice=UUID=${UUID}:vg0 root=/dev/mapper/vg0-root resume=/dev/mapper/vg0-swap rw\n" > /boot/loader/entries/arch.conf
 
 	- Enable Network Manager
 
@@ -155,10 +156,6 @@
 		systemctl reboot
 
 ## Post-Installation
-
-1. Set locale
-
-		localectl set-locale LANG=en_US.UTF-8
 
 1. Install CUPS
 
