@@ -76,11 +76,7 @@
 2. Configure the system (see [ArchWiki](https://wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
 	- Generate fstab
 
-			genfstab -U /mnt >> /mnt/etc/fstab
-
-	- Update fstab
-
-		(TODO: automate this!) Add 'discard' to all vfat and ext4 fstab entries (/mnt/etc/fstab)
+			genfstab -U /mnt | awk '($2~"^/"||$2~"^swap$"){$4=$4",discard"}1' OFS='\t' >> /mnt/etc/fstab
 
 	- Change root
 
