@@ -161,6 +161,10 @@
 
 ## Post-Installation
 
+1. Configure locale
+
+		sudo localectl set-locale LANG=en_US.UTF-8
+
 1. Install CUPS
 
 		sudo pacman -Sy cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
