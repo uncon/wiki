@@ -112,7 +112,7 @@
 	- Install systemd-boot to the ESP and EFI variables
 
 			bootctl --path=/boot install
-			UUID=$(dumpe2fs -h $(grep " / " /etc/mtab | grep -v "rootfs\|arch_root-image" | awk '{ print $1 }') | grep "Filesystem UUID" | awk '{ print $3 }'); printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\tcryptdevice=UUID=${UUID}:vg0:allow-discards root=/dev/mapper/vg0-root resume=/dev/mapper/vg0-swap rw\n" > /boot/loader/entries/arch.conf
+			printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\tcryptdevice=UUID=$(blkid /dev/nvme0n1p2 -o value | head -n1):cryptlvm root=/dev/mapper/vg0-root resume=/dev/mapper/vg0-swap rw\n" > /boot/loader/entries/arch.conf
 
 	- Enable (periodic) TRIM
 
