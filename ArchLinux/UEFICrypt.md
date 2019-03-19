@@ -22,16 +22,16 @@
 
 1. Clean and partition the disk
 
-		sgdisk --zap-all /dev/sda
-		cgdisk /dev/sda
+		sgdisk --zap-all /dev/nvme0n1
+		cgdisk /dev/nvme0n1
 
 	* **EFI System Partition** - ef00 (550 MiB)
 	* **LUKS Partition** - 8300
 
 1. Setup encryption and LUKS
 
-		cryptsetup luksFormat --type luks2 /dev/sda2
-		cryptsetup luksOpen /dev/sda2 luks
+		cryptsetup luksFormat --type luks2 /dev/nvme0n1p2
+		cryptsetup luksOpen /dev/nvme0n1p2 luks
 		pvcreate /dev/mapper/luks
 		vgcreate vg0 /dev/mapper/luks
 		lvcreate -L 24G vg0 -n swap
@@ -40,7 +40,7 @@
 1. Format partitions
 	- EFI
 
-			mkfs.vfat -F32 -n "EFI System Partition" /dev/sda1
+			mkfs.vfat -F32 -n "EFI System Partition" /dev/nvme0n1p1
 
 	- Root
 
@@ -58,7 +58,7 @@
 	- EFI
 
 			mkdir -p /mnt/boot
-			mount /dev/sda1 /mnt/boot
+			mount /dev/nvme0n1p1 /mnt/boot
 
 	- Swap
 
