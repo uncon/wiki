@@ -92,7 +92,6 @@
 			sed -i.orig -e 's/^#\(en_US\.UTF-8 .*$\)/\1/g' /etc/locale.gen
 			locale-gen
 			echo "LANG=en_US.UTF-8" > /etc/locale.conf
-			localectl set-locale LANG=en_US.UTF-8
 
 	- Set hostname
 
