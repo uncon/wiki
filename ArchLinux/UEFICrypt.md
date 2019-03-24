@@ -194,6 +194,6 @@
 
 		yay -Sy insync insync-nautilus
 
-1. Install [u2f-hidraw-policy](https://github.com/amluto/u2f-hidraw-policy)
+1. Install libu2f-host (for U2F support)
 
-		yay -Sy u2f-hidraw-policy
+		sudo pacman -Sy libu2f-host
