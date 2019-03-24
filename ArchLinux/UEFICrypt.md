@@ -71,7 +71,7 @@
 	Optionally, append the following packages. 
 	- GNOME
 	
-			gdm gnome gnome-power-manager gnome-tweaks aspell-en
+			gdm gnome gnome-power-manager gnome-tweaks aspell-en gst-libav gst-plugins-base gst-plugins-good gst-plugins-ugly
 
 2. Configure the system (see [ArchWiki](https://wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
 	- Generate fstab
