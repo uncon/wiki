@@ -164,6 +164,10 @@
 
 		sudo localectl set-locale LANG=en_US.UTF-8
 
+1. Disable tap-and-drag (GNOME)
+
+		gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
+
 1. Install CUPS
 
 		sudo pacman -Sy cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
