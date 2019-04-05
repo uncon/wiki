@@ -164,6 +164,10 @@
 
 		sudo localectl set-locale LANG=en_US.UTF-8
 
+1. Install Intel hardware video acceleration and Vulkan support
+
+		sudo pacman -Sy intel-media-driver vulkan-intel
+
 1. Disable tap-and-drag (GNOME)
 
 		gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
