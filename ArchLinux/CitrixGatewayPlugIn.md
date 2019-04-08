@@ -64,6 +64,7 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 		    ;;
 		  stop)
 		    pkill NSGClient
+		    sudo resolvconf -d Citrix_VA
 		    sudo resolvconf -u
 		    ;;
 		  *)
