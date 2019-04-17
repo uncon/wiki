@@ -22,6 +22,7 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 		printf '\n# Allow tun device\nlxc.mount.entry = /dev/net dev/net none bind,create=dir\nlxc.cgroup.devices.allow = c 10:200 rwm\n' | sudo tee -a '/var/lib/lxc/nsgclient/config'
 
 1. Start the container
+
 		sudo lxc-start -n nsgclient
 
 1. Attach to a root prompt inside the container (bypasses login)
