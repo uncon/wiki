@@ -1,14 +1,17 @@
 # One-Liners
-## Convert flac to mp3
+## Convert FLAC to MP3
 	find . -type f -iname "*.flac" | while read -r FILE; do flac -cd "${FILE}" | lame -V 0 - "${FILE%.flac}.mp3"; done
 
-## Re-encode flac
+## Re-Encode FLAC
 	find . -type f -iname "*.flac" | while read -r FILE; do mv "${FILE}" "${FILE%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${FILE}" "${FILE%.flac}-OLD.flac"; done
 
-## Copy a DVD
+## Copy an Audio CD (to FLAC)
+	cdda2wav -vall cddb=0 speed=4 -paranoia paraopts=proof -B -D /dev/sr0 && find . -type f -iname "*.wav" | while read -r FILE; do flac "${FILE}" && rm "${FILE}"; done
+
+## Copy a DVD (to MKV)
 	for FILE in /mnt/VIDEO_TS/*.VOB; do ffmpeg -fflags +genpts -i "${FILE}" -c:v copy -c:a copy "${HOME}/tmp/$(basename ${FILE%.VOB}.mkv)"; done
 
-## Bulk extract .zip files into directories
+## Bulk Extract .zip Files into Directories
 	find . -type f -iname "*.zip" | while read -r FILE; do mkdir "${FILE%.zip}"; 7z x "${FILE}" -o"${FILE%.zip}" && rm "${FILE}"; done
 
 ## Create Archive
@@ -34,16 +37,16 @@
 	-type f -name '*:Zone.Identifier:$DATA' \
 	\) -print0 | xargs -0 rm -fr
 
-## Remove Litter from Citrix Receiver for Linux
+## Remove Litter from Citrix Workspace App for Linux
 	find "${@:-$PWD}" \( \
 	-type f -name '.access^' -o \
 	-type f -name '.attribute^' \
 	\) -print0 | xargs -0 rm
 
-## Remove all events from Windows logs
+## Remove All Events from Windows Logs
 	for /f %x in ('wevtutil el') do wevtutil cl "%x"
 
-## Install identity.pub to a remote machine
+## Install identity.pub to a Remote Machine
 1. Generate key
 
 		ssh-keygen
@@ -56,19 +59,19 @@
 
 		cat ~/.ssh/id_rsa.pub | ssh user@host "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
 
-## Convert all filenames to uppercase
+## Convert All Filenames to Uppercase
 	find . -mindepth 1 -type f | while read -r FILE; do mv -f "${FILE}" $(echo "${FILE}" | tr 'a-z' 'A-Z'); done
 
-## Convert all filenames to lowercase
+## Convert All Filenames to Lowercase
 	find . -mindepth 1 -type f | while read -r FILE; do mv -f "${FILE}" $(echo "${FILE}" | tr 'A-Z' 'a-z'); done
 
-## Rename files based on EXIF date
+## Rename Files Based on EXIF Date
 	jhead -autorot -nf../Pictures/%Y/%Y-%m/%Y-%m-%d_%H-%M-%S *.[j\|J][p\|P][g\|G]
 
-## List directories by size
+## List Directories by Size
 	du -xk -d 1 . | sort -n | awk ' BEGIN { split("K,M,G,T", Units, ","); } { u = 1; while ($1 >= 1024) { $1 = $1 / 1024; u += 1; } $1 = sprintf("%.1f%s\t", $1, Units[u]); print $0; } '
 
-## Remove all but latest 3 files
+## Remove All but Latest 3 Files
 	(ls -t | head -n 3; ls) | sort | uniq -u | tr '\n' '\0' | xargs -0 rm
 
 ## List Hierarchical Permissions
