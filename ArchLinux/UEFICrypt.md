@@ -71,7 +71,7 @@
 	Optionally, append the following packages. 
 	- GNOME
 	
-			gdm gnome gnome-power-manager gnome-tweaks gnome-packagekit aspell-en gst-libav gst-plugins-base gst-plugins-good gst-plugins-ugly
+			gdm gnome gnome-power-manager gnome-tweaks aspell-en gst-libav gst-plugins-base gst-plugins-good gst-plugins-ugly
 
 2. Configure the system (see [ArchWiki](https://wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
 	- Generate fstab
@@ -121,6 +121,10 @@
 	- Enable Network Manager
 
 			systemctl enable NetworkManager.service
+
+	- Enable Bluetooth
+
+			systemctl enable bluetooth.service
 
 	- Enable SSH
 
