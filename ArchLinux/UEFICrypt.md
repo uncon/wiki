@@ -176,6 +176,12 @@
 
 		gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
 
+1. Add helpful key bindings (GNOME)
+
+		gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
+		gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Primary><Super>Tab']"
+		gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Primary><Shift><Super>Tab']"
+
 1. Install CUPS
 
 		sudo pacman -Sy cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
