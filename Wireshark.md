@@ -49,7 +49,7 @@
 	tcp.calculate_timestamps: TRUE
 
 	# SSL Options
-	ssl.keylog_file: nstrace.sslkeys
+	tls.keylog_file: nstrace.sslkeys
 
 ## TShark
 *  Filter a trace into a new file
