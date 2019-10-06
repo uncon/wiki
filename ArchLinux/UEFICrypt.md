@@ -66,7 +66,7 @@
 
 1. Install the base system
 
-		pacstrap /mnt base base-devel intel-ucode efibootmgr dosfstools networkmanager openssh net-tools bind-tools sudo wget git vim tmux zsh
+		pacstrap /mnt base linux base-devel intel-ucode efibootmgr dosfstools networkmanager openssh net-tools bind-tools sudo wget git vim tmux zsh
 		
 	Optionally, append the following packages. 
 	- GNOME
