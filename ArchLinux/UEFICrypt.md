@@ -178,9 +178,13 @@
 
 1. Add helpful key bindings (GNOME)
 
-		gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
-		gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Primary><Super>Tab']"
-		gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Primary><Shift><Super>Tab']"
+		gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
+		gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
+
+		gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
+		gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "tilix"
+		gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "'<Super>t'"
+		gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
 1. Install CUPS
 
@@ -208,9 +212,9 @@
 		sudo systemctl enable --now tlp.service
 		sudo systemctl enable --now tlp-sleep.service
 
-1. Install [Insync](https://www.insynchq.com/)
+1. Install [Dash to Dock](https://micheleg.github.io/dash-to-dock/)
 
-		yay -Sy insync insync-nautilus
+		yay -Sy gnome-shell-extension-dash-to-dock
 
 1. Install libu2f-host (for U2F support)
 
