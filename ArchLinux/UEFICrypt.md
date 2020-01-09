@@ -76,7 +76,7 @@
 2. Configure the system (see [ArchWiki](https://wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
 	- Generate fstab
 
-			genfstab -U /mnt | awk '($1!~"^#"&&($2~"^/"||$3~"^swap$")){$4=$4",discard"}1' OFS='\t' >> /mnt/etc/fstab
+			genfstab -U /mnt >> /mnt/etc/fstab
 
 	- Change root
 
@@ -112,7 +112,7 @@
 	- Install systemd-boot to the ESP and EFI variables
 
 			bootctl --path=/boot install
-			printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\tcryptdevice=UUID=$(blkid /dev/nvme0n1p2 -o value | head -n1):cryptlvm:allow-discards root=/dev/mapper/vg0-root resume=/dev/mapper/vg0-swap rd.luks.options=discard rw\n" > /boot/loader/entries/arch.conf
+			printf "title\tArch Linux\nlinux\t/vmlinuz-linux\ninitrd\t/intel-ucode.img\ninitrd\t/initramfs-linux.img\noptions\tcryptdevice=UUID=$(blkid /dev/nvme0n1p2 -o value | head -n1):cryptlvm root=/dev/mapper/vg0-root resume=/dev/mapper/vg0-swap rw\n" > /boot/loader/entries/arch.conf
 
 	- Enable (periodic) TRIM
 
