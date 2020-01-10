@@ -1,6 +1,6 @@
 # NetScaler One-Liners
 
-## Flush Cache (without IC enabled / licensed)
+## Flush cache (without IC enabled / licensed)
 
 	# shell nsapimgr_wr.sh -ys call=ns_ic_flush
 
@@ -65,11 +65,16 @@ Or, for multiple newnslog files:
 
 	# nsconmsg -K /var/nslog/newnslog -d event | sed -e 's/^.* PPE-[0-9]*//g' | awk -F " (Sun|Mon|Tue|Wed|Thu|Fri|Sat) " '{ print $2 "\t" $1 }'
 
-## Find Authentication Failure Count by Hour
+## Find authentication failure count by hour
 
 	# cat ns.log.* ns.log | grep "LOGIN_FAILED" | awk -F: '{ print "#" $1 ":00," }' | uniq -c | awk -F# '{ print $2 $1 }' | sort -M
 
+## View state and time since last state change for all virtual servers (useful for pre and post upgrade comparison) 
+
+	# nscli -U %%:nsroot:. -s "show ns runningConfig" | grep "^add \w* vserver " | awk '{ print $2" "$3" "$4 }' | while read -r VSERVER; do echo "${VSERVER}"; nscli -U %%:nsroot:. -s "show ${VSERVER}" | grep "^\W*State: \|^\W*Time since last state change: "; done
+	
 ## View monitor probe SYN's
+
 	# nstcpdump.sh -nnvvS tcp[14:2] = 8188
 	
 ## View raw HTTP(S) data
@@ -86,15 +91,14 @@ or
 
 then
 
-	# VER="$(grep "^netscaler.version" ../../shell/sysctl-a.out | sed -e 's/^.* NS\([0-9]*\)\.\([0-9]*\): .*$/\1\2/')"; \
-	for file in $(find . -name "newnslog*" -maxdepth 1 | grep -v "\.tar$\|\.tar\.gz" | sed -e 's#^./##g'); do \
-	  nsconmsg$VER -K $file -d setime > nsconmsg-setime-$file; \
-	  nsconmsg$VER -K $file -d event > nsconmsg-event-$file; \
-	  nsconmsg$VER -K $file -d consmsg > nsconmsg-consmsg-$file; \
-	  nsconmsg$VER -K $file -d auditedcmd > nsconmsg-auditedcmd-$file; \
-	  nsconmsg$VER -K $file -g ha_cur_system_state -g ha_cur_nodes_num -g ha_cur_master_state -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current > nsconmsg-ha-$file; \
-	  nsconmsg$VER -K $file -s disptime=1 -g err -g fail -d maxrate > nsconmsg-err_maxrate-$file; \
-	  nsconmsg$VER -K $file -g err -g fail -d statswt0 \
+	# for file in $(find . -name "newnslog*" -maxdepth 1 | grep -v "\.tar$\|\.tar\.gz" | sed -e 's#^./##g'); do \
+	  nsconmsg -K $file -d setime > nsconmsg-setime-$file; \
+	  nsconmsg -K $file -d event > nsconmsg-event-$file; \
+	  nsconmsg -K $file -d consmsg > nsconmsg-consmsg-$file; \
+	  nsconmsg -K $file -d auditedcmd > nsconmsg-auditedcmd-$file; \
+	  nsconmsg -K $file -g ha_cur_system_state -g ha_cur_nodes_num -g ha_cur_master_state -s disptime=1 -s deltacount=1 -s deltacountlow=-1 -d current > nsconmsg-ha-$file; \
+	  nsconmsg -K $file -s disptime=1 -g err -g fail -d maxrate > nsconmsg-err_maxrate-$file; \
+	  nsconmsg -K $file -g err -g fail -d statswt0 \
 		| grep -v "^Displaying\|^Performance\|^reltime\|Index\|^NetScaler" \
 		| awk '{ print $3 "\t" $4 }' \
 		| sort -n > nsconmsg-err_counters-$file; \
