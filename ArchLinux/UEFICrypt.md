@@ -66,7 +66,7 @@
 
 1. Install the base system
 
-		pacstrap /mnt base linux base-devel intel-ucode efibootmgr dosfstools networkmanager openssh net-tools bind-tools sudo wget git vim tmux zsh
+		pacstrap /mnt base linux base-devel intel-ucode efibootmgr dosfstools networkmanager openssh net-tools bind-tools sudo wget git vim tmux zsh p7zip
 		
 	Optionally, append the following packages. 
 	- GNOME
@@ -193,14 +193,9 @@
 
 1. Install [yay](https://github.com/Jguer/yay)
 
-		mkdir ~/aur
+		mkdir -p ~/aur
 		cd ~/aur
 		PKG="yay" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck
-
-1. Install VMware Tools
-
-		sudo pacman -Sy open-vm-tools
-		sudo systemctl enable --now vmtoolsd.service
 
 1. Install Google Chrome
 
@@ -215,6 +210,18 @@
 1. Install [Dash to Dock](https://micheleg.github.io/dash-to-dock/)
 
 		yay -Sy gnome-shell-extension-dash-to-dock
+
+1. Install Microsoft Windows 10 TrueType fonts
+
+	Download [Windows Evaluation](http://www.microsoft.com/en-us/evalcenter/evaluate-windows-10-enterprise) ISO
+
+		mkdir -p ~/aur
+		cd ~/aur
+		git clone 'https://aur.archlinux.org/ttf-ms-win10.git/'
+		cd ttf-ms-win10
+		7z e ~/Downloads/<WIN10>.iso 'sources/install.wim'
+		7z e install.wim 'Windows/Fonts/*.ttf' 'Windows/Fonts/*.ttc' 'Windows/System32/Licenses/neutral/*/*/license.rtf'
+		makepkg -i -s -r --skipchecksums
 
 1. Install libu2f-host (for U2F support)
 
