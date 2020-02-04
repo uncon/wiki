@@ -1,9 +1,12 @@
 # One-Liners
+## Write Raw Image to Device
+	dd oflag=sync bs=4M status=progress if=in.bin of=/dev/mmcblk0
+
 ## Convert FLAC to MP3
-	find . -type f -iname "*.flac" | while read -r FILE; do flac -cd "${FILE}" | lame -V 0 - "${FILE%.flac}.mp3"; done
+	find . -type f -name "*.flac" | while read -r FILE; do flac -cd "${FILE}" | lame -V 0 - "${FILE%.flac}.mp3"; done
 
 ## Re-Encode FLAC
-	find . -type f -iname "*.flac" | while read -r FILE; do mv "${FILE}" "${FILE%.flac}-OLD.flac"; flac --delete-input-file -8 -V -o "${FILE}" "${FILE%.flac}-OLD.flac"; done
+	find . -type f -name "*.flac" | while read -r FILE; do metaflac --export-tags-to="${FILE%.flac}.txt" --export-picture-to="${FILE%.flac}.jpg" "${FILE}" && flac -d -o "${FILE%.flac}.wav" "${FILE}" && rm "${FILE}" && flac --delete-input-file --best -V "${FILE%.flac}.wav" && metaflac --import-tags-from="${FILE%.flac}.txt" --dont-use-padding --import-picture-from="3||||${FILE%.flac}.jpg" "${FILE}" && rm "${FILE%.flac}.txt" "${FILE%.flac}.jpg"; done
 
 ## Copy an Audio CD (to FLAC)
 	cdda2wav -vall cddb=0 speed=4 -paranoia paraopts=proof -B -D /dev/sr0 && find . -type f -iname "*.wav" | while read -r FILE; do flac "${FILE}" && rm "${FILE}"; done
