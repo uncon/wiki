@@ -84,7 +84,11 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 1. Install OpenSSH and Privoxy
 
 		sudo apt-get install privoxy openssh-server
-		sed -e "s/^\(listen-address\s*\).*:/\1$(ip a | sed -ne '/127.0.0.1/!{s/^[ \t]*inet[ \t]*\([0-9.]\+\)\/.*$/\1/p}'):/g" -e 's/^\(toggle\s*\).*$/\10/g' -e 's/^#\(debug\s*1 \)/\1/g' /etc/privoxy/config > "${HOME}/config"
+		sed -e 's/^listen-address\s*\[::1\]:8118$//' -e "s/^\(listen-address\s*\).*:/\1$(ip a | sed -ne '/127.0.0.1/!{s/^[ \t]*inet[ \t]*\([0-9.]\+\)\/.*$/\1/p}'):/g" -e 's/^\(toggle\s*\).*$/\10/g' -e 's/^#\(debug\s*1 \)/\1/g' /etc/privoxy/config > "${HOME}/config"
+
+1. Install some tools (optional)
+
+		sudo apt install tmux vim zsh wget git net-tools dnsutils
 
 1. Exit the container's console by pressing ctrl-a then q
 
