@@ -43,7 +43,7 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 
 	Copy the package from an existing appliance
 	
-		scp nsroot@192.168.86.230:/var/netscaler/gui/vpn/scripts/linux/nsgclient64.deb .
+		scp nsroot@ns1.lan:/var/netscaler/gui/vpn/scripts/linux/nsgclient64.deb .
 	
 	Alternatively, download from Citrix
 	* [Citrix Gateway](https://www.citrix.com/downloads/citrix-gateway/)
