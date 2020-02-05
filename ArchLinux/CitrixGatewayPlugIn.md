@@ -39,9 +39,18 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 
 		sudo lxc-console -n nsgclient
 
-1. Download and install NSGClient and its dependencies
+1. Download NSGClient
 
+	Copy the package from an existing appliance
+	
 		scp nsroot@192.168.86.230:/var/netscaler/gui/vpn/scripts/linux/nsgclient64.deb .
+	
+	Alternatively, download from Citrix
+	* [Citrix Gateway](https://www.citrix.com/downloads/citrix-gateway/)
+	* [Plug-in VPN and EPA Clients for Ubuntu 18](https://www.citrix.com/downloads/citrix-gateway/earlier-versions/netscaler-gateway-plug-in-VPN_EPA_Clients_Ubuntu_18.html)
+
+1. Install NSGClient and its dependencies
+
 		sudo dpkg -i nsgclient64.deb
 		sudo apt-get install -f
 		sudo apt-get install libcurl3 dbus-x11
