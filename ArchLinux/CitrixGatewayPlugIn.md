@@ -13,9 +13,9 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 		sudo systemctl enable --now lxc-net.service
 
 ## Setup a Container
-1. Create a new container with Ubuntu 16.04 (Xenial Xerus)
+1. Create a new container with Ubuntu 18 LTS (Bionic Beaver)
 
-		sudo lxc-create -t download -n nsgclient -- --dist ubuntu --release xenial --arch amd64
+		sudo lxc-create -t download -n nsgclient -- --dist ubuntu --release bionic --arch amd64
 
 1. Configure the container for tun device support
 
@@ -57,7 +57,6 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 
 1. Configure NSG Client
 
-		sudo sed -i.orig '1s/^/Citrix_VA\n/' '/etc/resolvconf/interface-order'
 		mkdir "${HOME}/.citrix"
 		sed -e 's_^\(userName =\).*$_\1 myusername_' -e 's_^\(gatewayAddress =\).*$_\1 https://mygateway.mydomain.com_' -e 's_^\(gatewayPort =\).*$_\1 443_' -e 's_^\(proxyIP =\).*$_\1 direct://_' -e 's_^\(certdebug =\).*$_\1 1_' -e 's_^\(ignoreCertErrors =\).*$_\1 0_' /opt/Citrix/NSGClient/userConfiguration.conf > "${HOME}/.citrix/userConfiguration.conf"
 
@@ -69,13 +68,10 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 		  start)
 		    export \$(dbus-launch)
 		    /opt/Citrix/NSGClient/bin/NSGClient -c
-		    printf "nameserver 10.0.0.2\nsearch citrite.net\n" | sudo resolvconf -a Citrix_VA
-		    sudo resolvconf -u
+		    sudo systemd-resolve --interface Citrix_VA --set-dns 10.0.0.2 --set-domain citrite.net
 		    ;;
 		  stop)
 		    pkill NSGClient
-		    sudo resolvconf -d Citrix_VA
-		    sudo resolvconf -u
 		    ;;
 		  *)
 		    echo "Usage: \$(basename "\$0") [start|stop]"
@@ -88,7 +84,7 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 1. Install OpenSSH and Privoxy
 
 		sudo apt-get install privoxy openssh-server
-		sed -e 's/^\(listen-address\s*\).*:/\1192.168.89.83:/g' -e 's/^\(toggle\s*\).*$/\10/g' -e 's/^#\(debug\s*1 \)/\1/g' /etc/privoxy/config > "${HOME}/config"
+		sed -e "s/^\(listen-address\s*\).*:/\1$(ip a | sed -ne '/127.0.0.1/!{s/^[ \t]*inet[ \t]*\([0-9.]\+\)\/.*$/\1/p}'):/g" -e 's/^\(toggle\s*\).*$/\10/g' -e 's/^#\(debug\s*1 \)/\1/g' /etc/privoxy/config > "${HOME}/config"
 
 1. Exit the container's console by pressing ctrl-a then q
 
