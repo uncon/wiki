@@ -23,10 +23,10 @@
 1. Clean and partition the disk
 
 		sgdisk --zap-all /dev/nvme0n1
-		cgdisk /dev/nvme0n1
-
-	* **EFI System Partition** - ef00 (550 MiB)
-	* **LUKS Partition** - 8300
+		sgdisk --clear \
+		--new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI \
+		--new=2:0:0 --typecode=2:8300 --change-name=2:LUKS \
+		/dev/nvme0n1
 
 1. Setup encryption and LUKS
 
