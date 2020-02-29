@@ -205,7 +205,6 @@
 
 		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
 		sudo systemctl enable --now tlp.service
-		sudo systemctl enable --now tlp-sleep.service
 
 1. Install [Dash to Dock](https://micheleg.github.io/dash-to-dock/)
 
