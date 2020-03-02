@@ -205,6 +205,8 @@
 
 		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
 		sudo systemctl enable --now tlp.service
+		sudo systemctl mask systemd-rfkill.service
+		sudo systemctl mask systemd-rfkill.socket
 
 1. Install a GNOME dock extension
 
