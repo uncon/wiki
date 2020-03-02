@@ -209,6 +209,12 @@
 1. Install [Dash to Dock](https://micheleg.github.io/dash-to-dock/)
 
 		yay -Sy gnome-shell-extension-dash-to-dock
+		gnome-extensions enable dash-to-dock@micxgx.gmail.com
+
+1. Install [Dash to Panel](https://github.com/jderose9/dash-to-panel)
+
+		yay -Sy gnome-shell-extension-dash-to-panel
+		gnome-extensions enable dash-to-panel@jderose9.github.com
 
 1. Install Microsoft Windows 10 TrueType fonts
 
