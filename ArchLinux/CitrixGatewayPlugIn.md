@@ -90,7 +90,9 @@ This guide can be used to setup an LXC container to run NSGClient on an Arch Lin
 
 		sudo apt install tmux vim zsh wget git net-tools dnsutils
 
-1. Exit the container's console by pressing ctrl-a then q
+1. Update and power off the container
+
+		sudo apt update && sudo apt full-upgrade && sudo apt autoremove && sudo systemctl poweroff
 
 # Usage
 
