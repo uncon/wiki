@@ -17,7 +17,7 @@ As of Citrix ADM 13.0, the available fields are as follows.
 ## Database
 
 ### Connect to Database
-To connect to the MAS database, run the following command from the shell.
+To connect to the ADM database, run the following command from the shell.
 
     /mps/db_pgsql/bin/psql -U mpsroot -p 5454 mpsdb
 
@@ -30,12 +30,12 @@ You will also generally need to run the following command before anything else.
     SET ROLE 'Owner'; SET SCHEMA 'Owner';
 
 ### Determine Database Size
-To find the size (in bytes) of the MAS database, run the following SQL command.
+To find the size of the ADM database, run the following SQL command.
 
-    SELECT pg_database_size('mpsdb');
+    SELECT pg_size_pretty(pg_database_size('mpsdb'));
 
 ### List NetScaler Virtual Servers
-To list details about NetSCaler Virtual Servers, run one of the following SQL commands.
+To list details about Virtual Servers, run one of the following SQL commands.
 
     SELECT * FROM ns_authenticationvserver;
     SELECT * FROM ns_crvserver;
