@@ -1,4 +1,8 @@
 # One-Liners
+
+## Copy with rsync
+	rsync -avzh /path/directory/ /otherPath/directory
+
 ## Write Raw Image to Device
 	dd oflag=sync bs=4M status=progress if=in.bin of=/dev/mmcblk0
 
