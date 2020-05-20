@@ -178,6 +178,8 @@
 
 1. Add helpful key bindings (GNOME)
 
+		gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
+		
 		gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 		gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
 
