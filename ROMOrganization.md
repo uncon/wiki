@@ -13,11 +13,11 @@ Mount SD card
 ## Mass Extract
 Extact and delete all 7z files into their own directories
 
-	find . -maxdepth 1 -type f -name "*.7z" | while read -r FILE; do mkdir "${FILE%.7z}"; 7z x -o"${FILE%.7z}" "${FILE}" && rm "${FILE}"; done
+	find . -maxdepth 1 -type f -name "*.7z" | while read -r FILE; do mkdir "${FILE%.7z}"; 7z e -o"${FILE%.7z}" "${FILE}" && rm "${FILE}"; done
 
 or
 
-	find . -maxdepth 1 -type f -name "*.zip" | while read -r FILE; do mkdir "${FILE%.zip}"; 7z x -o"${FILE%.zip}" "${FILE}" && rm "${FILE}"; done
+	find . -maxdepth 1 -type f -name "*.zip" | while read -r FILE; do mkdir "${FILE%.zip}"; 7z e -o"${FILE%.zip}" "${FILE}" && rm "${FILE}"; done
 
 ## Do The Magic
 
