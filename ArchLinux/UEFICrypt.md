@@ -203,6 +203,14 @@
 
 		yay -Sy google-chrome
 
+	- Disable media key control
+
+			chrome://flags/#hardware-media-key-handling
+	
+	- Enable screen sharing with Wayland
+
+			chrome://flags/#enable-webrtc-pipewire-capturer
+
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
 		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
