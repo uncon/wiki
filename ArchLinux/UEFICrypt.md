@@ -38,6 +38,7 @@
 		lvcreate -l +100%FREE vg0 -n root
 
 1. Format partitions
+
 	- EFI
 
 			mkfs.vfat -F32 -n "EFI System Partition" /dev/nvme0n1p1
@@ -50,7 +51,8 @@
 
 			mkswap -L "Arch Linux Swap" /dev/mapper/vg0-swap
 
-2. Mount the partitions
+1. Mount the partitions
+
 	- Root
 
 			mount /dev/mapper/vg0-root /mnt
@@ -73,7 +75,8 @@
 	
 			gdm gnome gnome-power-manager gnome-tweaks aspell-en gst-libav gst-plugins-base gst-plugins-good gst-plugins-ugly
 
-2. Configure the system (see [ArchWiki](https://wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
+1. Configure the system (see [ArchWiki](https://wiki.archlinux.org/index.php/Installation_Guide#Configure_the_system))
+
 	- Generate fstab
 
 			genfstab -U /mnt >> /mnt/etc/fstab
@@ -170,7 +173,7 @@
 
 1. Install Intel hardware video acceleration and Vulkan support
 
-		sudo pacman -Sy intel-media-driver vulkan-intel
+		sudo pacman -S intel-media-driver vulkan-intel
 
 1. Disable tap-and-drag (GNOME)
 
@@ -190,7 +193,7 @@
 
 1. Install CUPS
 
-		sudo pacman -Sy cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
+		sudo pacman -S cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
 		sudo systemctl enable --now org.cups.cupsd.service
 
 1. Install [yay](https://github.com/Jguer/yay)
@@ -201,7 +204,7 @@
 
 1. Install Google Chrome
 
-		yay -Sy google-chrome
+		yay -S google-chrome
 
 	- Disable media key control
 
@@ -213,7 +216,7 @@
 
 1. Install [tlp](https://wiki.archlinux.org/index.php/TLP)
 
-		sudo pacman -Sy tlp x86_energy_perf_policy smartmontools ethtool
+		sudo pacman -S tlp x86_energy_perf_policy smartmontools ethtool
 		sudo systemctl enable --now tlp.service
 		sudo systemctl mask systemd-rfkill.service
 		sudo systemctl mask systemd-rfkill.socket
@@ -222,12 +225,12 @@
 
 	- [Dash to Dock](https://micheleg.github.io/dash-to-dock/)
 
-			yay -Sy gnome-shell-extension-dash-to-dock
+			yay -S gnome-shell-extension-dash-to-dock
 			gnome-extensions enable dash-to-dock@micxgx.gmail.com
 
 	- [Dash to Panel](https://github.com/jderose9/dash-to-panel)
 
-			yay -Sy gnome-shell-extension-dash-to-panel
+			yay -S gnome-shell-extension-dash-to-panel
 			gnome-extensions enable dash-to-panel@jderose9.github.com
 
 1. Install Microsoft Windows 10 TrueType fonts
@@ -244,4 +247,4 @@
 
 1. Install libu2f-host (for U2F support)
 
-		sudo pacman -Sy libu2f-host
+		sudo pacman -S libu2f-host
