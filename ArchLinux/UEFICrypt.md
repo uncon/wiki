@@ -196,7 +196,7 @@
 		sudo pacman -S cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
 		sudo systemctl enable --now cups.service
 
-1. Install [yay](https://github.com/Jguer/yay)
+1. Install [paru](https://github.com/Morganamilo/paru)
 
 		mkdir -p ~/aur
 		cd ~/aur
