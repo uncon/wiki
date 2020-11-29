@@ -173,7 +173,7 @@
 
 1. Install Intel hardware video acceleration and Vulkan support
 
-		sudo pacman -S intel-media-driver vulkan-intel
+		sudo pacman -S intel-media-driver vulkan-intel vulkan-mesa-layers
 
 1. Disable tap-and-drag (GNOME)
 
@@ -187,24 +187,24 @@
 		gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
 
 		gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
-		gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "tilix"
+		gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal"
 		gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "'<Super>t'"
 		gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
 1. Install CUPS
 
 		sudo pacman -S cups cups-pdf system-config-printer foomatic-db-engine foomatic-db foomatic-db-ppds foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds
-		sudo systemctl enable --now org.cups.cupsd.service
+		sudo systemctl enable --now cups.service
 
 1. Install [yay](https://github.com/Jguer/yay)
 
 		mkdir -p ~/aur
 		cd ~/aur
-		PKG="yay" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck
+		PKG="paru-bin" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck
 
 1. Install Google Chrome
 
-		yay -S google-chrome
+		paru -S google-chrome
 
 	- Disable media key control
 
@@ -221,18 +221,6 @@
 		sudo systemctl mask systemd-rfkill.service
 		sudo systemctl mask systemd-rfkill.socket
 
-1. Install a GNOME dock extension
-
-	- [Dash to Dock](https://micheleg.github.io/dash-to-dock/)
-
-			yay -S gnome-shell-extension-dash-to-dock
-			gnome-extensions enable dash-to-dock@micxgx.gmail.com
-
-	- [Dash to Panel](https://github.com/jderose9/dash-to-panel)
-
-			yay -S gnome-shell-extension-dash-to-panel
-			gnome-extensions enable dash-to-panel@jderose9.github.com
-
 1. Install Microsoft Windows 10 TrueType fonts
 
 	Download [Windows Evaluation](http://www.microsoft.com/en-us/evalcenter/evaluate-windows-10-enterprise) ISO
@@ -244,7 +232,3 @@
 		7z e ~/Downloads/<WIN10>.iso 'sources/install.wim'
 		7z e install.wim 'Windows/Fonts/*.ttf' 'Windows/Fonts/*.ttc' 'Windows/System32/Licenses/neutral/*/*/license.rtf'
 		makepkg -i -s -r --skipchecksums
-
-1. Install libu2f-host (for U2F support)
-
-		sudo pacman -S libu2f-host
