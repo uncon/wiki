@@ -45,7 +45,7 @@
 
 	- Root
 
-			mkfs.ext4 -L "Arch Linux Root" /dev/mapper/vg0-root
+			mkfs.btrfs -L "Arch Linux Root" /dev/mapper/vg0-root
 
 	- Swap
 
