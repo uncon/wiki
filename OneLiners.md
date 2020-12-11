@@ -22,7 +22,7 @@
 	find . -type f -iname "*.zip" | while read -r FILE; do mkdir "${FILE%.zip}"; 7z x "${FILE}" -o"${FILE%.zip}" && rm "${FILE}"; done
 
 ## Create Archive
-	tar -c -v -f archive.tar --mode='a+rw' --owner=0 --group=0 . &> archive.log
+	tar --create --one-file-system --verbose --file="backup_$(date +%Y-%m-%d).tar" --mode='a+rw' --owner=0 --group=0 . &> "backup_$(date +%Y-%m-%d).log"
 
 ## Install Certificate
 	certutil -d sql:${HOME}/.pki/nssdb -A -t "C,," -n "unconnet CA" -i pfSense-CA.crt
