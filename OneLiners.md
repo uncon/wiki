@@ -87,22 +87,5 @@
 ## Network Debug
 	tcpdump -nnvvS host 192.168.1.22 and port 80
 
-## Stupid Web Server
-	while [ true ]; do nc -e 'cat << EOF
-	HTTP/1.1 200 OK
-	Date: Mon, 23 May 2005 22:38:34 GMT
-	Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
-	Content-Type: text/html; charset=UTF-8
-	Content-Length: 131
-	Connection: close
-	
-	<html>
-	<head>
-	<title>`An Example Page`</title>
-	</head>
-	<body>
-	Hello World, this is a very simple HTML document.
-	</body>
-	</html>
-	
-	EOF' -l -p 80; echo Hit; sleep 2; done
+## Check Site Response Times
+	for IP in $(host www.google.com | grep " has address " | cut -d ' ' -f 4 | tr '\n' ' '); do echo "${IP}"; curl --insecure --silent --output /dev/null --write-out '\tConnection Time: %{time_connect} s\n\tTTFB: %{time_starttransfer} s\n\tTotal Time: %{time_total} s\n' "https://${IP}/"; done
