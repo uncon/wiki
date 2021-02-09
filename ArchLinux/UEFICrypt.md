@@ -220,6 +220,7 @@
 		sudo systemctl enable --now tlp.service
 		sudo systemctl mask systemd-rfkill.service
 		sudo systemctl mask systemd-rfkill.socket
+		echo 'USB_AUTOSUSPEND=0' | sudo tee /etc/tlp.d/01-usb.conf
 
 1. Install Microsoft Windows 10 TrueType fonts
 
