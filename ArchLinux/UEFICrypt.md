@@ -173,7 +173,7 @@
 
 1. Install Intel hardware video acceleration and Vulkan support
 
-		sudo pacman -S intel-media-driver vulkan-intel vulkan-mesa-layers
+		sudo pacman -S intel-media-driver libva-intel-driver vulkan-intel vulkan-mesa-layers
 
 1. Disable tap-and-drag (GNOME)
 
