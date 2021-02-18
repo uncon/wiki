@@ -25,7 +25,7 @@
 	tar --create --one-file-system --verbose --file="backup_$(date +%Y-%m-%d).tar" --mode='a+rw' --owner=0 --group=0 . &> "backup_$(date +%Y-%m-%d).log"
 
 ## Install Certificate
-	certutil -d sql:${HOME}/.pki/nssdb -A -t "C,," -n "unconnet CA" -i pfSense-CA.crt
+	sudo trust anchor unconnet-CA.crt
 
 ## Remove Litter from Windows and OS X
 	find "${@:-$PWD}" \( \
