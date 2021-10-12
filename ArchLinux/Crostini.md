@@ -22,11 +22,11 @@ usermod -aG wheel uncon
 exit
 lxc console penguin
 sudo pacman -Sy
-sudo pacman -S wayland xorg-xwayland base-devel git
+sudo pacman -S base-devel git wayland xorg-xwayland ttf-croscore noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
 mkdir -p ~/aur
 cd ~/aur
 PKG="paru-bin" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck && cd && rm -fr ~/aur
 paru -S cros-container-guest-tools-git
 cp -r /etc/skel/.config/pulse ~/.config
-reboot
+sudo reboot
 ```
