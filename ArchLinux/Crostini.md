@@ -27,8 +27,6 @@ mkdir -p ~/aur
 cd ~/aur
 PKG="paru-bin" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck && cd && rm -fr ~/aur
 paru -S cros-container-guest-tools-git
-sudo systemctl enable --now sommelier@0.service
-sudo systemctl enable --now sommelier-x@0.service
-sudo systemctl enable --now sommelier@1.service
-sudo systemctl enable --now sommelier-x@1.service
+cp -r /etc/skel/.config/pulse ~/.config
+reboot
 ```
