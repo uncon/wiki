@@ -28,5 +28,6 @@ cd ~/aur
 PKG="paru-bin" && git clone "https://aur.archlinux.org/${PKG}.git/" && cd "${PKG}" && makepkg -i -s -r --skippgpcheck && cd && rm -fr ~/aur
 paru -S cros-container-guest-tools-git
 cp -r /etc/skel/.config/pulse ~/.config
-sudo reboot
+sudo systemctl reboot
+lxc restart penguin
 ```
