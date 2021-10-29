@@ -15,7 +15,7 @@ lxc exec penguin -- bash
 grep 1000:1000 /etc/passwd | cut -d ':' -f 1
 pkill -9 -u $(grep 1000:1000 /etc/passwd | cut -d ':' -f 1)
 groupmod -n uncon $(grep 1000:1000 /etc/passwd | cut -d ':' -f 1)
-usermod -d /home/new-username -l uncon -m -c new-username $(grep 1000:1000 /etc/passwd | cut -d ':' -f 1)
+usermod -d /home/uncon -l uncon -m -c uncon $(grep 1000:1000 /etc/passwd | cut -d ':' -f 1)
 passwd uncon
 visudo
 usermod -aG wheel uncon
