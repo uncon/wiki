@@ -46,7 +46,6 @@
 1. Configure user account
 
 	```
-	grep 1000:1000 /etc/passwd | cut -d ':' -f 1
 	pkill -9 -u $(grep 1000:1000 /etc/passwd | cut -d ':' -f 1)
 	groupmod -n uncon $(grep 1000:1000 /etc/passwd | cut -d ':' -f 1)
 	usermod -d /home/uncon -l uncon -m -c uncon $(grep 1000:1000 /etc/passwd | cut -d ':' -f 1)
