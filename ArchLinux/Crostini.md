@@ -15,7 +15,7 @@
 1. Create an Arch Linux container
 
 	```
-	vmc container termina penguin https://us.images.linuxcontainers.org archlinux/current
+	vmc container termina penguin https://images.linuxcontainers.org archlinux/current
 	```
 
 	**Note**: The following error is expected and can be ignored
