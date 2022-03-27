@@ -33,7 +33,7 @@
 	**Note**: If the container did not start, start it
 
 	```
-	lxc start arch
+	lxc start penguin
 	```
 
 1. Start a Bash shell in the container
