@@ -21,8 +21,7 @@
 	**Note**: The following error is expected and can be ignored
 
 	```
-	Error: operation `container_start` failed: timeout while waiting for signal
-	[ERROR:src/main.rs:181] ERROR: command failed
+	ERROR vsh: [vsh.cc(150)] Failed to launch vshd for termina:penguin: requested container does not exist: penguin
 	```
 
 1. Ensure the container was created successfully
