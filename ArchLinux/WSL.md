@@ -21,7 +21,7 @@ Run the following command in a PowerShell or Windows Command Prompt
 	````
 
 # Arch Setup
-For a root shell, from PowerShell or Command Prompt, run Arch: `wsl --distribution Arch`
+For a root shell, from a PowerShell or Windows Command Prompt, run Arch: `wsl --distribution Arch`
 
 1. Set root password
 	```
@@ -57,7 +57,7 @@ For a root shell, from PowerShell or Command Prompt, run Arch: `wsl --distributi
 	```
 
 ## WSL Setup
-Run the following commands from PowerShell or Command Prompt
+Run the following command in a PowerShell or Windows Command Prompt
 
 1. Set Arch as the default distribution
 	```
