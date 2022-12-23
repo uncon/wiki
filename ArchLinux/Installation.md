@@ -37,6 +37,21 @@
 	sudo pacman -S sof-firmware net-tools bind-tools git tmux zsh p7zip gnome-firmware aspell aspell-en noto-fonts-cjk noto-fonts-emoji
 	```
 
+1. Enable Bluetooth
+	```
+	systemctl enable --now bluetooth.service
+	```
+
+1. Enable SSH
+	```
+	systemctl enable --now sshd.service
+	```
+
+1. Enable timesyncd
+	```
+	systemctl enable --now systemd-timesyncd.service
+	```
+
 1. Optionally, install Intel hardware video acceleration and Vulkan support
 	```
 	sudo pacman -S intel-media-driver libva-intel-driver vulkan-intel vulkan-mesa-layers
@@ -59,11 +74,11 @@
 1. Add helpful key bindings (GNOME)
 	```
 	gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w']"
-	```
-
-	```		
 	gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Super>b']"
 	gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Super>f']"
+	```
+
+	```
 	gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Terminal"
 	gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "kgx"
 	gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "'<Super>t'"
