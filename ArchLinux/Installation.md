@@ -26,9 +26,9 @@
 1. Complete installation with [archinstall](https://wiki.archlinux.org/title/archinstall)
 
 1. Reboot
-		```
-		systemctl reboot
-		```
+	```
+	systemctl reboot
+	```
 
 ## Post-Installation
 
@@ -64,6 +64,7 @@
 	sudo systemctl enable nvidia-resume
 	sudo systemctl enable nvidia-suspend
 	sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
+	sudo sed -i -e 's/^\(options .*\)$/\1 nvidia-drm.modeset=1/' /boot/loader/entries/*_linux.conf
 	```
 
 1. Disable tap-and-drag (GNOME)
