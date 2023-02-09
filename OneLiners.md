@@ -88,4 +88,4 @@
 	tcpdump -nnvvS host 192.168.1.22 and port 80
 
 ## Check Site Response Times
-	for IP in $(host www.google.com | grep " has address " | cut -d ' ' -f 4 | tr '\n' ' '); do echo "${IP}"; curl --insecure --silent --output /dev/null --write-out '\tConnection Time: %{time_connect} s\n\tTTFB: %{time_starttransfer} s\n\tTotal Time: %{time_total} s\n' "https://${IP}/"; done
+	for IP in $(host www.google.com | grep " has address " | cut -d ' ' -f 4 | tr '\n' ' '); do echo "${IP}"; curl --insecure --silent --output /dev/null --write-out '\tResponse Code: %{http_code}\n\tConnection Time: %{time_connect} s\n\tTTFB: %{time_starttransfer} s\n\tTotal Time: %{time_total} s\n' "https://${IP}/"; done
