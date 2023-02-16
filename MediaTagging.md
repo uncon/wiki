@@ -5,8 +5,8 @@
 ### File Naming Script
 **Title**: `[album artist]/[album] [[musicbrainz_albumid]]/[disc and track #] [artist] - [title]`
 ```
-$if2(%albumartist%,%artist%,"[unknown]")/
-$if(%albumartist%,%album% [%musicbrainz_albumid%]/,)
+$if2(%albumartist%,%artist%,[unknown])/
+$if(%albumartist%,%album%$if(%musicbrainz_albumid%, [%musicbrainz_albumid%])/,)
 $if($gt(%totaldiscs%,1),%discnumber%-,)
 $num(%tracknumber%,2) 
 $if(%_multiartist%,%artist% - ,)
