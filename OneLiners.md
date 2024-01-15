@@ -3,6 +3,9 @@
 ## Copy with rsync
 	rsync -avzh /path/directory/ /otherPath/directory
 
+## Mass Extract Archives In-Place
+	find . -type f -name '*.7z' | while read -r FILE; do mkdir "${FILE%.7z}"; 7z x -o"${FILE%.7z}" "${FILE}" && rm "${FILE}"; done
+
 ## Write Raw Image to Device
 	dd oflag=sync bs=4M status=progress if=in.bin of=/dev/mmcblk0
 
