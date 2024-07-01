@@ -34,7 +34,7 @@
 
 1. Install additional packages.
 	```
-	sudo pacman -S sof-firmware net-tools bind-tools git tmux zsh p7zip gnome-firmware aspell aspell-en noto-fonts-cjk noto-fonts-emoji
+	sudo pacman -S net-tools bind-tools git tmux zsh p7zip gnome-firmware aspell aspell-en noto-fonts noto-fonts-cjk noto-fonts-emoji
 	```
 
 1. Enable Bluetooth
